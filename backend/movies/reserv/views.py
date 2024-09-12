@@ -39,6 +39,14 @@ class UserCreate(CreateAPIView):
     serializer_class = UserSerializer
 
 
+class UserDetail(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        serializer = UserSerializer(request.user)
+        return Response(serializer.data)
+
+
 class Logout(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -48,3 +56,4 @@ class Logout(APIView):
         except (AttributeError, Token.DoesNotExist):
             return Response(status=status.HTTP_400_BAD_REQUEST)
         return Response(status=status.HTTP_200_OK)
+    
