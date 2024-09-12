@@ -27,9 +27,14 @@ const ShowDetail = () => {
   };
 
   const reserveSeats = () => {
+    const userId = localStorage.getItem('userId');
+    const token =localStorage.getItem('token');
+    console.log(userId)
+    console.log(token)
     axios.patch(`http://127.0.0.1:8000/${id}/`, {
       seat_a: seatA,
-      seat_b: seatB
+      seat_b: seatB,
+      user_id: userId
     })
     .then(response => {
       alert('Seats reserved successfully!');
