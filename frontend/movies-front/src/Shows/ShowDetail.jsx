@@ -33,6 +33,7 @@ const ShowDetail = () => {
     })
     .then(response => {
       alert('Seats reserved successfully!');
+      window.location.reload();
     })
     .catch(error => {
       console.error('There was an error reserving the seats!', error);
