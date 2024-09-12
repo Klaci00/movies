@@ -12,15 +12,17 @@ class Show(models.Model):
     seat_b=models.IntegerField(default=0)
     def __str__(self) -> str:
         return self.title+", "+str(self.start)
-    '''
+    
 class Reservation(models.Model):
     name=models.CharField("room",max_length=100)
     owner=models.ForeignKey('reserv.CustomUser', related_name='CustomUser', on_delete=models.CASCADE)
-    chair_a=models.IntegerField(default=0,name="chair_a")
-    chair_b=models.IntegerField(default=0,name="chair_b")
-    chair_count = models.IntegerField(default=0)
+    seat_a=models.IntegerField(default=0,name="seat_a")
+    seat_b=models.IntegerField(default=0,name="seat_b")
+    seat_count = models.IntegerField(default=0)
+    start=models.DateTimeField("Start")
 
-    '''
+
+    
         
 class CustomUser(AbstractUser):
     pass

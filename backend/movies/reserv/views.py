@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Show,CustomUser
+from .models import Show,CustomUser,Reservation
 from .serializers import ShowSerializer,UserSerializer
 from rest_framework.views import APIView
 from rest_framework.generics import CreateAPIView
@@ -16,7 +16,17 @@ class ShowDetail(generics.RetrieveUpdateDestroyAPIView):
     def partial_update(self, request, *args, **kwargs):
         instance = self.get_object()
         data = request.data
-
+        user=CustomUser.objects.get(pk=self.user)
+        # Create a new Reservation instance
+        reservation_data = {
+            'name': instance.title,
+            'owner': data.user,
+            'seat_a': instance.seat_a if instance.seat_a == 1 else 0,
+            'seat_b': instance.seat_b if instance.seat_b == 1 else 0,
+            'seat_count': sum([1 for seat in [instance.seat_a, instance.seat_b] if seat == 1]),
+            'start': instance.start
+        }
+        reservation = Reservation.objects.create(**reservation_data)
         # Update seat values from 1 to 2
         if 'seat_a' in data and data['seat_a'] == 1:
             data['seat_a'] = 2
