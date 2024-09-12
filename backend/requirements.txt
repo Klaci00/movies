@@ -1,0 +1,5 @@
+pip install pillow
+pip install
+pip install djangorestframework
+python -m pip install Django
+python -m pip install django-cors-headers
