@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
 
-const ShowDetail = () => {
+const ListVenues = () => {
   const { id } = useParams();
   const [show, setShow] = useState(null);
   const [venues, setVenues] = useState([]);
@@ -41,7 +41,7 @@ const ShowDetail = () => {
         <ul>
           {venues.map(venue => (
             <li key={venue.id}>
-              <Link to={`/venues/${venue.id}`}>
+              <Link to={`/${id}/venues/${venue.id}`}>
                 <p>Room Name: {venue.room_name}</p>
                 <p>Showtime: {new Date(venue.showtime).toLocaleString()}</p>
               </Link>
@@ -55,4 +55,4 @@ const ShowDetail = () => {
   );
 };
 
-export default ShowDetail;
+export default ListVenues;

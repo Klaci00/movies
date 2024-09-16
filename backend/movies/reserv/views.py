@@ -1,5 +1,5 @@
 from rest_framework.authtoken.views import ObtainAuthToken
-from .models import Show,CustomUser,Reservation
+from .models import Show,CustomUser,Reservation,Venue
 from .serializers import ShowSerializer,UserSerializer
 from rest_framework.views import APIView
 from rest_framework.generics import CreateAPIView
@@ -9,6 +9,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 # Create your views here.
 
@@ -28,7 +29,7 @@ class ShowDetail(generics.RetrieveUpdateDestroyAPIView):
         print(instance.seat_b)
         # Create a new Reservation instance
         reservation_data = {
-            'name': instance.title,
+            'room_name': instance.title,
             'owner': user,
             'seat_a': instance.seat_a if instance.seat_a == 1 else 0,
             'seat_b': instance.seat_b if instance.seat_b == 1 else 0,
@@ -58,6 +59,18 @@ def show_venues(request, show_id):
     venues_data = [{'id': venue.id, 'room_name': venue.room_name, 'showtime': venue.showtime, 'seat_a':venue.seat_a,'seat_b':venue.seat_b,'seat_c':venue.seat_c,'seat_d':venue.seat_d,} for venue in venues]
     return JsonResponse({'venues': venues_data})
 
+def venue_detail(request, show_id, venue_id):
+    venue = get_object_or_404(Venue, id=venue_id, shows__id=show_id)
+    venue_data = {
+        'id': venue.id,
+        'room_name': venue.room_name,
+        'showtime': venue.showtime,
+        'seat_a': venue.seat_a,
+        'seat_b': venue.seat_b,
+        'seat_c': venue.seat_c,
+        'seat_d': venue.seat_d
+    }
+    return JsonResponse(venue_data)
 
 class UserCreate(CreateAPIView):
     serializer_class = UserSerializer
@@ -90,3 +103,6 @@ class CustomObtainAuthToken(ObtainAuthToken):
             'token': token.key,
             'user_id': token.user_id
         })
+@ensure_csrf_cookie
+def set_csrf_token(request):
+    return JsonResponse({'detail': 'CSRF cookie set'})

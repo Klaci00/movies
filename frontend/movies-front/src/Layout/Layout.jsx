@@ -52,7 +52,7 @@ const Layout = () => {
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login setAuth={setIsAuth} />} />
             <Route path="/:id" element={<ListVenues />} />
-            <Route path="/venues/:id" element={<VenueDetail />} />
+            <Route path=":id/venues/:venueId" element={<VenueDetail />} />
           </Routes>
         </div>
       </Router>

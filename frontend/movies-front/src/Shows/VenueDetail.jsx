@@ -2,8 +2,12 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
+
 const VenueDetail = () => {
-  const { id } = useParams();
+  axios.defaults.xsrfCookieName = 'csrftoken';
+  axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+
+  const { id, venueId } = useParams();
   const [show, setShow] = useState(null);
   const [venue, setVenue] = useState(null);
   const [seatA, setSeatA] = useState(0);
@@ -22,19 +26,18 @@ const VenueDetail = () => {
       });
 
     // Fetch venue details
-    axios.get(`http://127.0.0.1:8000/${id}/venues`)
+    axios.get(`http://127.0.0.1:8000/${id}/venues/${venueId}`)
       .then(response => {
-        const venueData = response.data.venues[0]; // Assuming you want the first venue
-        setVenue(venueData);
-        setSeatA(venueData.seat_a);
-        setSeatB(venueData.seat_b);
-        setSeatC(venueData.seat_c);
-        setSeatD(venueData.seat_d);
+        setVenue(response.data);
+        setSeatA(response.data.seat_a);
+        setSeatB(response.data.seat_b);
+        setSeatC(response.data.seat_c);
+        setSeatD(response.data.seat_d);
       })
       .catch(error => {
         console.error('There was an error fetching the venue!', error);
       });
-  }, [id]);
+  }, [id, venueId]);
 
   const toggleSeat = (seat, setSeat) => {
     if (seat !== 2) {
@@ -42,14 +45,43 @@ const VenueDetail = () => {
     }
   };
 
-  const reserveSeats = () => {
+  // Define the getCSRFToken function
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+
+
+
+  // Update the reserveSeats function to use the CSRF token
+  const reserveSeats = async () => {
     const userId = localStorage.getItem('userId');
-    axios.patch(`http://127.0.0.1:8000/${id}/venues/${venue.id}/`, {
+    const csrftoken = getCookie('csrftoken');
+    console.log(csrftoken);
+
+    axios.patch(`http://127.0.0.1:8000/${id}/venues/${venueId}/`, {
+      room_name: venue.room_name,
+      showtime: venue.showtime,
       seat_a: seatA,
       seat_b: seatB,
       seat_c: seatC,
       seat_d: seatD,
       user_id: userId
+    }, {
+      headers: {
+        'X-CSRFToken': csrftoken
+      }
     })
     .then(response => {
       alert('Seats reserved successfully!');
