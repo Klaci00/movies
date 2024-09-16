@@ -1,4 +1,4 @@
-from .models import Show
+from .models import Show,Venue
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 
@@ -20,4 +20,9 @@ class UserSerializer(serializers.ModelSerializer):
         user=User.objects.create_user(**validated_data)
         return user
     
+class VenueSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Venue
+        fields="__all__"
+        depth=1
     

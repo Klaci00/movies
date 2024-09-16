@@ -22,6 +22,7 @@ class Venue(models.Model):
     reservations = models.ManyToManyField('Reservation', related_name='venues',blank=True,null=True)
 
 class Reservation(models.Model):
+    title=models.CharField(max_length=100)
     owner = models.ForeignKey('CustomUser', related_name='reservations', on_delete=models.CASCADE)
     room_name = models.CharField("room", max_length=100)
     showtime = models.DateTimeField("showtime")
