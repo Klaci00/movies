@@ -1,18 +1,20 @@
 from django.contrib import admin
-from .models import Show,CustomUser,Reservation
+from .models import Show,CustomUser,Reservation,Venue
 # Register your models here.
 
 class ShowAdin(admin.ModelAdmin):
-    list_display=["title","seat_a","seat_b"]
     pass
 
 class CustomUserAdmin(admin.ModelAdmin):
     pass
 
 class ReservationAdmin(admin.ModelAdmin):
-    list_display=["name","owner","seat_count","start"]
+    pass
+
+class VenueAdmin(admin.ModelAdmin):
     pass
 
 admin.site.register(Show,ShowAdin)
 admin.site.register(CustomUser,CustomUserAdmin)
 admin.site.register(Reservation,ReservationAdmin)
+admin.site.register(Venue,VenueAdmin)

@@ -22,6 +22,8 @@ class ShowDetail(generics.RetrieveUpdateDestroyAPIView):
         except CustomUser.DoesNotExist:
             return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
 
+        print(instance.seat_a)
+        print(instance.seat_b)
         # Create a new Reservation instance
         reservation_data = {
             'name': instance.title,
@@ -37,7 +39,6 @@ class ShowDetail(generics.RetrieveUpdateDestroyAPIView):
             data['seat_a'] = 2
         if 'seat_b' in data and data['seat_b'] == 1:
             data['seat_b'] = 2
-
         serializer = self.get_serializer(instance, data=data, partial=True)
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
