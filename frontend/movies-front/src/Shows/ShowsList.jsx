@@ -23,7 +23,7 @@ const ShowsList = () => {
             <Link to={`/${show.id}`}>{show.title}</Link>
           </h2>
           <p>{show.description}</p>
-          <p>{new Date(show.start).toLocaleString()}</p>
+        
           <img src={show.poster} alt={show.title} />
         </div>
       ))}

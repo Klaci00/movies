@@ -7,6 +7,8 @@ from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 
@@ -50,6 +52,12 @@ class ShowList(generics.ListAPIView):
     queryset=Show.objects.all()
     serializer_class=ShowSerializer
 
+def show_venues(request, show_id):
+    show = get_object_or_404(Show, id=show_id)
+    venues = show.venues.all()
+    venues_data = [{'id': venue.id, 'room_name': venue.room_name, 'showtime': venue.showtime, 'seat_a':venue.seat_a,'seat_b':venue.seat_b,'seat_c':venue.seat_c,'seat_d':venue.seat_d,} for venue in venues]
+    return JsonResponse({'venues': venues_data})
+
 
 class UserCreate(CreateAPIView):
     serializer_class = UserSerializer
@@ -64,9 +72,9 @@ class UserDetail(APIView):
 
 
 class Logout(APIView):
-    permission_classes = [IsAuthenticated]
+   permission_classes = [IsAuthenticated]
 
-    def post(self, request):
+def post(self, request):
         try:
             request.user.auth_token.delete()
         except (AttributeError, Token.DoesNotExist):

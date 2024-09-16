@@ -4,7 +4,8 @@ import Register from '../Auth/Register';
 import Login from '../Auth/Login';
 import Logout from '../Auth/Logout';
 import ShowsList from '../Shows/ShowsList';
-import ShowDetail from '../Shows/ShowDetail';
+import VenueDetail from '../Shows/VenueDetail';
+import ListVenues from '../Shows/ListVenues';
 import axios from 'axios';
 
 const Layout = () => {
@@ -50,7 +51,8 @@ const Layout = () => {
             <Route path="/" element={<ShowsList />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login setAuth={setIsAuth} />} />
-            <Route path="/:id" element={<ShowDetail />} />
+            <Route path="/:id" element={<ListVenues />} />
+            <Route path="/venues/:id" element={<VenueDetail />} />
           </Routes>
         </div>
       </Router>
