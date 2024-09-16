@@ -13,6 +13,7 @@ class Show(models.Model):
         return self.title
 
 class Venue(models.Model):
+    title=models.CharField("Title",max_length=100)
     room_name = models.CharField("Room name", max_length=100)
     showtime = models.DateTimeField("showtime")
     seat_a = models.IntegerField("seat_a", blank=True, null=True, default=0)

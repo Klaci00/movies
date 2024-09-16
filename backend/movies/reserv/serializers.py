@@ -1,4 +1,4 @@
-from .models import Show,Venue
+from .models import Show,Venue,Reservation
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 
@@ -26,3 +26,8 @@ class VenueSerializer(serializers.ModelSerializer):
         fields="__all__"
         depth=1
     
+class ReservSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Reservation
+        fields="__all__"
+        depth=1
