@@ -117,7 +117,7 @@ class ReservDetail(generics.ListCreateAPIView):
             'seat_b': data['seat_b'],
             'seat_c': data['seat_c'],
             'seat_d': data['seat_d'],
-            'seat_count': 1
+            'seat_count': data['seat_count'],
         }
         
         # Create the reservation using the serializer
@@ -167,9 +167,9 @@ class UserDetail(APIView):
 
 
 class Logout(APIView):
-   permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
-def post(self, request):
+    def post(self, request):
         try:
             request.user.auth_token.delete()
         except (AttributeError, Token.DoesNotExist):

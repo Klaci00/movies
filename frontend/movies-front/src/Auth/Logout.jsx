@@ -3,15 +3,15 @@ import axios from 'axios';
 
 const Logout = ({ setAuth }) => {
   const handleLogout = async () => {
+    
     try {
       await axios.post('http://127.0.0.1:8000/logout/', {}, {
         headers: {
           Authorization: `Token ${localStorage.getItem('token')}`
         }
       });
-      
+
       localStorage.removeItem('token');
-      
       setAuth(false);
       alert('Logout successful!');
     } catch (error) {

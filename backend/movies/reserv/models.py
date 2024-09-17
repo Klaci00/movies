@@ -21,6 +21,8 @@ class Venue(models.Model):
     seat_c = models.IntegerField("seat_c", blank=True, null=True, default=0)
     seat_d = models.IntegerField("seat_d", blank=True, null=True, default=0)
     reservations = models.ManyToManyField('Reservation', related_name='venues',blank=True,null=True)
+    def __str__(self) -> str:
+        return self.title+", "+self.room_name+", "+str(self.showtime)
 
 class Reservation(models.Model):
     title=models.CharField(max_length=100)

@@ -26,7 +26,7 @@ const VenueDetail = () => {
       });
 
     // Fetch venue details
-    axios.get(`http://127.0.0.1:8000/${id}/venues/${venueId}`)
+    axios.get(`http://127.0.0.1:8000/venues/${venueId}`)
       .then(response => {
         setVenue(response.data);
         setSeatA(response.data.seat_a);
@@ -70,7 +70,8 @@ const VenueDetail = () => {
     const csrftoken = getCookie('csrftoken');
     console.log(csrftoken);
 
-    axios.patch(`http://127.0.0.1:8000/${id}/venues/${venueId}/`, {
+    axios.patch(`http://127.0.0.1:8000/venues/${venueId}/`, {
+      title: show.title,
       room_name: venue.room_name,
       showtime: venue.showtime,
       seat_a: seatA,
@@ -83,13 +84,39 @@ const VenueDetail = () => {
         'X-CSRFToken': csrftoken
       }
     })
+    
     .then(response => {
       alert('Seats reserved successfully!');
-      window.location.reload();
+      
     })
     .catch(error => {
       console.error('There was an error reserving the seats!', error);
+      console.log(show.title)
     });
+    
+    const seatCount = [seatA, seatB, seatC, seatD].reduce((count, seat) => {
+      return count + (seat === 1 ? 1 : 0);},0);
+      console.log(seatCount);
+    console.log(localStorage.getItem('token'));
+      axios.post(`http://127.0.0.1:8000/reservations/`, {
+        title: show.title,
+        room_name: venue.room_name,
+        showtime: venue.showtime,
+        seat_a: seatA,
+        seat_b: seatB,
+        seat_c: seatC,
+        seat_d: seatD,
+        seat_count: seatCount
+      }, {
+        headers: {
+          'Authorization': `Token ${localStorage.getItem('token')}` // Assuming the token is stored in localStorage
+        }
+      }).then(response => {
+        window.location.reload();
+      }).catch(error => {
+        console.error('There was an error making the reservation!', error);
+      });
+      
   };
 
   if (!show || !venue) return <div>Loading...</div>;
