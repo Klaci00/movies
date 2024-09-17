@@ -33,8 +33,8 @@ const ListVenues = () => {
     <div>
       <h1>{show.title}</h1>
       <img src={show.poster} alt={show.title} />
-      <p>Rating: {show.rating}</p>
-      <p>Playtime: {show.playtime} minutes</p>
+      <p>Korhatár: {show.rating}</p>
+      <p>Műsoridő: {show.playtime} perc</p>
 
       <h2>Venues</h2>
       {venues.length > 0 ? (

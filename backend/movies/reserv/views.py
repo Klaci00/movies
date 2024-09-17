@@ -130,6 +130,15 @@ class ReservDetail(generics.ListCreateAPIView):
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
+class ReservationListView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, owner):
+        print(owner)
+        owner_user = CustomUser.objects.get(username=owner)
+        reservations = Reservation.objects.filter(owner=owner_user.id)
+        serializer = ReservSerializer(reservations, many=True)
+        return Response(serializer.data)
     
 class ShowList(generics.ListAPIView):
     queryset=Show.objects.all()
@@ -183,7 +192,7 @@ class CustomObtainAuthToken(ObtainAuthToken):
         token = Token.objects.get(key=response.data['token'])
         return Response({
             'token': token.key,
-            'user_id': token.user_id
+            'user_id': token.user_id,
         })
 @ensure_csrf_cookie
 def set_csrf_token(request):

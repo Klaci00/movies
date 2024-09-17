@@ -6,6 +6,8 @@ import Logout from '../Auth/Logout';
 import ShowsList from '../Shows/ShowsList';
 import VenueDetail from '../Shows/VenueDetail';
 import ListVenues from '../Shows/ListVenues';
+import Reservations from '../Reservations/Reservations';
+import Reservations2 from '../Reservations/Reservations2';
 import axios from 'axios';
 
 const Layout = () => {
@@ -43,6 +45,7 @@ const Layout = () => {
             ) : (
               <>
                 <span>Welcome, {username}!</span>
+                <Link to="/reservations">Reservations</Link>
                 <Logout setAuth={setIsAuth} />
               </>
             )}
@@ -53,6 +56,7 @@ const Layout = () => {
             <Route path="/login" element={<Login setAuth={setIsAuth} />} />
             <Route path="/:id" element={<ListVenues />} />
             <Route path=":id/venues/:venueId" element={<VenueDetail />} />
+            <Route path="/reservations" element={<Reservations2 />} />
           </Routes>
         </div>
       </Router>
