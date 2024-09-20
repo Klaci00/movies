@@ -31,7 +31,7 @@ const Reservations2 = () => {
         const fetchReservations = async () => {
             if (username) {
                 try {
-                    const response = await axios.get(`http://127.0.0.1:8000/reservations/${username}`, {
+                    const response = await axios.get(`http://127.0.0.1:8000/reservations/`, {
                         headers: {
                             Authorization: `Token ${authToken}`,
                         }
@@ -47,10 +47,32 @@ const Reservations2 = () => {
         fetchUsername().then(fetchReservations);
     }, [authToken, username]);
 
+    const handleDelete = async (id) => {
+        try {
+            await axios.delete(`http://127.0.0.1:8000/reservdestroy/${id}/`, {
+                headers: {
+                    Authorization: `Token ${authToken}`
+                }
+            });
+            setReservationData(reservationData.filter(reservation => reservation.id !== id));
+        } catch (error) {
+            setError('There was an error deleting the reservation!');
+            console.error('Error deleting reservation:', error);
+        }
+    };
+
     function reservParser(x) {
         return (
             <div key={x.id}>
-                <ReservApp title={x.title} owner={x.owner} room_name={x.room_name} showtime={x.showtime} seat_count={x.seat_count} />
+                <ReservApp
+                    id={x.id}
+                    title={x.title}
+                    owner={x.owner}
+                    room_name={x.room_name}
+                    showtime={x.showtime}
+                    seat_count={x.seat_count}
+                    onDelete={handleDelete}
+                />
             </div>
         );
     }
