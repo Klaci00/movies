@@ -26,6 +26,24 @@ def venueDataUpdater(data):
         
         return data
 
+def seatLiberator(instance,venue):
+    if instance.seat_a==1: venue.seat_a=0
+    if instance.seat_b==1: venue.seat_b=0
+    if instance.seat_c==1: venue.seat_c=0
+    if instance.seat_d==1: venue.seat_d=0
+    return venue
+
+def venue_data(venue):
+    return {
+        'id': venue.id,
+        'room_name': venue.room_name,
+        'showtime': venue.showtime,
+        'seat_a': venue.seat_a,
+        'seat_b': venue.seat_b,
+        'seat_c': venue.seat_c,
+        'seat_d': venue.seat_d
+    }
+
 def reservData2(user,data):
    return{
             'owner': user,

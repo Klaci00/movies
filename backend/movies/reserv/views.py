@@ -48,10 +48,8 @@ class ReservDestroy(generics.DestroyAPIView):
 
             
             print(f"Venue associated with reservation: {venue.id}")
-            if instance.seat_a==1: venue.seat_a=0
-            if instance.seat_b==1: venue.seat_b=0
-            if instance.seat_c==1: venue.seat_c=0
-            if instance.seat_d==1: venue.seat_d=0
+            
+            venue=myFunctions.seatLiberator(instance,venue)
             venue.save()
             print(f"Deleting reservation: {instance.title}")
 
@@ -106,20 +104,11 @@ class ShowList(generics.ListAPIView):
 def show_venues(request, show_id):
     show = get_object_or_404(Show, id=show_id)
     venues = show.venues.all()
-    venues_data = [{'id': venue.id, 'room_name': venue.room_name, 'showtime': venue.showtime, 'seat_a':venue.seat_a,'seat_b':venue.seat_b,'seat_c':venue.seat_c,'seat_d':venue.seat_d,} for venue in venues]
+    venues_data = [myFunctions.venue_data(venue) for venue in venues]
     return JsonResponse({'venues': venues_data})
 
 def venue_detail(request, show_id, venue_id):
-    venue = get_object_or_404(Venue, id=venue_id, shows__id=show_id)
-    venue_data = {
-        'id': venue.id,
-        'room_name': venue.room_name,
-        'showtime': venue.showtime,
-        'seat_a': venue.seat_a,
-        'seat_b': venue.seat_b,
-        'seat_c': venue.seat_c,
-        'seat_d': venue.seat_d
-    }
+    venue_data = myFunctions.venue_data(venue = get_object_or_404(Venue, id=venue_id, shows__id=show_id))
     return JsonResponse(venue_data)
 
 class UserCreate(CreateAPIView):
