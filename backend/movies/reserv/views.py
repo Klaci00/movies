@@ -11,6 +11,7 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import ensure_csrf_cookie
 from pprint import pprint
+from rest_framework.exceptions import NotFound
 # Create your views here.
 
 class ShowDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -99,6 +100,34 @@ class VenueDetail(generics.RetrieveUpdateDestroyAPIView):
 class ReservDestroy(generics.DestroyAPIView):
     queryset=Reservation.objects.all()
     serializer_class=ReservSerializer
+
+    def destroy(self, request, *args, **kwargs):
+        
+            instance = self.get_object()
+            # Custom logic before deletion
+            
+            # Example of custom logic: logging the deletion
+            
+            venue = Venue.objects.get(id=instance.venueId)
+            pprint(venue)
+
+            
+            print(f"Venue associated with reservation: {venue.id}")
+            if instance.seat_a==1: venue.seat_a=0
+            if instance.seat_b==1: venue.seat_b=0
+            if instance.seat_c==1: venue.seat_c=0
+            if instance.seat_d==1: venue.seat_d=0
+            venue.save()
+            print(f"Deleting reservation: {instance.title}")
+
+            # Perform the deletion
+            self.perform_destroy(instance)
+            return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+
+    def perform_destroy(self, instance):
+        instance.delete()
 
 class ReservDetail(generics.ListCreateAPIView):
     queryset = Reservation.objects.all()

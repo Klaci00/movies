@@ -97,8 +97,9 @@ const VenueDetail = () => {
     const seatCount = [seatA, seatB, seatC, seatD].reduce((count, seat) => {
       return count + (seat === 1 ? 1 : 0);},0);
       console.log(seatCount);
-    console.log(localStorage.getItem('token'));
+    console.log(venue.id);
       axios.post(`http://127.0.0.1:8000/reservations/`, {
+        venueId: venue.id,
         title: show.title,
         room_name: venue.room_name,
         showtime: venue.showtime,

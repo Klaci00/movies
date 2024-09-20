@@ -25,6 +25,7 @@ class Venue(models.Model):
         return self.title+", "+self.room_name+", "+str(self.showtime)
 
 class Reservation(models.Model):
+    venueId=models.IntegerField(default=0)
     title=models.CharField(max_length=100)
     owner = models.ForeignKey('CustomUser', related_name='reservations', on_delete=models.CASCADE)
     room_name = models.CharField("room", max_length=100)
