@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-
+import Seat from './Seat';
 
 const VenueDetail = () => {
   axios.defaults.xsrfCookieName = 'csrftoken';
@@ -15,6 +15,13 @@ const VenueDetail = () => {
   const [seatC, setSeatC] = useState(0);
   const [seatD, setSeatD] = useState(0);
 
+  const seats = [
+    { seat: seatA, setSeat: setSeatA },
+    { seat: seatB, setSeat: setSeatB },
+    { seat: seatC, setSeat: setSeatC },
+    { seat: seatD, setSeat: setSeatD },
+  ];
+  
   useEffect(() => {
     // Fetch show details
     axios.get(`http://127.0.0.1:8000/${id}`)
@@ -38,6 +45,8 @@ const VenueDetail = () => {
         console.error('There was an error fetching the venue!', error);
       });
   }, [id, venueId]);
+
+  
 
   const toggleSeat = (seat, setSeat) => {
     if (seat !== 2) {
@@ -128,54 +137,25 @@ const VenueDetail = () => {
       <img src={show.poster} alt={show.title} />
       <p>Showtime: {new Date(venue.showtime).toLocaleString()}</p>
       <div>
-        <div
-          onClick={() => toggleSeat(seatA, setSeatA)}
-          style={{
-            width: '20px',
-            height: '20px',
-            backgroundColor: seatA === 0 ? 'green' : seatA === 1 ? 'red' : 'gray',
-            display: 'inline-block',
-            margin: '5px',
-            cursor: seatA !== 2 ? 'pointer' : 'not-allowed'
-          }}
-        ></div>
-        <div
-          onClick={() => toggleSeat(seatB, setSeatB)}
-          style={{
-            width: '20px',
-            height: '20px',
-            backgroundColor: seatB === 0 ? 'green' : seatB === 1 ? 'red' : 'gray',
-            display: 'inline-block',
-            margin: '5px',
-            cursor: seatB !== 2 ? 'pointer' : 'not-allowed'
-          }}
-        ></div>
-        <div
-          onClick={() => toggleSeat(seatC, setSeatC)}
-          style={{
-            width: '20px',
-            height: '20px',
-            backgroundColor: seatC === 0 ? 'green' : seatC === 1 ? 'red' : 'gray',
-            display: 'inline-block',
-            margin: '5px',
-            cursor: seatC !== 2 ? 'pointer' : 'not-allowed'
-          }}
-        ></div>
-        <div
-          onClick={() => toggleSeat(seatD, setSeatD)}
-          style={{
-            width: '20px',
-            height: '20px',
-            backgroundColor: seatD === 0 ? 'green' : seatD === 1 ? 'red' : 'gray',
-            display: 'inline-block',
-            margin: '5px',
-            cursor: seatD !== 2 ? 'pointer' : 'not-allowed'
-          }}
-        ></div>
+        {seats.map(({ seat, setSeat }, index) => (
+          <div
+            key={index}
+            onClick={() => toggleSeat(seat, setSeat)}
+            style={{
+              width: '20px',
+              height: '20px',
+              backgroundColor: seat === 0 ? 'green' : seat === 1 ? 'red' : 'gray',
+              display: 'inline-block',
+              margin: '5px',
+              cursor: seat !== 2 ? 'pointer' : 'not-allowed',
+            }}
+          ></div>
+        ))}
       </div>
       <button onClick={reserveSeats}>Reserve Seats</button>
     </div>
   );
+  
 };
 
 export default VenueDetail;
