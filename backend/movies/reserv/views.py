@@ -11,7 +11,7 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import ensure_csrf_cookie
 from pprint import pprint
-from rest_framework.exceptions import NotFound
+from .myFunctions import myFunctions
 # Create your views here.
 
 class ShowDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -28,20 +28,6 @@ class ShowDetail(generics.RetrieveUpdateDestroyAPIView):
 
         print(instance.seat_a)
         print(instance.seat_b)
-        # Create a new Reservation instance
-        reservation_data = {
-            'title': instance.title,
-            'room_name': instance.room_name,
-            'owner': user,
-            'seat_a': instance.venue.seat_a if instance.venue.seat_a == 1 else 0,
-            'seat_b': instance.venue.seat_b if instance.venue.seat_b == 1 else 0,
-            'seat_c': instance.venue.seat_c if instance.venue.seat_c == 1 else 0,
-            'seat_d': instance.venue.seat_d if instance.venue.seat_d == 1 else 0,
-
-            'seat_count': sum([1 for seat in [instance.venue.seat_a, instance.venue.seat_b,instance.venue.seat_c,instance.venue.seat_d] if seat == 1]),
-            'showtime': instance.venue.showtime
-        }
-        reservation = Reservation.objects.create(**reservation_data)
         # Update seat values from 1 to 2
         if 'seat_a' in data and data['seat_a'] == 1:
             data['seat_a'] = 2
@@ -59,39 +45,8 @@ class VenueDetail(generics.RetrieveUpdateDestroyAPIView):
     def partial_update(self,request, *args, **kwargs):
         instance=self.get_object()
         data=request.data
-        '''
-        print(instance.title)
-        
-        try:
-            user = CustomUser.objects.get(id=data['user_id'])
-        except CustomUser.DoesNotExist:
-            return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
-        reservation_data = {
-            'title': instance.title,
-            'room_name': instance.room_name,
-            'owner': user,
-            'seat_a': instance.seat_a if instance.seat_a == 2 else 0,
-            'seat_b': instance.seat_b if instance.seat_b == 2 else 0,
-            'seat_c': instance.seat_c if instance.seat_c == 2 else 0,
-            'seat_d': instance.seat_d if instance.seat_d == 2 else 0,
-            'seat_count': sum([1 for seat in [instance.seat_a, instance.seat_b,instance.seat_c,instance.seat_d] if seat == 1]),
-            'showtime': instance.showtime
-        }
-        reservation = Reservation.objects.create(**reservation_data)
-        '''
-        # Update seat values!
-        
-        
-        if 'seat_a' in data and data['seat_a'] == 1:
-            data['seat_a'] = 2
-        if 'seat_b' in data and data['seat_b'] == 1:
-            data['seat_b'] = 2
-        if 'seat_c' in data and data['seat_c'] == 1:
-            data['seat_c'] = 2
-        if 'seat_d' in data and data['seat_d'] == 1:
-            data['seat_d'] = 2
-         
-        serializer = self.get_serializer(instance, data=data, partial=True)
+        #Update seats with my imported function!
+        serializer = self.get_serializer(instance, data=myFunctions.venueDataUpdater(data), partial=True)
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
 
@@ -141,17 +96,8 @@ class ReservDetail(generics.ListCreateAPIView):
             user = CustomUser.objects.get(id=self.request.user.id)
         except CustomUser.DoesNotExist:
             return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
-        reservation_data = {
-            'owner': user,
-            'title': data['title'],
-            'room_name': data['room_name'],
-            'showtime': data['showtime'],
-            'seat_a': data['seat_a'],
-            'seat_b': data['seat_b'],
-            'seat_c': data['seat_c'],
-            'seat_d': data['seat_d'],
-            'seat_count': data['seat_count'],
-        }
+        reservation_data = myFunctions.reservData(user,data)
+
         
         # Create the reservation using the serializer
         serializer.save(**reservation_data)
