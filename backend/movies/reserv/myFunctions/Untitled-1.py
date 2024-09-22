@@ -20,10 +20,10 @@ mystring=""
 '''
 for i in range(1,181):
     if i<10:
-        mystring+=f"seat00{i}, setSeat00{i},"
+        mystring += f"seat00{i}, "
     elif i<100:
-        mystring+=f"seat0{i}, setSeat0{i},"
+        mystring += f"seat0{i}, "
     else:
-        mystring+=f"seat{i}, setSeat{i},"
+        mystring += f"seat{i}, "
 
 print(mystring)

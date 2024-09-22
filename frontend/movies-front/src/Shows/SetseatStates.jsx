@@ -1,10 +1,6 @@
 import { useState } from 'react';
 
 export const useSeatStates = () => {
-  const [seatA, setSeatA] = useState(0);
-  const [seatB, setSeatB] = useState(0);
-  const [seatC, setSeatC] = useState(0);
-  const [seatD, setSeatD] = useState(0);
   const [seat001, setSeat001] = useState(0);
   const [seat002, setSeat002] = useState(0);
   const [seat003, setSeat003] = useState(0);
@@ -186,10 +182,6 @@ export const useSeatStates = () => {
   const [seat179, setSeat179] = useState(0);
   const [seat180, setSeat180] = useState(0);
   return {
-    seatA, setSeatA,
-    seatB, setSeatB,
-    seatC, setSeatC,
-    seatD, setSeatD,
     seat001, setSeat001,
     seat002, setSeat002,
     seat003, setSeat003,
