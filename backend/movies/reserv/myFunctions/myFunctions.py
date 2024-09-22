@@ -1,3 +1,46 @@
+testList=['seat_a','seat_b','seat_c','seat_d']
+
+def reservDataTEST(user,data):
+    reservData={
+        'owner': user,
+        'title': data['title'],
+        'room_name': data['room_name'],
+        'showtime': data['showtime'],
+    }
+    for i in testList:
+        reservData.update({i : data[i]})
+    reservData.update({'seat_count': data['seat_count'],})
+    return reservData
+
+def venueDataUpdaterTEST(data):
+    for i in testList:
+        if i in data and data[i] == 1:
+            data[i]=2
+    return data
+
+def seatLiberatorTEST(instance,venue):
+    for i in testList:
+        if getattr(instance, i) == 1:
+            setattr(venue, i, 0)
+    return venue
+def venue_dataTEST(venue):
+    venueData={
+        'id': venue.id,
+        'room_name': venue.room_name,
+        'showtime': venue.showtime,
+    }
+    for i in testList:
+        venueData.update({i : getattr(venue, i),})
+    return venueData
+
+def seatMaker():
+    seatList=[]
+    for i in range(1,181):
+        if i<10: seatList.append(f'seat_00{i}')
+        elif i<100: seatList.append(f'seat_0{i}')
+        else: seatList.append(f'seat_{i}')
+    return seatList
+
 def reservData(user,data):
    return{
             'owner': user,
@@ -10,6 +53,41 @@ def reservData(user,data):
             'seat_d': data['seat_d'],
             'seat_count': data['seat_count'],
         }
+def reservData3(user,data):
+    seatList=seatMaker()
+    reservData={
+        'owner': user,
+        'title': data['title'],
+        'room_name': data['room_name'],
+        'showtime': data['showtime'],
+    }
+    for i in seatList:
+        reservData.update({i : data[i]})
+    reservData.update({'seat_count': data['seat_count'],})
+    return reservData
+def venueDataUpdater3(data):
+    seatList=seatMaker()
+    for i in seatList:
+        if i in data and data[i]==1:
+            data[i]=2
+    return data
+
+def seatLiberator3(instance,venue):
+    seatList=seatMaker()
+    for i in seatList:
+        if instance.i == 1: venue.i = 0
+    return venue 
+
+def venue_data3(venue):
+    seatList=seatMaker()
+    venueData={
+        'id': venue.id,
+        'room_name': venue.room_name,
+        'showtime': venue.showtime,
+    }
+    for i in seatList:
+        venueData.update({i : venue.i,})
+    return venueData
 
 def venueDataUpdater(data):
         if 'seat_a' in data and data['seat_a'] == 1:

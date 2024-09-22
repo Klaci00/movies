@@ -26,7 +26,7 @@ class VenueDetail(generics.RetrieveUpdateDestroyAPIView):
         instance=self.get_object()
         data=request.data
         #Update seats with my imported function!
-        serializer = self.get_serializer(instance, data=myFunctions.venueDataUpdater(data), partial=True)
+        serializer = self.get_serializer(instance, data=myFunctions.venueDataUpdaterTEST(data), partial=True)
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
 
@@ -49,7 +49,7 @@ class ReservDestroy(generics.DestroyAPIView):
             
             print(f"Venue associated with reservation: {venue.id}")
             
-            venue=myFunctions.seatLiberator(instance,venue)
+            venue=myFunctions.seatLiberatorTEST(instance,venue)
             venue.save()
             print(f"Deleting reservation: {instance.title}")
 
@@ -74,7 +74,7 @@ class ReservDetail(generics.ListCreateAPIView):
             user = CustomUser.objects.get(id=self.request.user.id)
         except CustomUser.DoesNotExist:
             return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
-        reservation_data = myFunctions.reservData(user,data)
+        reservation_data = myFunctions.reservDataTEST(user,data)
 
         
         # Create the reservation using the serializer
@@ -104,11 +104,11 @@ class ShowList(generics.ListAPIView):
 def show_venues(request, show_id):
     show = get_object_or_404(Show, id=show_id)
     venues = show.venues.all()
-    venues_data = [myFunctions.venue_data(venue) for venue in venues]
+    venues_data = [myFunctions.venue_dataTEST(venue) for venue in venues]
     return JsonResponse({'venues': venues_data})
 
 def venue_detail(request, show_id, venue_id):
-    venue_data = myFunctions.venue_data(venue = get_object_or_404(Venue, id=venue_id, shows__id=show_id))
+    venue_data = myFunctions.venue_dataTEST(venue = get_object_or_404(Venue, id=venue_id, shows__id=show_id))
     return JsonResponse(venue_data)
 
 class UserCreate(CreateAPIView):
