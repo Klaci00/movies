@@ -1,0 +1,161 @@
+[33mcommit dcc295a8cdc16f371eae89f1d6f4f79b93646e21[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m
+Author: Klaci00 <kenyolaszlo6@gmail.com>
+Date:   Sun Sep 22 20:40:06 2024 +0200
+
+    completed production model transition on both front- and backend
+
+[33mcommit 0313dd877a8f6ae9fd7b612fdf96b287b4ec4121[m
+Author: Klaci00 <kenyolaszlo6@gmail.com>
+Date:   Sun Sep 22 14:52:57 2024 +0200
+
+    setting up transition to production backend model
+
+[33mcommit 7c5e33ac333010d0f1be0e77765cfd3f38818b35[m
+Author: Klaci00 <kenyolaszlo6@gmail.com>
+Date:   Sun Sep 22 14:14:56 2024 +0200
+
+    implemented the test version of automated venue and reservation manipulation with myFunctions module
+
+[33mcommit 8125e9c05b774d7bb4f618b388fc47b19dfa9520[m
+Author: Klaci00 <kenyolaszlo6@gmail.com>
+Date:   Fri Sep 20 20:26:29 2024 +0200
+
+    appended django myFunctions module
+
+[33mcommit 8cb1ad108180d275b0c52637989c51d691a91bc5[m
+Author: Klaci00 <kenyolaszlo6@gmail.com>
+Date:   Fri Sep 20 17:47:53 2024 +0200
+
+    further trimmed down venue_detail and show_venues using my functions
+
+[33mcommit 1f852bcbe3c4be7e3173f5428f1a0556e5a35582[m
+Author: Klaci00 <kenyolaszlo6@gmail.com>
+Date:   Fri Sep 20 17:31:27 2024 +0200
+
+    got rid of showdetailview update function, since it became obsolete
+
+[33mcommit c27be8282c36361f8a231f5e84475baee1a8cab0[m
+Author: Klaci00 <kenyolaszlo6@gmail.com>
+Date:   Fri Sep 20 17:29:26 2024 +0200
+
+    optimized django views by importing my custom fumctions
+
+[33mcommit 269cb61a6c09d5f99ec79e7284497a28166d8e72[m
+Author: Klaci00 <kenyolaszlo6@gmail.com>
+Date:   Fri Sep 20 16:51:31 2024 +0200
+
+    optimized the venuedetail frontend to be more concise
+
+[33mcommit 56fa6041a13b12c5fe00bb4f8f12eb7fcd81f9ff[m
+Author: Klaci00 <kenyolaszlo6@gmail.com>
+Date:   Fri Sep 20 13:07:34 2024 +0200
+
+    reservation deletion with seat liberation FINALLY implementedgit add .!
+
+[33mcommit 6fb79913ef737c7ddef3d65bd7751c25a6408be1[m
+Author: Klaci00 <kenyolaszlo6@gmail.com>
+Date:   Fri Sep 20 12:15:53 2024 +0200
+
+    reservation delete patch using DestroyAPIVIew. The next goal is to create a custom destroy function that modifies the Venue instance befor deleting the reservation
+
+[33mcommit 3519b570cddd3f8786bdd1c811cc29a4aad795a3[m
+Author: Klaci00 <kenyolaszlo6@gmail.com>
+Date:   Tue Sep 17 15:20:31 2024 +0200
+
+    more reservation fix
+
+[33mcommit 443d660c92136527245a21383fc354a9069ca61b[m
+Author: Klaci00 <kenyolaszlo6@gmail.com>
+Date:   Tue Sep 17 12:36:33 2024 +0200
+
+    reservation fix and django logout view fix
+
+[33mcommit ce09e606b30ffd3f70507f5842587a723d070bd2[m
+Author: Klaci00 <kenyolaszlo6@gmail.com>
+Date:   Mon Sep 16 22:41:26 2024 +0200
+
+    reservation creation gigafixgit add .
+
+[33mcommit 45bf85414e4105a8bb036f721d097ad418acf0a1[m
+Author: Klaci00 <kenyolaszlo6@gmail.com>
+Date:   Mon Sep 16 21:11:37 2024 +0200
+
+    backend patch views and url fix
+
+[33mcommit bee580a000b1f997baeb6ff6428b6da7df0e9e65[m
+Author: Klaci00 <kenyolaszlo6@gmail.com>
+Date:   Mon Sep 16 15:11:53 2024 +0200
+
+    react frontend overhaul step 2
+
+[33mcommit 7f50505e4e6df96d0cd45f6a97c2eee368911e72[m
+Author: Klaci00 <kenyolaszlo6@gmail.com>
+Date:   Mon Sep 16 13:00:15 2024 +0200
+
+    react frontend overhaul
+
+[33mcommit 852770e3ff6acc1af937570842b7c2fe429ca3a5[m
+Author: Klaci00 <kenyolaszlo6@gmail.com>
+Date:   Mon Sep 16 12:21:32 2024 +0200
+
+    django model overhaul
+
+[33mcommit cc4ebbf3887c05b7e1340a5994b37b3431f46495[m
+Author: Klaci00 <kenyolaszlo6@gmail.com>
+Date:   Thu Sep 12 14:37:33 2024 +0200
+
+    added readme
+
+[33mcommit 835a3d5bf374f33e7993ca43bd45a24365dbb1ad[m
+Author: Klaci00 <kenyolaszlo6@gmail.com>
+Date:   Thu Sep 12 14:30:00 2024 +0200
+
+    django, react authentication overhaul
+
+[33mcommit 92ec1fbfe9764453340135a6763072241aac09d9[m
+Author: Klaci00 <kenyolaszlo6@gmail.com>
+Date:   Thu Sep 12 14:00:00 2024 +0200
+
+    django, reservation model and logic added to show partial update
+
+[33mcommit 0345ff9d31cb3b9567159ce50ec4fb190ebf260d[m
+Author: Klaci00 <kenyolaszlo6@gmail.com>
+Date:   Thu Sep 12 13:28:51 2024 +0200
+
+    react router overhaul
+
+[33mcommit bc9998581113be5ae13138af4f6c8ad89454cbd7[m
+Author: Klaci00 <kenyolaszlo6@gmail.com>
+Date:   Thu Sep 12 12:51:20 2024 +0200
+
+    react basic login logic was added
+
+[33mcommit 29b708c56e293eac1f9979501c824cba1cd7e79e[m
+Author: Klaci00 <kenyolaszlo6@gmail.com>
+Date:   Thu Sep 12 12:25:10 2024 +0200
+
+    react basic seat reservation logic added!
+
+[33mcommit 43dcb5558e19cf4e868a924756eaeedc933a1656[m
+Author: Klaci00 <kenyolaszlo6@gmail.com>
+Date:   Thu Sep 12 12:13:15 2024 +0200
+
+    react basic listview and detailview fetchers, and router setup
+
+[33mcommit dea165f76c294aff5e49fcb2c3dc354e9d67421a[m
+Author: Klaci00 <kenyolaszlo6@gmail.com>
+Date:   Thu Sep 12 11:49:52 2024 +0200
+
+    react start
+
+[33mcommit 60ad4b5f8bf60efc6a41087b2f38b125c121298e[m
+Author: Klaci00 <kenyolaszlo6@gmail.com>
+Date:   Wed Sep 11 21:58:41 2024 +0200
+
+    Basic setup with APIViews, URLs, Serializers, Admin, and Login
+
+[33mcommit ba2995b31918e4c37087175387fa1c539387b02e[m
+Author: Klaci00 <kenyolaszlo6@gmail.com>
+Date:   Wed Sep 11 21:06:24 2024 +0200
+
+    all set
