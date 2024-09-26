@@ -18,7 +18,7 @@ const ShowsList = () => {
   return (
     <div>
       {shows.map(show => (
-        <div key={show.id} className="show">
+        <div key={show.id} className='show'>
           <h2>
             <Link to={`/${show.id}`}>{show.title}</Link>
           </h2>

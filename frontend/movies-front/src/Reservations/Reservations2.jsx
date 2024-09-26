@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-import ReservApp from "./ReservApp";
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import ReservApp from './ReservApp';
 
 const Reservations2 = () => {
     const [reservationData, setReservationData] = useState([]);

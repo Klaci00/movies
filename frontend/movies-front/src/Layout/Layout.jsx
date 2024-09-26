@@ -36,27 +36,27 @@ const Layout = () => {
       <Router>
         <div>
           <nav>
-            <Link to="/">Home</Link>
+            <Link to='/'>Home</Link>
             {!isAuth ? (
               <>
-                <Link to="/register">Register</Link>
-                <Link to="/login">Login</Link>
+                <Link to='/register'>Register</Link>
+                <Link to='/login'>Login</Link>
               </>
             ) : (
               <>
                 <span>Welcome, {username}!</span>
-                <Link to="/reservations">Reservations</Link>
+                <Link to='/reservations'>Reservations</Link>
                 <Logout setAuth={setIsAuth} />
               </>
             )}
           </nav>
           <Routes>
-            <Route path="/" element={<ShowsList />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login setAuth={setIsAuth} />} />
-            <Route path="/:id" element={<ListVenues />} />
-            <Route path=":id/venues/:venueId" element={<VenueDetail />} />
-            <Route path="/reservations" element={<Reservations2 />} />
+            <Route path='/' element={<ShowsList />} />
+            <Route path='/register' element={<Register />} />
+            <Route path='/login' element={<Login setAuth={setIsAuth} />} />
+            <Route path='/:id' element={<ListVenues />} />
+            <Route path=':id/venues/:venueId' element={<VenueDetail />} />
+            <Route path='/reservations' element={<Reservations2 />} />
           </Routes>
         </div>
       </Router>

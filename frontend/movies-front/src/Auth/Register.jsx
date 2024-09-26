@@ -22,18 +22,18 @@ const Register = () => {
     <form onSubmit={handleRegister}>
       <h2>Register</h2>
       <input
-        type="text"
-        placeholder="Username"
+        type='text'
+        placeholder='Username'
         value={username}
         onChange={(e) => setUsername(e.target.value)}
       />
       <input
-        type="password"
-        placeholder="Password"
+        type='password'
+        placeholder='Password'
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button type="submit">Register</button>
+      <button type='submit'>Register</button>
     </form>
   );
 };
