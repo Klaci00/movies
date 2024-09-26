@@ -1,6 +1,7 @@
 from rest_framework.authtoken.views import ObtainAuthToken
 from .models import Show,CustomUser,Reservation,Venue
-from .serializers import ShowSerializer,UserSerializer,VenueSerializer,ReservSerializer
+from .serializers import ShowSerializer,UserSerializer,\
+                         VenueSerializer,ReservSerializer
 from rest_framework.views import APIView
 from rest_framework.generics import CreateAPIView
 from rest_framework import generics, status
@@ -11,8 +12,8 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import ensure_csrf_cookie
 from pprint import pprint
-from .seathandler.seathandler import reserv_data,venue_data,venue_data_updater,seat_liberator
-# Create your views here.
+from .seathandler.seathandler import reserv_data,venue_data,\
+                                     venue_data_updater,seat_liberator
 
 class ShowDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset=Show.objects.all()
@@ -22,11 +23,20 @@ class ShowDetail(generics.RetrieveUpdateDestroyAPIView):
 class VenueDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset=Venue.objects.all()
     serializer_class=VenueSerializer
-    def partial_update(self,request, *args, **kwargs):
+    def partial_update(
+            self,
+            request,
+            *args,
+            **kwargs
+            ):
         instance=self.get_object()
         data=request.data
         #Update seats with my imported function!
-        serializer = self.get_serializer(instance, data=venue_data_updater(data), partial=True)
+        serializer = self.get_serializer(
+                                        instance,
+                                        data=venue_data_updater(data),
+                                        partial=True
+                                        )
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
 
@@ -73,7 +83,10 @@ class ReservDetail(generics.ListCreateAPIView):
         try:
             user = CustomUser.objects.get(id=self.request.user.id)
         except CustomUser.DoesNotExist:
-            return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+            return Response(
+                {'error': 'User not found'},
+                status=status.HTTP_404_NOT_FOUND
+                            )
         reservation_data = reserv_data(user,data)
 
         
