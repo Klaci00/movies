@@ -6,7 +6,6 @@ import Logout from '../Auth/Logout';
 import ShowsList from '../Shows/ShowsList';
 import VenueDetail from '../Shows/VenueDetail';
 import ListVenues from '../Shows/ListVenues';
-import Reservations from '../Reservations/Reservations';
 import Reservations2 from '../Reservations/Reservations2';
 import axios from 'axios';
 
