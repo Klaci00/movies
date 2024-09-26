@@ -5,10 +5,11 @@ const VenueDetail = () => {
   axios.defaults.xsrfCookieName = 'csrftoken';
   axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
+  const [roomsize,setRoomsize]=useState(null);
   const { id, venueId } = useParams();
   const [show, setShow] = useState(null);
   const [venue, setVenue] = useState(null);
- 
+
   const useSeatStates = (numSeats) => {
     const seatStates = [];
     for (let i = 1; i <= numSeats; i++) {
@@ -18,10 +19,7 @@ const VenueDetail = () => {
     return seatStates;
 };
 
-
-
   const seats = useSeatStates(180);
-  console.log(seats[110]);
 
     const updateSeats = (response, seats) => {
       seats.forEach((seatItem, index) => {
@@ -50,6 +48,10 @@ const VenueDetail = () => {
     axios.get(`http://127.0.0.1:8000/venues/${venueId}`)
       .then(response => {
         setVenue(response.data);
+        const numSeatsToDisplay = response.data['room_name'] === 'Nagyterem' ? 180 :
+                               response.data['room_name'] === 'Közepes terem' ? 120 : 80;
+
+        console.log(response.data['room_name'])
         seats.forEach((seatItem, index) => {
           const seatKey = `seat_${String(index + 1).padStart(3, '0')}`;
           if (response.data[seatKey] !== undefined) {
@@ -154,6 +156,9 @@ const constructPostData = (seats, show, venue) => {
   };
 
   if (!show || !venue) return <div>Loading...</div>;
+  
+  const numSeatsToDisplay = venue.room_name === 'Nagyterem' ? 180 :
+  venue.room_name === 'Közepes terem' ? 120 : 80;
 
   return (
     <div>
@@ -161,7 +166,7 @@ const constructPostData = (seats, show, venue) => {
       <img src={show.poster} alt={show.title} />
       <p>Showtime: {new Date(venue.showtime).toLocaleString()}</p>
       <div>
-        {seats.map(({ seat, setSeat }, index) => (
+        {seats.slice(0,numSeatsToDisplay).map(({ seat, setSeat }, index) => (
           <div
             key={index}
             onClick={() => toggleSeat(seat, setSeat)}

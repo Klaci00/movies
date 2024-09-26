@@ -12,9 +12,11 @@ def reserv_data(user, data):
         for seat in seatlist:
             if seat in data:
                 reserv_data[seat] = data[seat]
-            else:
-                raise KeyError(f'Seat \'{seat}\' not found in data')
-
+            else: break
+                #raise KeyError(f'Seat \'{seat}\' not found in data')
+                # raising the above keyerror would be counterproductive,
+                # since the seat fields are nullable, to satisfy the
+                # need for different room sizes !!!
         reserv_data['seat_count'] = data['seat_count']
         
     except KeyError as e:
@@ -36,9 +38,11 @@ def venue_data_updater(data):
             if seat in data:
                 if data[seat] == 1:
                     data[seat] = 2
-            else:
-                raise KeyError(f'Seat \'{seat}\' not found in data')
-                
+            else: break
+                #raise KeyError(f'Seat \'{seat}\' not found in data')
+                # raising the above keyerror would be counterproductive,
+                # since the seat fields are nullable, to satisfy the
+                # need for different room sizes !!!
     except KeyError as e:
         print(f'Key error: {e}')
         return None
