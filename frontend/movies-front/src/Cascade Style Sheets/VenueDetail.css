@@ -1,0 +1,54 @@
+.venuedetail_main {
+    width: 95vw;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.seats_container_small {
+    height: 35vh;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr); 
+    grid-template-rows: repeat(4, 1fr) 7vh repeat(5, 1fr); /* Add a gap between the fifth and sixth row */
+    gap: 7px;
+    justify-content: center; /* Center the grid items horizontally */
+    align-content: center;   /* Center the grid items vertically */
+}
+
+.seat {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.screen_small{
+    background-color: rgb(58, 170, 170);
+    width: 12vw;
+    font-size: x-large;
+}
+
+.corridor_small{
+    height: 5vh;
+}
+.entrance_small{
+    background-color: greenyellow;
+    width: 5vw;
+    height: 5.5vh;
+    left: 40%;
+    justify-content: center; /* Center the grid items horizontally */
+    align-content: center;
+}
+
+.seatsandentrance_small{
+    display: flex;
+    width: 10vw;
+}
+
+.gap_upper_small{
+    height: 14.3vh;
+}
+.gap_lower_small{
+    height: 15vh;
+}

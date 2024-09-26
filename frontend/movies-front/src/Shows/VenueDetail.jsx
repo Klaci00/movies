@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import RoomTypeDict from './RoomTypeDict';
+import '../Cascade Style Sheets/VenueDetail.css';
 const VenueDetail = () => {
   axios.defaults.xsrfCookieName = 'csrftoken';
   axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
-  const [roomsize,setRoomsize]=useState(null);
   const { id, venueId } = useParams();
   const [show, setShow] = useState(null);
   const [venue, setVenue] = useState(null);
@@ -21,15 +22,6 @@ const VenueDetail = () => {
 
   const seats = useSeatStates(180);
 
-    const updateSeats = (response, seats) => {
-      seats.forEach((seatItem, index) => {
-        let seatKey='';
-        index<10 ? seatKey = `seat_00${index + 1}` : ( seatKey<100 ? `seat_0${index + 1}`:`seat_${index + 1}`);
-          if (response.data[seatKey] !== undefined) {
-              seatItem.setSeat(response.data[seatKey]);
-          }
-      });
-  };
   
   const countOccupiedSeats = (seats) => {
     return seats.filter(seatItem => seatItem.seat === 1).length;
@@ -160,26 +152,38 @@ const constructPostData = (seats, show, venue) => {
   const numSeatsToDisplay = venue.room_name === 'Nagyterem' ? 180 :
   venue.room_name === 'Közepes terem' ? 120 : 80;
 
+  
+
+  const roomDict=RoomTypeDict(venue.room_name);
+
   return (
-    <div>
+    <div className='venuedetail_main'>
       <h1>{show.title}</h1>
       <img src={show.poster} alt={show.title} />
       <p>Showtime: {new Date(venue.showtime).toLocaleString()}</p>
-      <div>
-        {seats.slice(0,numSeatsToDisplay).map(({ seat, setSeat }, index) => (
-          <div
-            key={index}
-            onClick={() => toggleSeat(seat, setSeat)}
-            style={{
-              width: '20px',
-              height: '20px',
-              backgroundColor: seat === 0 ? 'green' : seat === 1 ? 'red' : 'gray',
-              display: 'inline-block',
-              margin: '5px',
-              cursor: seat !== 2 ? 'pointer' : 'not-allowed',
-            }}
-          ></div>
-        ))}
+      <div className={roomDict['screen']}>Screen</div>
+      <div className={roomDict['corridor']}> </div>
+      <div className={roomDict['seatsandentrance']}>
+          <div className={roomDict['seats_container']}>
+            {seats.slice(0,numSeatsToDisplay).map(({ seat, setSeat }, index) => (
+              <div
+                key={index}
+                className='seat'
+                onClick={() => toggleSeat(seat, setSeat)}
+                style={{
+                  width: '20px',
+                  height: '20px',
+                  backgroundColor: seat === 0 ? 'green' : seat === 1 ? 'red' : 'gray',
+                  cursor: seat !== 2 ? 'pointer' : 'not-allowed',
+                }}
+              ></div>
+            ))}
+          </div>
+          <div className={roomDict['entrance_and_gaps']}>
+            <div className={roomDict['gap_upper']}></div>
+            <div className={roomDict['entrance']}>BEJÁRAT</div>
+            <div className={roomDict['gap_lower']}></div>
+          </div>
       </div>
       <button onClick={reserveSeats}>Reserve Seats</button>
     </div>
