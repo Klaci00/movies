@@ -9,6 +9,7 @@ class CustomUserAdmin(admin.ModelAdmin):
     pass
 
 class ReservationAdmin(admin.ModelAdmin):
+    list_display=['owner','title','room_name','seat_count','showtime']
     pass
 
 class VenueAdmin(admin.ModelAdmin):

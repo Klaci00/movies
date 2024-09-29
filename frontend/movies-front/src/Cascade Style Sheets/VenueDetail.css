@@ -1,13 +1,52 @@
-.venuedetail_main {
-    width: 95vw;
-    text-align: center;
+.corridor_Kisterem{
+    height: 5vh;
+    width: 20vw;
+    align-content: center;
+}
+
+.entrance_and_gaps{
+    width: 5vw;
+}
+
+.entrance_Kisterem{
+    background-color: greenyellow;
+    width: 5vw;
+    height: 5.5vh;
+    justify-content: center; /* Center the grid items horizontally */
+    align-content: center;
+}
+
+.gap_lower_Kisterem{
+    height: 15vh;
+}
+
+.gap_upper_Kisterem{
+    height: 14.3vh;
+}
+
+.leftverticalcorridor_Kisterem{
+    width: 5vw;
+}
+.roomContainer_Kisterem{
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+}
+.screen_Kisterem{
+    background-color: rgb(58, 170, 170);
+    width: 20vw;
+    font-size: x-large;
+}
+
+.seat {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
 }
 
-.seats_container_small {
+.seats_container_Kisterem {
     height: 35vh;
     display: grid;
     grid-template-columns: repeat(8, 1fr); 
@@ -17,38 +56,133 @@
     align-content: center;   /* Center the grid items vertically */
 }
 
+.seatsandentrance_Kisterem{
+    display: flex;
+    width: 35vw;
+    justify-content: center;
+    height: 40vh;
+}
+
+.venuedetail_main {
+    width: 95vw;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.corridor_Nagyterem{
+    height: 5vh;
+}
+
+.entrance_and_gaps{
+    width: 5vw;
+}
+
+.entrance_Nagyterem{
+    background-color: greenyellow;
+    width: 5vw;
+    height: 5.5vh;
+    justify-content: center; /* Center the grid items horizontally */
+    align-content: center;
+}
+
+.gap_lower_Nagyterem{
+    height: 0vh;
+}
+
+.gap_upper_Nagyterem{
+    height: 26vh;
+}
+
+.leftverticalcorridor_Nagyterem{
+    width: 5vw;
+}
+
+
+.screen_Nagyterem{
+    background-color: rgb(58, 170, 170);
+    width: 30vw;
+    font-size: x-large;
+}
+
 .seat {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.screen_small{
-    background-color: rgb(58, 170, 170);
-    width: 12vw;
-    font-size: x-large;
+.seats_container_Nagyterem {
+    height: 55vh;
+    display: grid;
+    grid-template-columns: repeat(15, 1fr); 
+    grid-template-rows: repeat(6, 1fr) 7vh repeat(6, 1fr); /* Add a gap between the fifth and sixth row */
+    gap: 7px;
+    justify-content: center; /* Center the grid items horizontally */
+    align-content: center;   /* Center the grid items vertically */
 }
 
-.corridor_small{
+.seatsandentrance_Nagyterem{
+    display: flex;
+    width: 45vw;
+    justify-content: center;
+}
+
+.corridor_Közepesterem{
     height: 5vh;
 }
-.entrance_small{
+
+.entrance_and_gaps{
+    width: 5vw;
+}
+
+.entrance_Közepesterem{
     background-color: greenyellow;
     width: 5vw;
     height: 5.5vh;
-    left: 40%;
     justify-content: center; /* Center the grid items horizontally */
     align-content: center;
 }
 
-.seatsandentrance_small{
-    display: flex;
-    width: 10vw;
+.gap_lower_Közepesterem{
+    height: 0vh;
 }
 
-.gap_upper_small{
-    height: 14.3vh;
+.gap_upper_Közepesterem{
+    height: 26vh;
 }
-.gap_lower_small{
-    height: 15vh;
+
+.leftverticalcorridor_Közepesterem{
+    width: 5vw;
 }
+
+
+.screen_Közepesterem{
+    background-color: rgb(58, 170, 170);
+    width: 30vw;
+    font-size: x-large;
+}
+
+.seat {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.seats_container_Közepesterem {
+    height: 55vh;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr); 
+    grid-template-rows: repeat(6, 1fr) 7vh repeat(6, 1fr); /* Add a gap between the fifth and sixth row */
+    gap: 7px;
+    justify-content: center; /* Center the grid items horizontally */
+    align-content: center;   /* Center the grid items vertically */
+}
+
+.seatsandentrance_Közepesterem{
+    display: flex;
+    width: 45vw;
+    justify-content: center;
+}
+

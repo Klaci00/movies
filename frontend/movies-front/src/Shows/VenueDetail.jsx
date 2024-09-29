@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import RoomTypeDict from './RoomTypeDict';
 import '../Cascade Style Sheets/VenueDetail.css';
+import RoomApp from './RoopApp';
+
 const VenueDetail = () => {
   axios.defaults.xsrfCookieName = 'csrftoken';
   axios.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -40,13 +42,9 @@ const VenueDetail = () => {
     axios.get(`http://127.0.0.1:8000/venues/${venueId}`)
       .then(response => {
         setVenue(response.data);
-        const numSeatsToDisplay = response.data['room_name'] === 'Nagyterem' ? 180 :
-                               response.data['room_name'] === 'Közepes terem' ? 120 : 80;
-
-        console.log(response.data['room_name'])
         seats.forEach((seatItem, index) => {
-          const seatKey = `seat_${String(index + 1).padStart(3, '0')}`;
-          if (response.data[seatKey] !== undefined) {
+        const seatKey = `seat_${String(index + 1).padStart(3, '0')}`;
+        if (response.data[seatKey] !== undefined) {
               seatItem.setSeat(response.data[seatKey]);
           }
       });
@@ -149,45 +147,29 @@ const constructPostData = (seats, show, venue) => {
 
   if (!show || !venue) return <div>Loading...</div>;
   
-  const numSeatsToDisplay = venue.room_name === 'Nagyterem' ? 180 :
-  venue.room_name === 'Közepes terem' ? 120 : 80;
+  const numSeatsToDisplay = {
+    'Kisterem': 80,
+    'Közepes terem': 120,
+    'Nagyterem': 180
+  }
+  // Remove spaces from the room name
+const room_name_without_spaces = venue.room_name.replace(/\s+/g, '');
+console.log(room_name_without_spaces);
 
-  
-
-  const roomDict=RoomTypeDict(venue.room_name);
+// Use the cleaned room name to get the room dictionary
+const roomDict = RoomTypeDict(room_name_without_spaces);
 
   return (
-    <div className='venuedetail_main'>
-      <h1>{show.title}</h1>
-      <img src={show.poster} alt={show.title} />
-      <p>Showtime: {new Date(venue.showtime).toLocaleString()}</p>
-      <div className={roomDict['screen']}>Screen</div>
-      <div className={roomDict['corridor']}> </div>
-      <div className={roomDict['seatsandentrance']}>
-          <div className={roomDict['seats_container']}>
-            {seats.slice(0,numSeatsToDisplay).map(({ seat, setSeat }, index) => (
-              <div
-                key={index}
-                className='seat'
-                onClick={() => toggleSeat(seat, setSeat)}
-                style={{
-                  width: '20px',
-                  height: '20px',
-                  backgroundColor: seat === 0 ? 'green' : seat === 1 ? 'red' : 'gray',
-                  cursor: seat !== 2 ? 'pointer' : 'not-allowed',
-                }}
-              ></div>
-            ))}
-          </div>
-          <div className={roomDict['entrance_and_gaps']}>
-            <div className={roomDict['gap_upper']}></div>
-            <div className={roomDict['entrance']}>BEJÁRAT</div>
-            <div className={roomDict['gap_lower']}></div>
-          </div>
-      </div>
-      <button onClick={reserveSeats}>Reserve Seats</button>
-    </div>
-  );
+    <RoomApp
+    title={show.title}
+    poster={show.poster}
+    showtime={venue.showtime}
+    seats={seats}
+    numSeatsToDisplay={numSeatsToDisplay[venue.room_name]}
+    roomDict={roomDict}
+    toggleSeat={toggleSeat}
+    reserveSeats={reserveSeats}
+/>);
   
 };
 

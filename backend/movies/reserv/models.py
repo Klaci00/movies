@@ -387,6 +387,8 @@ class Reservation(models.Model):
     seat_179 = models.IntegerField('seat_179', blank=True, null=True, default=0)
     seat_180 = models.IntegerField('seat_180', blank=True, null=True, default=0)
     seat_count = models.IntegerField(default=0)
+    def __str__(self) -> str:
+        return self.owner.username+', '+', '+self.title+', '+self.room_name
 
 class CustomUser(AbstractUser):
     pass
