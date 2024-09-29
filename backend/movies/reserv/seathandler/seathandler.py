@@ -1,4 +1,3 @@
-from .seatlist import seatlist
 
 def reserv_data(user, data):
     try:
@@ -9,7 +8,8 @@ def reserv_data(user, data):
             'showtime': data['showtime'],
         }
 
-        for seat in seatlist:
+        for i in range(1,181):
+            seat = 'seat_' + str(i).zfill(3)
             if seat in data:
                 reserv_data[seat] = data[seat]
             else: break
@@ -34,7 +34,8 @@ def reserv_data(user, data):
 
 def venue_data_updater(data):
     try:
-        for seat in seatlist:
+        for i in range(1,181):
+            seat = 'seat_' + str(i).zfill(3)
             if seat in data:
                 if data[seat] == 1:
                     data[seat] = 2
@@ -58,7 +59,8 @@ def venue_data_updater(data):
 
 def seat_liberator(instance, venue):
     try:
-        for seat in seatlist:
+        for i in range(1,181):
+            seat = 'seat_' + str(i).zfill(3)
             if hasattr(instance, seat) and getattr(instance, seat) == 1:
                 setattr(venue, seat, 0)
             elif not hasattr(instance, seat):
@@ -86,7 +88,8 @@ def venue_data(venue):
             'showtime': venue.showtime,
         }
 
-        for seat in seatlist:
+        for i in range(1,181):
+            seat = 'seat_' + str(i).zfill(3)
             if hasattr(venue, seat):
                 venue_data[seat] = getattr(venue, seat)
             else:
