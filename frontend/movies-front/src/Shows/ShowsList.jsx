@@ -19,12 +19,13 @@ const ShowsList = () => {
     <div>
       {shows.map(show => (
         <div key={show.id} className='show'>
-          <h2>
-            <Link to={`/${show.id}`}>{show.title}</Link>
+          <h2 className='textinmiddle'>
+            <Link className='showlink' to={`/${show.id}`}>{show.title}</Link>
           </h2>
-          <p>{show.description}</p>
-        
+          <p className='textinmiddle'>{show.description}</p>
+        <div className='listvenues_img'>
           <img src={show.poster} alt={show.title} />
+          </div>
         </div>
       ))}
     </div>

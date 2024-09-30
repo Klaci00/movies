@@ -117,7 +117,7 @@ const constructPostData = (seats, show, venue) => {
 
     axios.patch(`http://127.0.0.1:8000/venues/${venueId}/`, data, {
       headers: {
-        'X-CSRFToken': csrftoken
+        'Authorization': `Token ${localStorage.getItem('token')}` // Assuming the token is stored in localStorage
       }
     })
     

@@ -8,6 +8,7 @@ import VenueDetail from '../Shows/VenueDetail';
 import ListVenues from '../Shows/ListVenues';
 import Reservations2 from '../Reservations/Reservations2';
 import axios from 'axios';
+import '../Cascade Style Sheets/VenueDetail.css';
 
 const Layout = () => {
     const [isAuth, setIsAuth] = useState(false);
@@ -32,9 +33,9 @@ const Layout = () => {
     }, []);
   
     return (
-      <Router>
-        <div>
-          <nav>
+      <Router className='router'>
+        <div className='main_screen'>
+          <nav className='nav'>
             <Link to='/'>Home</Link>
             {!isAuth ? (
               <>
@@ -49,11 +50,11 @@ const Layout = () => {
               </>
             )}
           </nav>
-          <Routes>
+          <Routes className='routes'>
             <Route path='/' element={<ShowsList />} />
             <Route path='/register' element={<Register />} />
             <Route path='/login' element={<Login setAuth={setIsAuth} />} />
-            <Route path='/:id' element={<ListVenues />} />
+            <Route path='/:id' element={<ListVenues className='listvenues' />} />
             <Route path=':id/venues/:venueId' element={<VenueDetail />} />
             <Route path='/reservations' element={<Reservations2 />} />
           </Routes>
