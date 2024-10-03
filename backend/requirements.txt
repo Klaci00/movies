@@ -1,5 +1,8 @@
-pip install pillow
-pip install
-pip install djangorestframework
-python -m pip install Django
-python -m pip install django-cors-headers
+asgiref==3.8.1
+Django==5.1
+django-cors-headers==4.4.0
+djangorestframework==3.15.2
+pillow==10.4.0
+PyYAML==6.0.2
+sqlparse==0.5.1
+tzdata==2024.1
