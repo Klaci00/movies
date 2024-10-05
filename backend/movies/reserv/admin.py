@@ -19,3 +19,5 @@ admin.site.register(Show,ShowAdin)
 admin.site.register(CustomUser,CustomUserAdmin)
 admin.site.register(Reservation,ReservationAdmin)
 admin.site.register(Venue,VenueAdmin)
+
+#Itt voltam BCS
