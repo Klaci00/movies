@@ -5,12 +5,12 @@ import '../Cascade Style Sheets/VenueDetail.css';
 import RoomApp from './RoopApp';
 import { useSeatStates } from './Functions/useSeatStates';
 import { FetchShowDetails } from './Functions/FetchShowDetails';
-import { FetchVenueDetails } from './Functions/FetchVenueDetails';
 import { toggleSeat } from './Functions/toggleSeat';
-import { ConstructPostData } from './Functions/constructPostData';
 import { PatchVenue } from './Functions/PatchVenue';
 import { PostReservation } from './Functions/PostReservation';
-import { ConstructPatchData} from './Functions/CounstructPatchData';
+import { FetchVenueDetails,FetchVenueDetails_new } from './Functions/FetchVenueDetails';
+import { ConstructPatchData,ConstructPatchData_new} from './Functions/CounstructPatchData';
+import { ConstructPostData, ConstructPostData_new } from './Functions/constructPostData';
 
 const VenueDetail = () => {
   const { id, venueId } = useParams();
@@ -32,7 +32,7 @@ const VenueDetail = () => {
     PatchVenue(venueId,dataToPatch);
  
     const dataToPOST=ConstructPostData(seats, show, venue);  
-      PostReservation(dataToPOST)
+    PostReservation(dataToPOST)
       
   };
 
