@@ -12,8 +12,8 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import ensure_csrf_cookie
 from pprint import pprint
-from .seathandler.seathandler import reserv_data,venue_data_dict_maker,\
-                                     venue_data_updater,seat_liberator
+from .seathandler.seathandler import reserv_data_maker,venue_data_dict_maker,\
+                                     venue_data_updater2,seat_liberator2
 
 class ShowDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset=Show.objects.all()
@@ -34,7 +34,7 @@ class VenueDetail(generics.RetrieveUpdateDestroyAPIView):
         #Update seats with my imported function!
         serializer = self.get_serializer(
                                         instance,
-                                        data=venue_data_updater(data),
+                                        data=venue_data_updater2(data),
                                         partial=True
                                         )
         serializer.is_valid(raise_exception=True)
@@ -59,7 +59,7 @@ class ReservDestroy(generics.DestroyAPIView):
             
             print(f"Venue associated with reservation: {venue.id}")
             
-            venue=seat_liberator(instance,venue)
+            venue=seat_liberator2(instance,venue)
             venue.save()
             print(f"Deleting reservation: {instance.title}")
 
@@ -87,7 +87,7 @@ class ReservDetail(generics.ListCreateAPIView):
                 {'error': 'User not found'},
                 status=status.HTTP_404_NOT_FOUND
                             )
-        reservation_data = reserv_data(user,data)
+        reservation_data = reserv_data_maker(user,data)
 
         
         # Create the reservation using the serializer

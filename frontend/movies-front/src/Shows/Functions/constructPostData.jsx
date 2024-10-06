@@ -21,6 +21,7 @@ export const ConstructPostData_new = (seats, show, venue) => {
         title: show.title,
         room_name: venue.room_name,
         showtime: venue.showtime,
+        seats: {},
         seat_count: countOccupiedSeats(seats)
     };
   

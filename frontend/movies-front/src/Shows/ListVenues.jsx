@@ -50,7 +50,7 @@ const ListVenues = () => {
             <li key={venue.id}>
               <Link to={`/${id}/venues/${venue.id}`}>
                 <p>Room Name: {venue.room_name}</p>
-                <p>Showtime: {new Date(venue.showtime).toLocaleString()}</p>
+                <p>Showtime: {new Date(venue.showtime).toLocaleString('en-GB', { timeZone: 'Europe/Budapest' })}</p>
               </Link>
             </li>
           ))}
@@ -76,8 +76,8 @@ const ListVenues = () => {
         {venues.map(venue => (
           <li key={venue.id}>
               <p>Room Name: {venue.room_name}</p>
-              <p>Showtime: {new Date(venue.showtime).toLocaleString()}</p>
-          </li>
+              <p>Showtime: {new Date(venue.showtime).toLocaleString('en-GB', { timeZone: 'Europe/Budapest' })}</p>
+              </li>
         ))}
       </ul>
     ) : (

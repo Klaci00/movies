@@ -1,15 +1,8 @@
 import React from 'react';
-
 function ReservApp({ id, title, owner, room_name, showtime, seat_count, onDelete }) {
     function convertDateTime(datetime) {
         const date = new Date(datetime);
-        const year = date.getUTCFullYear();
-        const month = String(date.getUTCMonth() + 1).padStart(2, '0');
-        const day = String(date.getUTCDate()).padStart(2, '0');
-        const hours = String(date.getUTCHours()).padStart(2, '0');
-        const minutes = String(date.getUTCMinutes()).padStart(2, '0');
-        
-        return `${year}.${month}.${day}. ${hours}:${minutes}`;
+        return date.toLocaleString('en-GB', { timeZone: 'Europe/Budapest', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }).replace(',', '');
     }
     
     return (

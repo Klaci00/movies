@@ -18,12 +18,15 @@ export const ConstructPatchData = (seats, show, venue) => {
         title: show.title,
         room_name: venue.room_name,
         showtime: venue.showtime,
+        seats: {}
     };
-  
+
+
     seats.forEach((seatItem, index) => {
         const seatKey = `seat_${String(index).padStart(3, '0')}`;
         data.seats[seatKey] = seatItem.seat;
     });
-  
+
+
     return data;
-  };
+};

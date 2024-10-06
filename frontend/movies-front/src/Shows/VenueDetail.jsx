@@ -16,22 +16,23 @@ const VenueDetail = () => {
   const { id, venueId } = useParams();
   const [show, setShow] = useState(null);
   const [venue, setVenue] = useState(null);
-  const seats = useSeatStates(180);
+  const seats = useSeatStates(1000);
 
   useEffect(() => {
     // Fetch show details
     FetchShowDetails(setShow,id);
     
     // Fetch venue details
-    FetchVenueDetails(setVenue,venueId,seats);
+    FetchVenueDetails_new(setVenue,venueId,seats);
+    console.log(seats);
   }, [id, venueId]);
 
 
   const reserveSeats = async () => {
-    const dataToPatch = ConstructPatchData(seats, show, venue);
+    const dataToPatch = ConstructPatchData_new(seats, show, venue);
     PatchVenue(venueId,dataToPatch);
  
-    const dataToPOST=ConstructPostData(seats, show, venue);  
+    const dataToPOST=ConstructPostData_new(seats, show, venue);  
     PostReservation(dataToPOST)
       
   };
