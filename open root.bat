@@ -1,2 +1,2 @@
 @echo off
-%SystemRoot%\explorer.exe "C:\movies"
+%SystemRoot%\explorer.exe "."
