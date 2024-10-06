@@ -12,7 +12,7 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import ensure_csrf_cookie
 from pprint import pprint
-from .seathandler.seathandler import reserv_data,venue_data,\
+from .seathandler.seathandler import reserv_data,venue_data_dict_maker,\
                                      venue_data_updater,seat_liberator
 
 class ShowDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -117,7 +117,11 @@ class ShowList(generics.ListAPIView):
 def show_venues(request, show_id):
     show = get_object_or_404(Show, id=show_id)
     venues = show.venues.all()
-    venues_data = [venue_data(venue) for venue in venues]
+    venues_data = [venue_data_dict_maker(venue) for venue in venues]   
+    #Inline serialization is possible in Python,
+    #but it returns a JSON string, which is a security issue.
+    #That's why I implemented a custom function that returns
+    #a dictionary. (Klaci)
     return JsonResponse({'venues': venues_data})
 
 def venue_detail(request, show_id, venue_id):
