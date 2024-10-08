@@ -1,8 +1,16 @@
 Sziasztok!
 
-A frontend és a backend mappákban van egy-egy fájl requirements néven, azokat telepíteni kell a virtuális környezetekbe.
+Vizsgaremek project a mozi foglalós oldalhoz.
 
-A fő mappában vannak batch fileok, amikkel könnyedén el lehet indítani a szervereket, és vscodeban is meg lehet nyitni a mappát.
+Életre keltés:
 
+py -m venv testbed1
+testbed1\scripts\activate
+pip install -r backend\requirements.txt
+cd frontend\movies-front
+npm install
+npm run dev
+
+Üvd: Laci
 Üvd:
 Laci
