@@ -1,11 +1,15 @@
 # movies
 Vizsgaremek project a mozi foglalós oldalhoz.
 
-Sziasztok!
+py -m venv testbed1
+testbed1\scripts\activate
+pip install -r backend\requirements.txt
+cd frontend\movies-front
+npm install
+npm run dev
 
-A frontend és a backend mappákban van egy-egy fájl requirements néven, azokat telepíteni kell a virtuális környezetekbe.
-
-A fő mappában vannak batch fileok, amikkel könnyedén el lehet indítani a szervereket, és vscodeban is meg lehet nyitni a mappát.
 
 Üvd:
 Laci
+
+
