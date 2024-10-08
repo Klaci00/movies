@@ -7,15 +7,22 @@ import ShowsList from '../Shows/ShowsList';
 import VenueDetail from '../Shows/VenueDetail';
 import ListVenues from '../Shows/ListVenues';
 import Reservations2 from '../Reservations/Reservations2';
+import AddShow from '../Admin/AddShow';
+import { AddVenue } from '../Admin/AddVenue';
 import axios from 'axios';
 import '../Cascade Style Sheets/VenueDetail.css';
 
 const Layout = () => {
     const [isAuth, setIsAuth] = useState(false);
+    const [isAdmin,setIsAdmin] = useState(false);
     const [username, setUsername] = useState('');
   
     useEffect(() => {
       const token = localStorage.getItem('token');
+      const is_staff = localStorage.getItem('is_staff');
+      if (is_staff){
+        setIsAdmin(true);
+      }
       if (token) {
         setIsAuth(true);
         axios.get('http://127.0.0.1:8000/user/', {
@@ -46,6 +53,13 @@ const Layout = () => {
               <>
                 <span>Welcome, {username}!</span>
                 <Link to='/reservations'>Reservations</Link>
+                {isAdmin ? (
+                  <>
+                    <Link to='/addshow'>Add Show</Link>
+                    <Link to='/addvenue'>Add Venue</Link>
+                  </>)
+                  :
+                  (<></>)}
                 <Logout setAuth={setIsAuth} />
               </>
             )}
@@ -57,6 +71,8 @@ const Layout = () => {
             <Route path='/:id' element={<ListVenues className='listvenues' />} />
             <Route path=':id/venues/:venueId' element={<VenueDetail />} />
             <Route path='/reservations' element={<Reservations2 />} />
+            <Route path='/addshow' element={<AddShow/>} />
+            <Route path='/addvenue' element={<AddVenue/>} />
           </Routes>
         </div>
       </Router>

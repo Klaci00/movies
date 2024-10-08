@@ -1,18 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
-
+import { FetchShowsList } from './Functions/FetchShowsList';
 const ShowsList = () => {
   const [shows, setShows] = useState([]);
 
   useEffect(() => {
-    axios.get('http://127.0.0.1:8000/')
-      .then(response => {
-        setShows(response.data);
-      })
-      .catch(error => {
-        console.error('There was an error fetching the shows!', error);
-      });
+    FetchShowsList(setShows);
   }, []);
 
   return (

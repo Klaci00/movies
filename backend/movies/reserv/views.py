@@ -11,9 +11,11 @@ from rest_framework.permissions import IsAuthenticated
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import ensure_csrf_cookie
+from rest_framework.exceptions import NotFound
 from pprint import pprint
 from .seathandler.seathandler import reserv_data_maker,venue_data_dict_maker,\
-                                     venue_data_updater2,seat_liberator2
+                                     venue_data_updater2,seat_liberator2,\
+                                     seat_maker
 
 class ShowDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset=Show.objects.all()
@@ -110,7 +112,7 @@ class ReservationListView(APIView):
         serializer = ReservSerializer(reservations, many=True)
         return Response(serializer.data)
     
-class ShowList(generics.ListAPIView):
+class ShowList(generics.ListCreateAPIView):
     queryset=Show.objects.all()
     serializer_class=ShowSerializer
 
@@ -127,6 +129,29 @@ def show_venues(request, show_id):
 def venue_detail(request, show_id, venue_id):
     venue_data = venue_data(venue = get_object_or_404(Venue, id=venue_id, shows__id=show_id))
     return JsonResponse(venue_data)
+
+class ListVenues(generics.ListCreateAPIView):
+    queryset=Venue.objects.all()
+    serializer_class=VenueSerializer
+
+    def perform_create(self, serializer):
+        pprint(self.request.data)
+        request_data = self.request.data
+        show_id = request_data.get('show_id')
+
+        try:
+            show = Show.objects.get(id=show_id)
+        except Show.DoesNotExist:
+            raise NotFound('Show not found')
+
+        venue = serializer.save(
+            title=request_data.get('title'),
+            room_name=request_data.get('room_name'),
+            showtime=request_data.get('showtime'),
+            seats=seat_maker()
+        )
+
+        show.venues.add(venue)
 
 class UserCreate(CreateAPIView):
     serializer_class = UserSerializer
@@ -155,10 +180,13 @@ class CustomObtainAuthToken(ObtainAuthToken):
     def post(self, request, *args, **kwargs):
         response = super().post(request, *args, **kwargs)
         token = Token.objects.get(key=response.data['token'])
+        user = token.user
         return Response({
             'token': token.key,
-            'user_id': token.user_id,
+            'user_id': user.id,
+            'is_staff': user.is_staff,
         })
+
 @ensure_csrf_cookie
 def set_csrf_token(request):
     return JsonResponse({'detail': 'CSRF cookie set'})

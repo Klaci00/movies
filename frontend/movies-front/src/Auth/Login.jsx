@@ -14,6 +14,7 @@ const Login = ({ setAuth }) => {
       console.log('Response:', response.data); // Log the response data
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('userId', response.data.user_id); // Save user ID
+      localStorage.setItem('is_staff',response.data.is_staff)
       console.log('Token:', response.data.token); // Log the token
       console.log('User ID:', response.data.user_id); // Log the user ID
       setAuth(true);
