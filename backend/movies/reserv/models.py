@@ -30,6 +30,7 @@ class Reservation(models.Model):
     showtime = models.DateTimeField("showtime")
     seats=models.JSONField(default=seat_maker)
     seat_count = models.IntegerField(default=0)
+    seatnames=models.CharField(max_length=1000,default=" ")
     def __str__(self) -> str:
         return self.owner.username+', '+', '+self.title+', '+self.room_name
 

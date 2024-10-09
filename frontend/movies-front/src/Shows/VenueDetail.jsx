@@ -8,9 +8,9 @@ import { FetchShowDetails } from './Functions/FetchShowDetails';
 import { toggleSeat } from './Functions/toggleSeat';
 import { PatchVenue } from './Functions/PatchVenue';
 import { PostReservation } from './Functions/PostReservation';
-import { FetchVenueDetails,FetchVenueDetails_new } from './Functions/FetchVenueDetails';
-import { ConstructPatchData,ConstructPatchData_new} from './Functions/CounstructPatchData';
-import { ConstructPostData, ConstructPostData_new } from './Functions/constructPostData';
+import { FetchVenueDetails_new } from './Functions/FetchVenueDetails';
+import { ConstructPatchData_new} from './Functions/CounstructPatchData';
+import { ConstructPostData_new } from './Functions/constructPostData';
 
 const VenueDetail = () => {
   const { id, venueId } = useParams();

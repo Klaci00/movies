@@ -80,8 +80,6 @@ class ReservDetail(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         data = serializer.validated_data
-        pprint(data)
-        print(self.request.user.id)
         try:
             user = CustomUser.objects.get(id=self.request.user.id)
         except CustomUser.DoesNotExist:

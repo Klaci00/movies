@@ -13,9 +13,9 @@ def reserv_data_maker(user, data):
             'room_name': data['room_name'],
             'showtime': data['showtime'],
             'seats': data['seats'],
-              }
-
-        reserv_data['seat_count'] = data['seat_count']
+            'seat_count': data['seat_count'],
+            'seatnames': data.get('seatnames', '')
+        }
         
     except KeyError as e:
         print(f'Key error: {e}')
@@ -28,6 +28,7 @@ def reserv_data_maker(user, data):
         return None
 
     return reserv_data
+
 
 def venue_data_updater2(data):
     try:
@@ -98,7 +99,8 @@ def reserv_data(user, data):
                 # since the seat fields are nullable, to satisfy the
                 # need for different room sizes !!!
         reserv_data['seat_count'] = data['seat_count']
-        
+        reserv_data['seatnames']= data.get('seatnames', '')
+
     except KeyError as e:
         print(f'Key error: {e}')
         return None

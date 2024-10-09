@@ -19,10 +19,7 @@ const Layout = () => {
   
     useEffect(() => {
       const token = localStorage.getItem('token');
-      const is_staff = localStorage.getItem('is_staff');
-      if (is_staff){
-        setIsAdmin(true);
-      }
+      
       if (token) {
         setIsAuth(true);
         axios.get('http://127.0.0.1:8000/user/', {
@@ -32,6 +29,9 @@ const Layout = () => {
         })
         .then(response => {
           setUsername(response.data.username);
+          if (response.data.is_staff==true){
+            setIsAdmin(true);
+          }
         })
         .catch(error => {
           console.error('There was an error fetching the user info!', error);
@@ -43,20 +43,20 @@ const Layout = () => {
       <Router className='router'>
         <div className='main_screen'>
           <nav className='nav'>
-            <Link to='/'>Home</Link>
+            <Link to='/'><p>Home</p></Link>
             {!isAuth ? (
               <>
-                <Link to='/register'>Register</Link>
-                <Link to='/login'>Login</Link>
+                <Link to='/register'><p>Register</p></Link>
+                <Link to='/login'><p>Login</p></Link>
               </>
             ) : (
               <>
                 <span>Welcome, {username}!</span>
-                <Link to='/reservations'>Reservations</Link>
+                <Link to='/reservations'><p>Reservations</p></Link>
                 {isAdmin ? (
                   <>
-                    <Link to='/addshow'>Add Show</Link>
-                    <Link to='/addvenue'>Add Venue</Link>
+                    <Link to='/addshow'><p>Add Show</p></Link>
+                    <Link to='/addvenue'><p>Add Venue</p></Link>
                   </>)
                   :
                   (<></>)}

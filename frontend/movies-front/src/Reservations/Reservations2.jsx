@@ -71,6 +71,7 @@ const Reservations2 = () => {
                     room_name={x.room_name}
                     showtime={x.showtime}
                     seat_count={x.seat_count}
+                    seatnames={x.seatnames}
                     onDelete={handleDelete}
                 />
             </div>

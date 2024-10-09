@@ -29,17 +29,50 @@ listvenues_main{
     display: flex;
     justify-content: center;
     align-content: center;
-    width: 95vw;
+    width: 100vw;
     flex-direction: column;
 }
 
 .nav{
     display: flex;
-    width: 95vw;
-    justify-content: center;
+    width: 100vw;
+    justify-content: space-evenly;
     align-content: center;
+    align-items: center;
+    height: 6vh;
+    background-color: rgba(201, 135, 35, 0.607);
+
+    button:hover{
+        background-color: rgba(255, 0, 0, 0.234);
+        box-shadow: inset;
+    }
+    a{
+        border-radius: 10%;
+
+    }
+    a>p{
+        padding: 0.5%;
+        width: 10vw;
+        text-align: center;
+        border-radius: 25%;
+
+    }
+    span{
+        padding: 0.5%;
+        border-radius: 5%;
+
+
+    }
 
 }
+
+
+.nav>:hover{
+    transition: background-color 1s ease, color 0.3s ease;
+    background-color: rgba(201, 135, 35, 0.294);
+
+}
+
 
 .router{
     display: flex;
@@ -64,7 +97,10 @@ listvenues_main{
     font-size: xx-large;
     color: rgb(219, 132, 33);
 }
+.showlink:hover{
+    color: rgb(249, 151, 39);
 
+}
 .corridor_Kisterem{
     height: 5vh;
     width: 20vw;
