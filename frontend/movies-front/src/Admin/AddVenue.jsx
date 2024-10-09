@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { VenueDataMaker } from './VenueDataMaker';
-import { FetchShowsList } from '../Shows/Functions/FetchShowsList';
+import { FetchShowsList } from '../Venues/Functions/FetchShowsList';
 
 export const AddVenue = () => {
     const [shows, setShows] = useState([]);

@@ -4,8 +4,8 @@ import Register from '../Auth/Register';
 import Login from '../Auth/Login';
 import Logout from '../Auth/Logout';
 import ShowsList from '../Shows/ShowsList';
-import VenueDetail from '../Shows/VenueDetail';
-import ListVenues from '../Shows/ListVenues';
+import VenueDetail from '../Venues/VenueDetail';
+import ListVenues from '../Venues/ListVenues';
 import Reservations2 from '../Reservations/Reservations2';
 import AddShow from '../Admin/AddShow';
 import { AddVenue } from '../Admin/AddVenue';
@@ -16,7 +16,7 @@ const Layout = () => {
     const [isAuth, setIsAuth] = useState(false);
     const [isAdmin,setIsAdmin] = useState(false);
     const [username, setUsername] = useState('');
-  
+    
     useEffect(() => {
       const token = localStorage.getItem('token');
       

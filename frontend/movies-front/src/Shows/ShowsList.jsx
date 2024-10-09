@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FetchShowsList } from './Functions/FetchShowsList';
+import { FetchShowsList } from '../Venues/Functions/FetchShowsList';
 const ShowsList = () => {
   const [shows, setShows] = useState([]);
 
@@ -17,7 +17,7 @@ const ShowsList = () => {
           </h2>
           <p className='textinmiddle'>{show.description}</p>
         <div className='listvenues_img'>
-          <img src={show.poster} alt={show.title} />
+          <img className='poster' src={show.poster} alt={show.title} />
           </div>
         </div>
       ))}

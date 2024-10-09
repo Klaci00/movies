@@ -1,11 +1,26 @@
 import React from 'react';
-
+import '../Cascade Style Sheets/VenueDetail.css';
+import { toggleSeat } from './Functions/toggleSeat';
 function RoomApp(props) {
-    return (
+    var stop=false;
+    const target = 1;
+    const indices = props.seats.map((item,index)=>(item.seat === target ? index : -1))
+    .filter(index=>index !== -1);
+    console.log(indices.length);
+    for (let i = 0; i < indices.length - 1; i++) {
+        if (Math.abs(indices[i] - indices[i + 1]) == 2) {
+          stop=true;
+          window.alert('Egy helyet nem lehet kihagyni a foglalt helyek között!');
+        }
+      }
+    const isButtonDisabled = stop || indices.length === 0;
+
+        return (
         <div className='venuedetail_main'>
             <h1>{props.title}</h1>
-            <img src={props.poster} alt={props.title} />
+            <img className='poster' src={props.poster} alt={props.title} />
             <p>Showtime: {new Date(props.showtime).toLocaleString()}</p>
+            <p>Jegyek száma: {props.seatnum}</p>
                 <div className={props.roomDict['screen']}>Screen</div>
                 <div className={props.roomDict['corridor']}></div>
                 <div className={props.roomDict['seatsandentrance']}>
@@ -15,7 +30,7 @@ function RoomApp(props) {
                             <div
                                 key={index}
                                 className='seat'
-                                onClick={() => props.toggleSeat(seat, setSeat)}
+                                onClick={() =>props.toggleSeat(seat, setSeat,props.seatNum,props.setSeatNum)}
                                 style={{
                                     width: '20px',
                                     height: '20px',
@@ -31,7 +46,7 @@ function RoomApp(props) {
                         <div className={props.roomDict['gap_lower']}></div>
                     </div>
                 </div>
-            <button onClick={() => props.reserveSeats(props)}>Reserve Seats</button>
+            <button onClick={() => props.reserveSeats(props)} disabled={isButtonDisabled}>Reserve Seats</button>
         </div>
     );
 }

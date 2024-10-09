@@ -289,3 +289,6 @@ listvenues_main{
     justify-content: center;
 }
 
+.poster{
+    max-width: 35vw;
+}

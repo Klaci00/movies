@@ -8,6 +8,7 @@ const ListVenues = () => {
   const [show, setShow] = useState(null);
   const [venues, setVenues] = useState([]);
   const [isAuth, setIsAuth] = useState(false);
+  const [seatNum, setSeatNum]=useState(1);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -31,18 +32,38 @@ const ListVenues = () => {
       });
   }, [id]);
 
+  const handleChange=(event)=>{
+    const value = event.target.value;
+    setSeatNum(value);
+    console.log(value);
+    localStorage.setItem('seatnum',value);
+  };
+
   if (!show) return <div>Loading...</div>;
   else if (isAuth)  return (
     <div className='listvenues_main'>
       <h1 className='textinmiddle'>{show.title}</h1>
       <div className='listvenues_img'>
-      <img src={show.poster} alt={show.title} />
+      <img className='poster' src={show.poster} alt={show.title} />
       </div>
 
       <p className='textinmiddle'>Korhatár: {show.rating}</p>
       <p className='textinmiddle'>Műsoridő: {show.playtime} perc</p>
 
       <h2 className='textinmiddle'>Venues</h2>
+      <div>
+      <h1>Reserve Your Seats</h1>
+      <label>
+        How many seats would you like to reserve?
+        <select value={seatNum} onChange={handleChange}>
+          {Array.from({ length: 30 }, (_, i) => i + 1).map((number) => (
+            <option key={number} value={number}>
+              {number}
+            </option>
+          ))}
+        </select>
+      </label>
+    </div>
 
       {venues.length > 0 ? (
         <ul className='textinmiddle'>
@@ -64,7 +85,7 @@ const ListVenues = () => {
   else return (    <div className='listvenues_main'>
       <h1 className='textinmiddle'>{show.title}</h1>
       <div className='listvenues_img'>
-      <img src={show.poster} alt={show.title} />
+      <img className='poster' src={show.poster} alt={show.title} />
       </div>
     <p className='textinmiddle'>Korhatár: {show.rating}</p>
     <p className='textinmiddle'>Műsoridő: {show.playtime} perc</p>

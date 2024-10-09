@@ -1,4 +1,5 @@
 import { countOccupiedSeats } from "./countOccupiedSeats";
+import { ConstructSeatNames } from "./ConstructSeatNames";
 
 export const ConstructPostData = (seats, show, venue) => {
     const data = {
@@ -32,7 +33,7 @@ export const ConstructPostData = (seats, show, venue) => {
             const seatKey = `seat_${String(index).padStart(3, '0')}`;
             data.seats[seatKey] = seatItem.seat;
             if (seatItem.seat === 1) {
-                seatnamesArray.push(`seat number ${index + 1}`);
+                seatnamesArray.push(ConstructSeatNames(venue.room_name,index));
             }
         });
     
