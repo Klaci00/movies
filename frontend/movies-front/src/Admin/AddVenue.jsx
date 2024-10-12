@@ -8,7 +8,8 @@ export const AddVenue = () => {
     const [selectedShow, setSelectedShow] = useState('');
     const [roomName, setRoomName] = useState('');
     const [showtime, setShowtime] = useState('');
-
+    const [selectedRoomName,setSelectedRoomname]=useState('');
+    const roomNames=['Nagyterem','Közepes terem','Kisterem'];
     useEffect(() => {
         FetchShowsList(setShows);
     }, []);
@@ -18,18 +19,24 @@ export const AddVenue = () => {
         setSelectedShow(e.target.value);
     };
 
+    const handleDropdownChange2 = (e) => {
+        console.log('Selected roomname:', e.target.value);
+        setSelectedRoomname(e.target.value);
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const selectedShowObject = shows.find(show => show.id === parseInt(selectedShow));
         console.log('Selected show object:', selectedShowObject);
+        window.alert('Venue succesfully added!');
 
         if (!selectedShowObject) {
             console.error('Selected show object not found');
             return;
         }
 
-        const venueData = VenueDataMaker(selectedShowObject.title,roomName,showtime,selectedShowObject.id);
+        const venueData = VenueDataMaker(selectedShowObject.title,selectedRoomName,showtime,selectedShowObject.id);
         console.log(venueData)
 
         const token = localStorage.getItem('token');
@@ -59,7 +66,13 @@ export const AddVenue = () => {
             </div>
             <div>
                 <label>Room Name:</label>
-                <input type="text" value={roomName} onChange={(e) => setRoomName(e.target.value)} required />
+                <select value={selectedRoomName} onChange={handleDropdownChange2} required>
+                    <option value="" disabled>Select a room</option>
+                    {roomNames.map(roomname => (
+                        <option key={roomname} value={roomname}>{roomname}</option>
+                    ))}
+                </select>
+
             </div>
             <div>
                 <label>Showtime (Budapest Time):</label>
