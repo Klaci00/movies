@@ -52,7 +52,7 @@ const ListVenues = () => {
 
       <h2 className='textinmiddle'>Venues</h2>
       <div>
-      <h1>Reserve Your Seats</h1>
+      <h3 className='ticketcount'>Reserve Your Seats</h3>
       <label>
         How many seats would you like to reserve?
         <select value={seatNum} onChange={handleChange}>
