@@ -21,3 +21,4 @@ admin.site.register(Reservation,ReservationAdmin)
 admin.site.register(Venue,VenueAdmin)
 
 #Itt voltam BCS
+#én is
