@@ -11,6 +11,7 @@ const ListVenues = () => {
   const [seatNum, setSeatNum]=useState(1);
 
   useEffect(() => {
+    localStorage.setItem('seatnum',seatNum);
     const token = localStorage.getItem('token');
     if (token) {setIsAuth(true)};
     // Fetch show details
