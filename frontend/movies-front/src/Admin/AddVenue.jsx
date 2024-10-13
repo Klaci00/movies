@@ -6,7 +6,6 @@ import { FetchShowsList } from '../Venues/Functions/FetchShowsList';
 export const AddVenue = () => {
     const [shows, setShows] = useState([]);
     const [selectedShow, setSelectedShow] = useState('');
-    const [roomName, setRoomName] = useState('');
     const [showtime, setShowtime] = useState('');
     const [selectedRoomName,setSelectedRoomname]=useState('');
     const roomNames=['Nagyterem','Közepes terem','Kisterem'];

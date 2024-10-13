@@ -7,14 +7,16 @@ const AddShow = () => {
     const [rating, setRating] = useState('');
     const [playtime, setPlaytime] = useState(0);
     const [poster, setPoster] = useState(null);
-
+    const [selectedRestriction, setSelectedRestriction]=useState('');
+    const Restrictions=['Korosztályra való tekintet nélkül megtekinthető','6 éven felülieknek','12 éven felülieknek','16 éven felülieknek','18 éven felülieknek'];
     const handleSubmit = async (e) => {
         e.preventDefault();
+
 
         const formData = new FormData();
         formData.append('title', title);
         formData.append('description', description);
-        formData.append('rating', rating);
+        formData.append('rating', selectedRestriction);
         formData.append('playtime', playtime);
         formData.append('poster', poster);
 
@@ -28,10 +30,23 @@ const AddShow = () => {
                 }
             });
             console.log(response.data);
+            window.alert('Show added succesfully!');
         } catch (error) {
             console.error('There was an error posting the show!', error);
         }
     };
+
+    const handleDropdownChange = (e) => {
+        console.log('Selected roomname:', e.target.value);
+        setSelectedRestriction(e.target.value);
+    };
+
+    const handlePlaytimeFocus = (e) => {
+        if (e.target.value === '0') {
+            setPlaytime('');
+        }
+    };
+
 
     return (
         <form onSubmit={handleSubmit}>
@@ -45,11 +60,19 @@ const AddShow = () => {
             </div>
             <div>
                 <label>Rating:</label>
-                <input type="text" value={rating} onChange={(e) => setRating(e.target.value)} required />
+                <select value={selectedRestriction} onChange={handleDropdownChange} required>
+                    <option value="" disabled>Select a restriction</option>
+                    {Restrictions.map(restriction => (
+                        <option key={restriction} value={restriction}>{restriction}</option>
+                    ))}
+                </select>
             </div>
             <div>
                 <label>Playtime:</label>
-                <input type="number" value={playtime} onChange={(e) => setPlaytime(Number(e.target.value))} required />
+                <input type="number" value={playtime} 
+                onChange={(e) => setPlaytime(Number(e.target.value))} 
+                onFocus={handlePlaytimeFocus}
+                required />
             </div>
             <div>
                 <label>Poster:</label>
