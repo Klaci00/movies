@@ -1,19 +1,20 @@
 import React from 'react';
 import '../Cascade Style Sheets/VenueDetail.css';
-import { toggleSeat } from './Functions/toggleSeat';
+import { NumSeatCheck } from './Functions/toggleSeat';
 function RoomApp(props) {
+    console.log(NumSeatCheck(props.seatNum));
+    console.log(props.seatNum);
     var stop=false;
     const target = 1;
     const indices = props.seats.map((item,index)=>(item.seat === target ? index : -1))
     .filter(index=>index !== -1);
-    console.log(indices.length);
     for (let i = 0; i < indices.length - 1; i++) {
         if (Math.abs(indices[i] - indices[i + 1]) == 2) {
           stop=true;
           window.alert('Egy helyet nem lehet kihagyni a foglalt helyek között!');
         }
       }
-    const isButtonDisabled = stop || indices.length === 0;
+    const isButtonDisabled = stop || indices.length === 0 || props.seatNum!=0 && NumSeatCheck(props.seatNum)!=0 ;
 
         return (
         <div className='venuedetail_main'>
