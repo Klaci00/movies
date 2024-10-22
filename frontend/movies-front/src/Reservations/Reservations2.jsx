@@ -31,7 +31,7 @@ const Reservations2 = () => {
         const fetchReservations = async () => {
             if (username) {
                 try {
-                    const response = await axios.get(`http://127.0.0.1:8000/reservations/`, {
+                    const response = await axios.get(`http://127.0.0.1:8000/reservations/${username}`, {
                         headers: {
                             Authorization: `Token ${authToken}`,
                         }
