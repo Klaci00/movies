@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const PatchVenue =(venueId,data)=> axios.patch(`http://127.0.0.1:8000/venues/${venueId}/`, data, {
+export const PatchVenue =(BASE_URL,venueId,data)=> axios.patch(`${BASE_URL}venues/${venueId}/`, data, {
     headers: {
       'Authorization': `Token ${localStorage.getItem('token')}` // Assuming the token is stored in localStorage
     }

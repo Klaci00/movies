@@ -1,7 +1,6 @@
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
 
-export const PostReservation =(dataToPOST)=> axios.post(`http://127.0.0.1:8000/reservations/`, dataToPOST, {
+export const PostReservation =(BASE_URL,dataToPOST)=> axios.post(`${BASE_URL}reservations/`, dataToPOST, {
     headers: {
       'Authorization': `Token ${localStorage.getItem('token')}` // Assuming the token is stored in localStorage
     }

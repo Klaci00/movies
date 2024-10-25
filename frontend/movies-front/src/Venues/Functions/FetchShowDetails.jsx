@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-export const FetchShowDetails = (setShow,id) =>{
+export const FetchShowDetails = (BASE_URL,setShow,id) =>{
 
- const getShow = axios.get(`http://127.0.0.1:8000/${id}`)
+  const getVenueDetails = axios.get(`${BASE_URL}${id}`)
       .then(response => {
         setShow(response.data);
       })

@@ -11,7 +11,7 @@ import { PostReservation } from './PostReservation';
 import { FetchVenueDetails_new } from './Functions/FetchVenueDetails';
 import { ConstructPatchData_new} from './Functions/CounstructPatchData';
 import { ConstructPostData_new } from './Functions/constructPostData';
-
+import { BASE_URL } from '../Settings';
 const VenueDetail = () => {
   const { id, venueId } = useParams();
   const [show, setShow] = useState(null);
@@ -20,19 +20,19 @@ const VenueDetail = () => {
   const [seatNum, setSeatNum] = useState(localStorage.getItem('seatnum'));
   useEffect(() => {
     // Fetch show details
-    FetchShowDetails(setShow,id);
+    FetchShowDetails(BASE_URL,setShow,id);
     
     // Fetch venue details
-    FetchVenueDetails_new(setVenue,venueId,seats);
+    FetchVenueDetails_new(BASE_URL,setVenue,venueId,seats);
   }, [id, venueId]);
 
 
   const reserveSeats = async () => {
     const dataToPatch = ConstructPatchData_new(seats, show, venue);
-    PatchVenue(venueId,dataToPatch);
+    PatchVenue(BASE_URL,venueId,dataToPatch);
  
     const dataToPOST=ConstructPostData_new(seats, show, venue);  
-    PostReservation(dataToPOST)
+    PostReservation(BASE_URL,dataToPOST);
       
   };
 

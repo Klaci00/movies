@@ -88,7 +88,6 @@ class ReservDetail(generics.ListCreateAPIView):
                 status=status.HTTP_404_NOT_FOUND
                             )
         reservation_data = reserv_data_maker(user,data)
-
         
         # Create the reservation using the serializer
         serializer.save(**reservation_data)
