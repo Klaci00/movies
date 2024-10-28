@@ -6,7 +6,7 @@ const ShowsList = () => {
   const [shows, setShows] = useState([]);
 
   useEffect(() => {
-    FetchShowsList(BASE_URL,setShows);
+    FetchShowsList(BASE_URL, setShows);
   }, []);
 
   return (
@@ -17,8 +17,8 @@ const ShowsList = () => {
             <Link className='showlink' to={`/${show.id}`}>{show.title}</Link>
           </h2>
           <p className='textinmiddle'>{show.description}</p>
-        <div className='listvenues_img'>
-          <img className='poster' src={show.poster} alt={show.title} />
+          <div className='listvenues_img'>
+            <img className='poster' src={show.poster} alt={show.title} />
           </div>
         </div>
       ))}

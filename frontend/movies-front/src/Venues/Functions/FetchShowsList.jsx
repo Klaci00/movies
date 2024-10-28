@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const FetchShowsList =async (BASE_URL, setShows)=>{
+export const FetchShowsList = async (BASE_URL, setShows) => {
     try {
         const response = await axios.get(`${BASE_URL}`);
         setShows(response.data);

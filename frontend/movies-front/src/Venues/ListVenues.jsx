@@ -11,27 +11,27 @@ const ListVenues = () => {
   const [show, setShow] = useState(null);
   const [venues, setVenues] = useState([]);
   const [isAuth, setIsAuth] = useState(false);
-  const [seatNum, setSeatNum]=useState(1);
+  const [seatNum, setSeatNum] = useState(1);
 
   useEffect(() => {
-    localStorage.setItem('seatnum',seatNum);
+    localStorage.setItem('seatnum', seatNum);
     const token = localStorage.getItem('token');
-    if (token) {setIsAuth(true)};
+    if (token) { setIsAuth(true) };
     // Fetch show details
-    FetchShowDetails(BASE_URL,setShow,id);
+    FetchShowDetails(BASE_URL, setShow, id);
     // Fetch venues associated with the show
-    FetchVenues(BASE_URL,setVenues,id);
+    FetchVenues(BASE_URL, setVenues, id);
   }, [id]);
 
-  const handleChange=(event)=>{
+  const handleChange = (event) => {
     const value = event.target.value;
     setSeatNum(value);
     console.log(value);
-    localStorage.setItem('seatnum',value);
+    localStorage.setItem('seatnum', value);
   };
 
- return ListVenuesApp(show,isAuth,seatNum,handleChange,venues,id);
- 
+  return ListVenuesApp(show, isAuth, seatNum, handleChange, venues, id);
+
 };
 
 export default ListVenues;

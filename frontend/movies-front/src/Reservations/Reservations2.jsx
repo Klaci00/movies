@@ -2,15 +2,16 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import ReservApp from './ReservApp';
 
-const Reservations2 = () => {
+const Reservations2 = (props) => {
     const [reservationData, setReservationData] = useState([]);
     const [username, setUsername] = useState('');
     const [isAuth, setIsAuth] = useState(false);
     const [error, setError] = useState(null);
 
-    const authToken = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
 
     useEffect(() => {
+        /*
         const fetchUsername = async () => {
             if (authToken) {
                 setIsAuth(true);
@@ -26,14 +27,14 @@ const Reservations2 = () => {
                     console.error('Error fetching user info:', error);
                 }
             }
-        };
+        };*/
 
         const fetchReservations = async () => {
-            if (username) {
+            if (props.username) {
                 try {
-                    const response = await axios.get(`http://127.0.0.1:8000/reservations/${username}`, {
+                    const response = await axios.get(`http://127.0.0.1:8000/reservations/${props.username}`, {
                         headers: {
-                            Authorization: `Token ${authToken}`,
+                            Authorization: `Token ${token}`,
                         }
                     });
                     setReservationData(response.data);
@@ -44,8 +45,8 @@ const Reservations2 = () => {
             }
         };
 
-        fetchUsername().then(fetchReservations);
-    }, [authToken, username]);
+        fetchReservations();
+    }, [token, props.username]);
 
     const handleDelete = async (id) => {
         try {

@@ -9,9 +9,10 @@ import { toggleSeat } from './Functions/toggleSeat';
 import { PatchVenue } from './Functions/PatchVenue';
 import { PostReservation } from './PostReservation';
 import { FetchVenueDetails_new } from './Functions/FetchVenueDetails';
-import { ConstructPatchData_new} from './Functions/CounstructPatchData';
+import { ConstructPatchData_new } from './Functions/CounstructPatchData';
 import { ConstructPostData_new } from './Functions/constructPostData';
 import { BASE_URL } from '../Settings';
+
 const VenueDetail = () => {
   const { id, venueId } = useParams();
   const [show, setShow] = useState(null);
@@ -20,26 +21,26 @@ const VenueDetail = () => {
   const [seatNum, setSeatNum] = useState(localStorage.getItem('seatnum'));
   useEffect(() => {
     // Fetch show details
-    FetchShowDetails(BASE_URL,setShow,id);
-    
+    FetchShowDetails(BASE_URL, setShow, id);
+
     // Fetch venue details
-    FetchVenueDetails_new(BASE_URL,setVenue,venueId,seats);
+    FetchVenueDetails_new(BASE_URL, setVenue, venueId, seats);
   }, [id, venueId]);
 
 
   const reserveSeats = async () => {
     const dataToPatch = ConstructPatchData_new(seats, show, venue);
-    PatchVenue(BASE_URL,venueId,dataToPatch);
- 
-    const dataToPOST=ConstructPostData_new(seats, show, venue);  
-    PostReservation(BASE_URL,dataToPOST);
-      
+    PatchVenue(BASE_URL, venueId, dataToPatch);
+
+    const dataToPOST = ConstructPostData_new(seats, show, venue);
+    PostReservation(BASE_URL, dataToPOST);
+
   };
 
   if (!show || !venue) return <div>Loading...</div>;
-  
 
-  
+
+
 
   const numSeatsToDisplay = {
     'Kisterem': 80,
@@ -47,26 +48,26 @@ const VenueDetail = () => {
     'Nagyterem': 180
   }
   // Remove spaces from the room name
-const room_name_without_spaces = venue.room_name.replace(/\s+/g, '');
+  const room_name_without_spaces = venue.room_name.replace(/\s+/g, '');
 
-// Use the cleaned room name to get the room dictionary
-const roomDict = RoomTypeDict(room_name_without_spaces);
+  // Use the cleaned room name to get the room dictionary
+  const roomDict = RoomTypeDict(room_name_without_spaces);
 
   return (
     <RoomApp
-    title={show.title}
-    poster={show.poster}
-    showtime={venue.showtime}
-    seats={seats}
-    seatnum={seatNum}
-    numSeatsToDisplay={numSeatsToDisplay[venue.room_name]}
-    roomDict={roomDict}
-    toggleSeat={toggleSeat}
-    seatNum={seatNum}
-    setSeatNum={setSeatNum}
-    reserveSeats={reserveSeats}
-/>);
-  
+      title={show.title}
+      poster={show.poster}
+      showtime={venue.showtime}
+      seats={seats}
+      seatnum={seatNum}
+      numSeatsToDisplay={numSeatsToDisplay[venue.room_name]}
+      roomDict={roomDict}
+      toggleSeat={toggleSeat}
+      seatNum={seatNum}
+      setSeatNum={setSeatNum}
+      reserveSeats={reserveSeats}
+    />);
+
 };
 
 export default VenueDetail;

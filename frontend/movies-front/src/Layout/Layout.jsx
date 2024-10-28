@@ -9,9 +9,10 @@ import ListVenues from '../Venues/ListVenues';
 import Reservations2 from '../Reservations/Reservations2';
 import AddShow from '../Admin/AddShow';
 import { AddVenue } from '../Admin/AddVenue';
-import axios from 'axios';
 import '../Cascade Style Sheets/VenueDetail.css';
-
+import { BASE_URL } from '../Settings';
+import { FetchUserName } from '../HTTP/FetchUserName';
+import { RoutesApp } from './RoutesApp';
 const Layout = () => {
     const [isAuth, setIsAuth] = useState(false);
     const [isAdmin,setIsAdmin] = useState(false);
@@ -19,25 +20,8 @@ const Layout = () => {
     
     useEffect(() => {
       const token = localStorage.getItem('token');
-      
-      if (token) {
-        setIsAuth(true);
-        axios.get('http://127.0.0.1:8000/user/', {
-          headers: {
-            Authorization: `Token ${token}`
-          }
-        })
-        .then(response => {
-          setUsername(response.data.username);
-          if (response.data.is_staff==true){
-            setIsAdmin(true);
-          }
-        })
-        .catch(error => {
-          console.error('There was an error fetching the user info!', error);
-        });
-      }
-    }, []);
+      FetchUserName(token,BASE_URL,setUsername,setIsAdmin,setIsAuth);
+          }, []);
   
     return (
       <Router className='router'>
@@ -64,16 +48,7 @@ const Layout = () => {
               </>
             )}
           </nav>
-          <Routes className='routes'>
-            <Route path='/' element={<ShowsList />} />
-            <Route path='/register' element={<Register />} />
-            <Route path='/login' element={<Login setAuth={setIsAuth} />} />
-            <Route path='/:id' element={<ListVenues className='listvenues' />} />
-            <Route path=':id/venues/:venueId' element={<VenueDetail />} />
-            <Route path='/reservations' element={<Reservations2 />} />
-            <Route path='/addshow' element={<AddShow/>} />
-            <Route path='/addvenue' element={<AddVenue/>} />
-          </Routes>
+          <RoutesApp username={username} setIsAuth={setIsAuth} />      
         </div>
       </Router>
     );
