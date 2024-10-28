@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { VenueDataMaker } from './VenueDataMaker';
 import { FetchShowsList } from '../Venues/Functions/FetchShowsList';
+import { BASE_URL } from '../Settings';
+import { PostVenue } from '../HTTP/PostVenue';
 
 export const AddVenue = () => {
     const [shows, setShows] = useState([]);
@@ -10,7 +12,7 @@ export const AddVenue = () => {
     const [selectedRoomName,setSelectedRoomname]=useState('');
     const roomNames=['Nagyterem','Közepes terem','Kisterem'];
     useEffect(() => {
-        FetchShowsList(setShows);
+        FetchShowsList(BASE_URL,setShows);
     }, []);
 
     const handleDropdownChange = (e) => {
@@ -25,31 +27,8 @@ export const AddVenue = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        const selectedShowObject = shows.find(show => show.id === parseInt(selectedShow));
-        console.log('Selected show object:', selectedShowObject);
-        window.alert('Venue succesfully added!');
-
-        if (!selectedShowObject) {
-            console.error('Selected show object not found');
-            return;
-        }
-
-        const venueData = VenueDataMaker(selectedShowObject.title,selectedRoomName,showtime,selectedShowObject.id);
-        console.log(venueData)
-
-        const token = localStorage.getItem('token');
-
-        try {
-            const response = await axios.post('http://127.0.0.1:8000/admin-venues', venueData, {
-                headers: {
-                    'Authorization': `Token ${token}`
-                }
-            });
-            console.log(response.data);
-        } catch (error) {
-            console.error('There was an error posting the venue!', error);
-        }
+        PostVenue(shows,selectedShow,selectedRoomName,showtime,BASE_URL);
+        
     };
 
     return (

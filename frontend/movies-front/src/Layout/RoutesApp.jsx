@@ -1,7 +1,6 @@
 import { Routes,Route } from "react-router-dom"
 import Register from '../Auth/Register';
 import Login from '../Auth/Login';
-import Logout from '../Auth/Logout';
 import ShowsList from '../Shows/ShowsList';
 import VenueDetail from '../Venues/VenueDetail';
 import ListVenues from '../Venues/ListVenues';
