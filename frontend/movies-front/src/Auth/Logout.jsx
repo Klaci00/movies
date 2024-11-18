@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const Logout = ({ setAuth }) => {
+const Logout = ({ setAuth,setIsAdmin }) => {
   const navigate = useNavigate();
   const handleLogout = async () => {
 
@@ -16,6 +16,7 @@ const Logout = ({ setAuth }) => {
       localStorage.removeItem('token');
       localStorage.removeItem('userId');
       setAuth(false);
+      setIsAdmin(false);
       alert('Logout successful!');
       navigate('/');
     } catch (error) {

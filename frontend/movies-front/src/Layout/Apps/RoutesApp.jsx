@@ -1,12 +1,12 @@
 import { Routes,Route } from "react-router-dom"
-import Register from '../Auth/Register';
-import Login from '../Auth/Login';
-import ShowsList from '../Shows/ShowsList';
-import VenueDetail from '../Venues/VenueDetail';
-import ListVenues from '../Venues/ListVenues';
-import Reservations2 from '../Reservations/Reservations2';
-import AddShow from '../Admin/AddShow';
-import { AddVenue } from '../Admin/AddVenue';
+import Register from '../../Auth/Register';
+import Login from '../../Auth/Login';
+import ShowsList from '../../Shows/ShowsList';
+import VenueDetail from '../../Venues/VenueDetail';
+import ListVenues from '../../Venues/ListVenues';
+import Reservations2 from '../../Reservations/Reservations2';
+import AddShow from '../../Admin/AddShow';
+import { AddVenue } from '../../Admin/AddVenue';
 
 export const RoutesApp=(props)=>{
     return <Routes className='routes'>

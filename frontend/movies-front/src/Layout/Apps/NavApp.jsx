@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import Logout from "../Auth/Logout"
+import Logout from "../../Auth/Logout"
 
 export const NavApp = (props) => {
     return <nav className='nav'>
@@ -20,7 +20,7 @@ export const NavApp = (props) => {
                     </>)
                     :
                     (<></>)}
-                <Logout setAuth={props.setIsAuth} />
+                <Logout setAuth={props.setIsAuth} setIsAdmin={props.setIsAdmin} />
             </>
         )}
     </nav>

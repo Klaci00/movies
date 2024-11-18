@@ -1,67 +1,18 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-import ReservApp from './ReservApp';
+import ReservApp from './Apps/ReservApp';
+import { FetchReservations } from './HTTP/FetchReservations';
+import { DeleteReservation } from './HTTP/DeleteReservation';
+import { BASE_URL } from '../Settings';
 
 const Reservations2 = (props) => {
     const [reservationData, setReservationData] = useState([]);
-    const [username, setUsername] = useState('');
-    const [isAuth, setIsAuth] = useState(false);
     const [error, setError] = useState(null);
-
     const token = localStorage.getItem('token');
 
     useEffect(() => {
-        /*
-        const fetchUsername = async () => {
-            if (authToken) {
-                setIsAuth(true);
-                try {
-                    const userResponse = await axios.get('http://127.0.0.1:8000/user/', {
-                        headers: {
-                            Authorization: `Token ${authToken}`
-                        }
-                    });
-                    setUsername(userResponse.data.username);
-                } catch (error) {
-                    setError('There was an error fetching the user info!');
-                    console.error('Error fetching user info:', error);
-                }
-            }
-        };*/
-
-        const fetchReservations = async () => {
-            if (props.username) {
-                try {
-                    const response = await axios.get(`http://127.0.0.1:8000/reservations/${props.username}`, {
-                        headers: {
-                            Authorization: `Token ${token}`,
-                        }
-                    });
-                    setReservationData(response.data);
-                } catch (error) {
-                    setError('There was an error fetching the reservations!');
-                    console.error('Error fetching reservations:', error);
-                }
-            }
-        };
-
-        fetchReservations();
+        FetchReservations(BASE_URL,props.username,token,setReservationData,error,setError);
     }, [token, props.username]);
-
-    const handleDelete = async (id) => {
-        try {
-            await axios.delete(`http://127.0.0.1:8000/reservdestroy/${id}/`, {
-                headers: {
-                    Authorization: `Token ${authToken}`
-                }
-            });
-            setReservationData(reservationData.filter(reservation => reservation.id !== id));
-        } catch (error) {
-            setError('There was an error deleting the reservation!');
-            console.error('Error deleting reservation:', error);
-        }
-    };
-
+ 
     function reservParser(x) {
         return (
             <div key={x.id}>
@@ -73,7 +24,13 @@ const Reservations2 = (props) => {
                     showtime={x.showtime}
                     seat_count={x.seat_count}
                     seatnames={x.seatnames}
-                    onDelete={handleDelete}
+                    BASE_URL={BASE_URL}
+                    token={token}
+                    setReservationData={setReservationData}
+                    reservationData={reservationData}
+                    error={error}
+                    setError={setError}
+                    onDelete={DeleteReservation}
                 />
             </div>
         );

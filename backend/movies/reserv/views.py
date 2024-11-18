@@ -47,7 +47,7 @@ class VenueDetail(generics.RetrieveUpdateDestroyAPIView):
 class ReservDestroy(generics.DestroyAPIView):
     queryset=Reservation.objects.all()
     serializer_class=ReservSerializer
-
+    permission_classes = [IsAuthenticated]
     def destroy(self, request, *args, **kwargs):
         
             instance = self.get_object()
