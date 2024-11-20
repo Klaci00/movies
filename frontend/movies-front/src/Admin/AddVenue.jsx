@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { VenueDataMaker } from './VenueDataMaker';
-import { FetchShowsList } from '../Venues/Functions/FetchShowsList';
+import { FetchShowsList } from '../Shows/HTTP/FetchShowsList';
 import { BASE_URL } from '../Settings';
-import { PostVenue } from '../HTTP/PostVenue';
+import { PostVenue } from './HTTP/PostVenue';
 
 export const AddVenue = () => {
     const [shows, setShows] = useState([]);

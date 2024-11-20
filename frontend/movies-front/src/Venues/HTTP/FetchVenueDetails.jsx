@@ -1,5 +1,4 @@
 import axios from "axios";
-import { BASE_URL } from "../../Settings";
 
 
 export const FetchVenueDetails_new = (BASE_URL, setVenue, venueId, seats) => {

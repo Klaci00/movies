@@ -1,6 +1,6 @@
 import React from 'react';
-import '../Cascade Style Sheets/VenueDetail.css';
-import { NumSeatCheck } from './Functions/toggleSeat';
+import '../../Cascade Style Sheets/VenueDetail.css';
+import { NumSeatCheck } from '../Functions/toggleSeat';
 
 function RoomApp(props) {
     console.log(NumSeatCheck(props.seatNum));

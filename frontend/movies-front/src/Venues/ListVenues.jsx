@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { BASE_URL } from '../Settings';
-import { FetchVenues } from './Functions/FetchVenues';
-import { FetchShowDetails } from './Functions/FetchShowDetails';
-import { ListVenuesApp } from './Functions/ListVenuesApp';
+import { FetchVenues } from './HTTP/FetchVenues';
+import { FetchShowDetails } from './HTTP/FetchShowDetails';
+import { ListVenuesApp } from './Apps/ListVenuesApp';
 import '../Cascade Style Sheets/VenueDetail.css';
 
 const ListVenues = () => {

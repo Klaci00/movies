@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BASE_URL } from '../Settings';
 import FormApp from './Apps/FormApp';
-import { HandleSubmit } from './Functions/HandleSubmit';
+import { HandleSubmit } from './HTTP/HandleSubmit';
 
 const AddShow = () => {
     const [title, setTitle] = useState('');
