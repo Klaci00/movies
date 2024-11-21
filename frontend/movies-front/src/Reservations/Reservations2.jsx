@@ -10,7 +10,7 @@ const Reservations2 = (props) => {
     const token = localStorage.getItem('token');
 
     useEffect(() => {
-        FetchReservations(BASE_URL,props.username,token,setReservationData,error,setError);
+        FetchReservations(BASE_URL,props.username,setReservationData,setError);
     }, [token, props.username]);
  
     function reservParser(x) {
