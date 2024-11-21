@@ -4,6 +4,7 @@ import Logout from "../../Auth/Logout"
 export const NavApp = (props) => {
     return <nav className='nav'>
         <Link to='/'><p>Home</p></Link>
+        <Link to='/login2'>Login JWT</Link>
         {!props.isAuth ? (
             <>
                 <Link to='/register'><p>Register</p></Link>

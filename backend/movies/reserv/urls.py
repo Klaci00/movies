@@ -1,8 +1,14 @@
 from django.urls import path
-from .views import ShowDetail,ShowList,UserCreate,Logout,UserDetail,CustomObtainAuthToken,show_venues,set_csrf_token,VenueDetail,ReservDetail,ReservationListView,ReservDestroy,ListVenues
+from .views import ShowDetail,ShowList,UserCreate,Logout,UserDetail,\
+        CustomObtainAuthToken,show_venues,set_csrf_token,VenueDetail,\
+        ReservDetail,ReservationListView,ReservDestroy,ListVenues
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework.authtoken import views
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 urlpatterns = [
     path("",ShowList.as_view()),
@@ -19,6 +25,9 @@ urlpatterns = [
     path('logout/', Logout.as_view(), name='logout'),
     path('user/', UserDetail.as_view(), name='user-detail'),
     path('set_csrf_token/',set_csrf_token,name='set_csrf_token'),
+    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
