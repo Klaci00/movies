@@ -7,12 +7,12 @@ from rest_framework.generics import CreateAPIView
 from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
-from rest_framework.permissions import IsAuthenticated
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import ensure_csrf_cookie
 from rest_framework.exceptions import NotFound
 from pprint import pprint
+from rest_framework.permissions import IsAuthenticated
 from .seathandler.seathandler import reserv_data_maker,venue_data_dict_maker,\
                                      venue_data_updater2,seat_liberator2,\
                                      seat_maker
@@ -47,7 +47,6 @@ class VenueDetail(generics.RetrieveUpdateDestroyAPIView):
 class ReservDestroy(generics.DestroyAPIView):
     queryset=Reservation.objects.all()
     serializer_class=ReservSerializer
-    permission_classes = [IsAuthenticated]
     def destroy(self, request, *args, **kwargs):
         
             instance = self.get_object()
@@ -100,10 +99,9 @@ class ReservDetail(generics.ListCreateAPIView):
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
 class ReservationListView(APIView):
-    permission_classes = [IsAuthenticated]
 
     def get(self, request, owner):
-        print(owner)
+        print(request)
         owner_user = CustomUser.objects.get(username=owner)
         reservations = Reservation.objects.filter(owner=owner_user.id)
         serializer = ReservSerializer(reservations, many=True)
@@ -112,6 +110,12 @@ class ReservationListView(APIView):
 class ShowList(generics.ListCreateAPIView):
     queryset=Show.objects.all()
     serializer_class=ShowSerializer
+    def list(self, request, *args, **kwargs):
+        print("Request data:", request.data)          # Request body data
+        print("Request headers:", request.headers)    # Request headers
+        print("Request query params:", request.query_params)  # Query parameters
+        response = super().list(request, *args, **kwargs)
+        return response
 
 def show_venues(request, show_id):
     show = get_object_or_404(Show, id=show_id)
@@ -155,7 +159,6 @@ class UserCreate(CreateAPIView):
 
 
 class UserDetail(APIView):
-    permission_classes = [IsAuthenticated]
 
     def get(self, request):
         serializer = UserSerializer(request.user)
@@ -163,7 +166,6 @@ class UserDetail(APIView):
 
 
 class Logout(APIView):
-    permission_classes = [IsAuthenticated]
 
     def post(self, request):
         try:

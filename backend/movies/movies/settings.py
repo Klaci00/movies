@@ -140,14 +140,11 @@ AUTH_USER_MODEL = 'reserv.CustomUser'
 
 MEDIA_ROOT=os.path.join(BASE_DIR,'movie_posters')
 
-MEDIA_URL='/media/'
+MEDIA_URL='media/'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
                 'rest_framework_simplejwt.authentication.JWTAuthentication',
-                'rest_framework.authentication.TokenAuthentication',
-                'rest_framework.authentication.BasicAuthentication',
-                'rest_framework.authentication.SessionAuthentication',
     ]
 }
 

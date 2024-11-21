@@ -1,13 +1,10 @@
-import axios from "axios";
+import apiClient from "../Auth/Functions/APIClient";
 
 export const FetchUserName = async (token, BASE_URL,setUsername,setIsAdmin,setIsAuth) =>  {
     if (token){
         setIsAuth(true);
-    await axios.get(`${BASE_URL}user/`, {
-        headers: {
-            Authorization: `Token ${token}`
-        }
-    }).then(response => {
+    await apiClient.get(`${BASE_URL}user/`, {
+        }).then(response => {
         setUsername(response.data.username);
         if(response.data.is_staff==true){
             setIsAdmin(true);
