@@ -1,7 +1,8 @@
 from django.urls import path
 from .views import ShowDetail,ShowList,UserCreate,Logout,UserDetail,\
         CustomObtainAuthToken,show_venues,set_csrf_token,VenueDetail,\
-        ReservDetail,ReservationListView,ReservDestroy,ListVenues
+        ReservDetail,ReservationListView,ReservDestroy,ListVenues,\
+        CustomTokenObtainPairView,AuthStatusView,Logout2
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework.authtoken import views
@@ -23,10 +24,12 @@ urlpatterns = [
     path('register/',UserCreate.as_view(),name='register'),
     path('login/', CustomObtainAuthToken.as_view(), name='login'),
     path('logout/', Logout.as_view(), name='logout'),
+    path('logout2/',Logout2.as_view(),name='logout2'),
     path('user/', UserDetail.as_view(), name='user-detail'),
     path('set_csrf_token/',set_csrf_token,name='set_csrf_token'),
-    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('auth-status/', AuthStatusView.as_view(), name='auth_status'),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -5,7 +5,7 @@ import {jwtDecode as decode} from 'jwt-decode';
 
 import { BASE_URL } from '../Settings';
 
-const Login2 = ({ onLoginSuccess }) => {
+const Login2 = ({onLoginSuccess,setAuth }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -15,16 +15,12 @@ const Login2 = ({ onLoginSuccess }) => {
         try {
             const response = await axios.post(`${BASE_URL}token/`, { username, password });
             const { access, refresh } = response.data;
-
-            console.log(response);
-            document.cookie = `access_token=${access}; path=/; secure; HttpOnly;`;
-            document.cookie = `refresh_token=${refresh}; path=/; secure; HttpOnly;`;
-
+            document.cookie = `access_token=${access}; path=/`;
+            document.cookie = `refresh_token=${refresh}; path=/`;
+            console.log('are here cookies?',document.cookie)
             const decodedToken = decode(access);
             onLoginSuccess(decodedToken);
-            console.log('access: ',access);
-            console.log('refresh: ',refresh);
-            console.log(document.cookie);
+            setAuth(true);
         } catch (err) {
             console.log(err);
             setError('Login failed. Please check your credentials and try again.');

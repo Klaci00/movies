@@ -1,9 +1,7 @@
-import axios from "axios";
+import apiClient from "../Auth/Functions/APIClient";
 
-export const PostReservation = (BASE_URL, dataToPOST) => axios.post(`${BASE_URL}reservations/`, dataToPOST, {
-  headers: {
-    'Authorization': `Token ${localStorage.getItem('token')}` // Assuming the token is stored in localStorage
-  }
+export const PostReservation = (BASE_URL, dataToPOST) => apiClient.post(`${BASE_URL}reservations/`, dataToPOST, {
+  
 }).then(response => {
   window.location.reload();
 }).catch(error => {

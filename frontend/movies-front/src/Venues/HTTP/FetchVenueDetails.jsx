@@ -1,8 +1,7 @@
-import axios from "axios";
-
+import apiClient from "../../Auth/Functions/APIClient";
 
 export const FetchVenueDetails_new = (BASE_URL, setVenue, venueId, seats) => {
-      const getVenues = axios.get(`${BASE_URL}venues/${venueId}`)
+      const getVenues = apiClient.get(`${BASE_URL}venues/${venueId}`)
             .then(response => {
                   setVenue(response.data);
                   seats.forEach((seatItem, index) => {

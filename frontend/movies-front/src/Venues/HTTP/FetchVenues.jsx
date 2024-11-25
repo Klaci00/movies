@@ -1,7 +1,7 @@
-import axios from "axios";
+import apiClient from "../../Auth/Functions/APIClient";
 
 export const FetchVenues = (BASE_URL, setVenues, id) => {
-  axios.get(`${BASE_URL}${id}/venues`)
+  apiClient.get(`${BASE_URL}${id}/venues`)
     .then(response => {
       setVenues(response.data.venues);
     })

@@ -1,6 +1,8 @@
 from .models import Show,Venue,Reservation
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from django.contrib.auth.models import User
 
 class ShowSerializer(serializers.ModelSerializer):
     class Meta:
@@ -31,3 +33,12 @@ class ReservSerializer(serializers.ModelSerializer):
         model=Reservation
         fields="__all__"
         depth=1
+
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):               
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+        # Add custom claims
+        token['username'] = user.username
+        token['is_staff'] = user.is_staff
+        return token

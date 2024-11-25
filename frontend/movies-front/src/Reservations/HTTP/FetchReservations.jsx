@@ -3,7 +3,7 @@ import apiClient from "../../Auth/Functions/APIClient";
 export const FetchReservations = async (BASE_URL, username, setReservationData, setError) => {
     if (username) {
         try {
-            const response = await apiClient.get(`${BASE_URL}reservations/admin/`);
+            const response = await apiClient.get(`${BASE_URL}reservations/${username}/`);
             console.log('Request Headers:', response.config.headers);
             setReservationData(response.data);
         } catch (error) {

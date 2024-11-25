@@ -1,12 +1,8 @@
-import axios from "axios"
+import apiClient from "../../Auth/Functions/APIClient";
 
 export const DeleteReservation= async (BASE_URL,id,token,setReservationData,reservationData,error,setError)=>{
     try {
-        await axios.delete(`${BASE_URL}reservdestroy/${id}/`, {
-            headers: {
-                Authorization: `Token ${token}`
-            }
-        });
+        await apiClient.delete(`${BASE_URL}reservdestroy/${id}/`);
         setReservationData(reservationData.filter(reservation => reservation.id !== id));
     } catch (error) {
         setError('There was an error deleting the reservation!');

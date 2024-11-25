@@ -1,10 +1,6 @@
-import axios from "axios";
+import apiClient from "../../Auth/Functions/APIClient";
 
-export const PatchVenue = (BASE_URL, venueId, data) => axios.patch(`${BASE_URL}venues/${venueId}/`, data, {
-  headers: {
-    'Authorization': `Token ${localStorage.getItem('token')}` // Assuming the token is stored in localStorage
-  }
-})
+export const PatchVenue = (BASE_URL, venueId, data) => apiClient.patch(`${BASE_URL}venues/${venueId}/`, data)
 
   .then(response => {
     alert('Seats reserved successfully!');

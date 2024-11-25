@@ -6,17 +6,14 @@ import { FetchShowDetails } from './HTTP/FetchShowDetails';
 import { ListVenuesApp } from './Apps/ListVenuesApp';
 import '../Cascade Style Sheets/VenueDetail.css';
 
-const ListVenues = () => {
+const ListVenues = ({isAuth}) => {
   const { id } = useParams();
   const [show, setShow] = useState(null);
   const [venues, setVenues] = useState([]);
-  const [isAuth, setIsAuth] = useState(false);
   const [seatNum, setSeatNum] = useState(1);
 
   useEffect(() => {
     localStorage.setItem('seatnum', seatNum);
-    const token = localStorage.getItem('token');
-    if (token) { setIsAuth(true) };
     // Fetch show details
     FetchShowDetails(BASE_URL, setShow, id);
     // Fetch venues associated with the show
