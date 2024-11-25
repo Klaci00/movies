@@ -6,13 +6,11 @@ export const NavApp = ({isAuth,username,isAdmin,setIsAuth,setIsAdmin}) => {
     console.log(isAuth);
     return <nav className='nav'>
         <Link to='/'><p>Home</p></Link>
-        <Link to='/login2'>Login JWT</Link>
-        <LogoutButton2 setIsAuth={setIsAuth} setIsAdmin={setIsAdmin}/>
 
         {!isAuth ? (
             <>
                 <Link to='/register'><p>Register</p></Link>
-                <Link to='/login'><p>Login</p></Link>
+                <Link to='/login2'>Login</Link>
 
             </>
         ) : (
@@ -26,6 +24,8 @@ export const NavApp = ({isAuth,username,isAdmin,setIsAuth,setIsAdmin}) => {
                     </>)
                     :
                     (<></>)}
+                <LogoutButton2 setIsAuth={setIsAuth} setIsAdmin={setIsAdmin}/>
+
             </>
         )}
     </nav>

@@ -6,6 +6,7 @@ from .serializers import ShowSerializer,UserSerializer,\
 from rest_framework.views import APIView
 from rest_framework.generics import CreateAPIView
 from rest_framework import generics, status
+from rest_framework_simplejwt.token_blacklist.models import BlacklistedToken, OutstandingToken
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from django.http import JsonResponse
@@ -184,13 +185,26 @@ class Logout(APIView):
 class Logout2(APIView):
     def post(self, request):
         try:
-            refresh_token = request.data["refresh"]
+            # Access the refresh token from the cookies
+            refresh_token = request.data['refresh']
+            print(refresh_token)
+            if not refresh_token:
+                return Response({"detail": "Refresh token not provided."}, status=status.HTTP_400_BAD_REQUEST)
+            
             token = RefreshToken(refresh_token)
-            token.blacklist()
-            return Response(status=status.HTTP_200_OK)
+            outstanding_token = OutstandingToken.objects.filter(token=token).first()
+            # Blacklist the token
+            if outstanding_token:
+                BlacklistedToken.objects.create(token=token)
+
+            # Clear the cookies
+            response = Response(status=status.HTTP_200_OK)
+            
+            return response
         except Exception as e:
             print(f"Logout error: {str(e)}")  # Log the error
             return Response({"detail": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
 class CustomObtainAuthToken(ObtainAuthToken):
     def post(self, request, *args, **kwargs):
         response = super().post(request, *args, **kwargs)

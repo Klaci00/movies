@@ -21,6 +21,7 @@ const Login2 = ({onLoginSuccess,setAuth }) => {
             const decodedToken = decode(access);
             onLoginSuccess(decodedToken);
             setAuth(true);
+            window.location.reload();
         } catch (err) {
             console.log(err);
             setError('Login failed. Please check your credentials and try again.');
