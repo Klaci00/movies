@@ -2,6 +2,7 @@ import axios from 'axios';
 import { refreshToken } from './AuthService';
 import { BASE_URL } from '../../Settings';
 import { jwtDecode as decode } from 'jwt-decode';
+import { getCookie } from './CookieHandler';
 
 const apiClient = axios.create({
     baseURL: BASE_URL,
@@ -14,15 +15,14 @@ const apiClient = axios.create({
 apiClient.interceptors.request.use(
     
     async (config) => {
-        const access = document.cookie.replace(/(?:(?:^|.*;\s*)access_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+        const access = getCookie('access');
         if (access) {
             let token = access;
             const decodedToken = decode(access);
             const currentTime = Date.now() / 1000;
-
             // Check if the token has expired
             if (decodedToken.exp < currentTime) {
-                token = await refreshToken();
+               token = await refreshToken();
             }
 
             // Log the token to the console to verify it's being set

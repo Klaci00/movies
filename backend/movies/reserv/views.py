@@ -240,10 +240,10 @@ class CustomTokenObtainPairView(TokenObtainPairView):
             secure=True,
             samesite='Lax',
         )
+        print(response)
         return response
 
 class AuthStatusView(APIView):
-    permission_classes =[IsAuthenticated]
     def get(self, request):
         user = request.user
         return Response({

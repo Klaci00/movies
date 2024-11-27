@@ -1,6 +1,6 @@
 import { BASE_URL } from "../../Settings";
 import apiClient from "./APIClient";
-
+import { getCookie,deleteCookie } from "./CookieHandler";
 export const logout2 = async () => {
     try {
         // Retrieve the refresh token from cookies
@@ -10,9 +10,8 @@ export const logout2 = async () => {
         await apiClient.post(`logout2/`, { refresh });
 
         // Clear the cookies after successful logout
-        document.cookie = "access_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
-        document.cookie = "refresh_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
-
+        deleteCookie('access');
+        deleteCookie('refresh');
         console.log('Logged out successfully');
     } catch (error) {
         console.error('Error logging out:', error);

@@ -4,6 +4,7 @@ import '../Cascade Style Sheets/VenueDetail.css';
 import { RoutesApp } from './Apps/RoutesApp';
 import { NavApp } from './Apps/NavApp';
 import apiClient from '../Auth/Functions/APIClient';
+import { refreshToken } from '../Auth/Functions/AuthService';
 
 const Layout = () => {
   const [isAuth, setIsAuth] = useState(false);
@@ -30,7 +31,10 @@ const Layout = () => {
       setUser(null);
      }};
 
-    useEffect(() => { checkAuthStatus(); }, []);
+    useEffect(() => {
+      checkAuthStatus();
+      refreshToken();
+    }, []);
   return (
     <Router className='router'>
       <div className='main_screen'>

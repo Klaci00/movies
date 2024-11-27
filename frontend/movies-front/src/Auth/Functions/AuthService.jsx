@@ -1,17 +1,25 @@
-// authService.js
 import axios from 'axios';
-import { jwtDecode as decode } from 'jwt-decode';
 import { BASE_URL } from '../../Settings';
+import { getCookie, setCookie } from './CookieHandler';
 
 export const refreshToken = async () => {
     try {
-        const refresh = document.cookie.replace(/(?:(?:^|.*;\s*)refresh_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+        const refresh = getCookie('refresh');
         if (!refresh) throw new Error('No refresh token');
-
-        const response = await axios.post(`${BASE_URL}token/refresh/`, { refresh });
-        const { access } = response.data;
-
-        document.cookie = `access_token=${access}; path=/; secure; HttpOnly;`;
+        
+        const response = await axios.post(
+            `${BASE_URL}token/refresh/`,
+            { refresh },  // Send refresh token in the request body
+            {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                withCredentials: true  // Ensure cookies are sent with the request
+            }
+        );
+        const { access,refresh:newRefresh } = response.data;
+        setCookie('refresh',newRefresh,1620);
+        setCookie('access',access,5);
         return access;
     } catch (err) {
         console.error('Error refreshing token:', err);

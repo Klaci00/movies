@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import {jwtDecode as decode} from 'jwt-decode';
-
+import { getCookie, setCookie } from './Functions/CookieHandler';
 import { BASE_URL } from '../Settings';
 
 const Login2 = ({onLoginSuccess,setAuth }) => {
@@ -15,13 +15,11 @@ const Login2 = ({onLoginSuccess,setAuth }) => {
         try {
             const response = await axios.post(`${BASE_URL}token/`, { username, password });
             const { access, refresh } = response.data;
-            document.cookie = `access_token=${access}; path=/`;
-            document.cookie = `refresh_token=${refresh}; path=/`;
-            console.log('are here cookies?',document.cookie)
+            setCookie('access',access,5);
+            setCookie('refresh',refresh,1620);
             const decodedToken = decode(access);
             onLoginSuccess(decodedToken);
             setAuth(true);
-            window.location.reload();
         } catch (err) {
             console.log(err);
             setError('Login failed. Please check your credentials and try again.');
