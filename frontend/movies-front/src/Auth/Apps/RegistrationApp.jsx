@@ -10,6 +10,12 @@ export const RegistrationApp = (props) => {
             />
             <input
                 type='text'
+                placeholder='Last name'
+                value={props.lastname}
+                onChange={(e) => props.setLastname(e.target.value)}
+            />
+            <input
+                type='text'
                 placeholder='Username'
                 value={props.username}
                 onChange={(e) => props.setUsername(e.target.value)}

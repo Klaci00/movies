@@ -64,11 +64,11 @@ class ReservDestroy(generics.DestroyAPIView):
             pprint(venue)
 
             
-            print(f"Venue associated with reservation: {venue.id}")
+            print(f'Venue associated with reservation: {venue.id}')
             
             venue=seat_liberator2(instance,venue)
             venue.save()
-            print(f"Deleting reservation: {instance.title}")
+            print(f'Deleting reservation: {instance.title}')
 
             # Perform the deletion
             self.perform_destroy(instance)
@@ -118,9 +118,9 @@ class ShowList(generics.ListCreateAPIView):
     queryset=Show.objects.all()
     serializer_class=ShowSerializer
     def list(self, request, *args, **kwargs):
-        #print("Request data:", request.data)          # Request body data
-        #print("Request headers:", request.headers)    # Request headers
-        #print("Request query params:", request.query_params)  # Query parameters
+        #print('Request data:', request.data)          # Request body data
+        #print('Request headers:', request.headers)    # Request headers
+        #print('Request query params:', request.query_params)  # Query parameters
         response = super().list(request, *args, **kwargs)
         return response
 
@@ -172,6 +172,13 @@ class UserDetail(APIView):
         serializer = UserSerializer(request.user)
         return Response(serializer.data)
 
+class CheckUsername(APIView):
+    def get(self, request, username):
+        user_exists = CustomUser.objects.filter(username=username).exists()
+        if user_exists:
+            return Response({'message': 'Username is taken.'}, status=status.HTTP_200_OK)
+        else:
+            return Response({'message': 'Username is available.'}, status=status.HTTP_200_OK)
 
 class Logout(APIView):
 
@@ -189,7 +196,7 @@ class Logout2(APIView):
             refresh_token = request.data['refresh']
             print(refresh_token)
             if not refresh_token:
-                return Response({"detail": "Refresh token not provided."}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({'detail': 'Refresh token not provided.'}, status=status.HTTP_400_BAD_REQUEST)
             
             token = RefreshToken(refresh_token)
             outstanding_token = OutstandingToken.objects.filter(token=token).first()
@@ -202,8 +209,8 @@ class Logout2(APIView):
             
             return response
         except Exception as e:
-            print(f"Logout error: {str(e)}")  # Log the error
-            return Response({"detail": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+            print(f'Logout error: {str(e)}')  # Log the error
+            return Response({'detail': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 class CustomObtainAuthToken(ObtainAuthToken):
     def post(self, request, *args, **kwargs):

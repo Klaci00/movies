@@ -5,7 +5,6 @@ import { RoutesApp } from './Apps/RoutesApp';
 import { NavApp } from './Apps/NavApp';
 import apiClient from '../Auth/Functions/APIClient';
 import { getCookie } from '../Auth/Functions/CookieHandler';
-
 const Layout = () => {
   const [isAuth, setIsAuth] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -19,6 +18,7 @@ const Layout = () => {
   const checkAuthStatus = async () => { 
     if(getCookie('refresh')){
     try {
+
     const response = await apiClient.get('auth-status/');
     if (response.data.user.username!=null){
       setIsAuth(true);
@@ -26,7 +26,6 @@ const Layout = () => {
       setIsAdmin(response.data.user.is_staff);
     }
   }
-    
     catch (error) { 
       console.error('Error checking auth status:', error); 
       setUser(null);
