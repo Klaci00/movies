@@ -10,7 +10,7 @@ import AddShow from '../../Admin/AddShow';
 import { AddVenue } from '../../Admin/AddVenue';
 import Login2 from "../../Auth/Login2";
 
-export const RoutesApp=({username,isAuth,setIsAuth,handleLoginSuccess})=>{
+export const RoutesApp=({username,setUsername,setisStaff,isAuth,setIsAuth,handleLoginSuccess})=>{
   
     return <Routes className='routes'>
     <Route path='/' element={<ShowsList />} />
@@ -20,6 +20,6 @@ export const RoutesApp=({username,isAuth,setIsAuth,handleLoginSuccess})=>{
     <Route path='/reservations' element={<Reservations2 username={username} />} />
     <Route path='/addshow' element={<AddShow/>} />
     <Route path='/addvenue' element={<AddVenue/>} />
-    <Route path="/login2" element={<Login2 onLoginSuccess={handleLoginSuccess} setAuth={setIsAuth} />}/>
+    <Route path="/login2" element={<Login2 onLoginSuccess={handleLoginSuccess} setAuth={setIsAuth} setisStaff={setisStaff} setUsernameGlobal={setUsername} />}/>
   </Routes>
 }

@@ -3,8 +3,6 @@ import '../../Cascade Style Sheets/VenueDetail.css';
 import { NumSeatCheck } from '../Functions/toggleSeat';
 
 function RoomApp(props) {
-    console.log(NumSeatCheck(props.seatNum));
-    console.log(props.seatNum);
     var stop = false;
     const target = 1;
     const indices = props.seats.map((item, index) => (item.seat === target ? index : -1))

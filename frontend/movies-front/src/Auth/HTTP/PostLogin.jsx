@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom"
 export const PostLogin= async (BASE_URL,username,password,setAuth)=>{
     
         const response = await axios.post(`${BASE_URL}login/`, { username, password });
-        console.log('Response:', response.data); // Log the response data
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('userId', response.data.user_id); // Save user ID
         console.log('Token:', response.data.token); // Log the token

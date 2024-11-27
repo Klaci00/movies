@@ -6,7 +6,6 @@ export const refreshToken = async () => {
     try {
         const refresh = getCookie('refresh');
         if (!refresh) throw new Error('No refresh token');
-        
         const response = await axios.post(
             `${BASE_URL}token/refresh/`,
             { refresh },  // Send refresh token in the request body

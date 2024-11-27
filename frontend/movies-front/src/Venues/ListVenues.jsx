@@ -23,7 +23,6 @@ const ListVenues = ({isAuth}) => {
   const handleChange = (event) => {
     const value = event.target.value;
     setSeatNum(value);
-    console.log(value);
     localStorage.setItem('seatnum', value);
   };
 

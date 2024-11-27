@@ -17,7 +17,6 @@ const AddShow = () => {
     };
 
     const handleDropdownChange = (e) => {
-        console.log('Selected roomname:', e.target.value);
         setSelectedRestriction(e.target.value);
     };
 

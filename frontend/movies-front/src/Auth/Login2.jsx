@@ -5,7 +5,7 @@ import {jwtDecode as decode} from 'jwt-decode';
 import { getCookie, setCookie } from './Functions/CookieHandler';
 import { BASE_URL } from '../Settings';
 
-const Login2 = ({onLoginSuccess,setAuth }) => {
+const Login2 = ({onLoginSuccess,setAuth,setisStaff,setUsernameGlobal }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -20,6 +20,9 @@ const Login2 = ({onLoginSuccess,setAuth }) => {
             const decodedToken = decode(access);
             onLoginSuccess(decodedToken);
             setAuth(true);
+            setisStaff(decodedToken['is_staff']);
+            setUsernameGlobal(decodedToken['username']);
+            
         } catch (err) {
             console.log(err);
             setError('Login failed. Please check your credentials and try again.');

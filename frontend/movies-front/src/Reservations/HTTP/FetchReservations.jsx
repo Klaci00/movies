@@ -4,7 +4,6 @@ export const FetchReservations = async (BASE_URL, username, setReservationData, 
     if (username) {
         try {
             const response = await apiClient.get(`${BASE_URL}reservations/${username}/`);
-            console.log('Request Headers:', response.config.headers);
             setReservationData(response.data);
         } catch (error) {
             setError('There was an error fetching the reservations!');

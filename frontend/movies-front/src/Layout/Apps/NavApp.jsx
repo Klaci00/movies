@@ -2,8 +2,8 @@ import { Link } from "react-router-dom"
 import Logout from "../../Auth/Logout"
 import LogoutButton2 from "../../Auth/Apps/LogoutButton2"
 
-export const NavApp = ({isAuth,username,isAdmin,setIsAuth,setIsAdmin}) => {
-    console.log(isAuth);
+export const NavApp = ({isAuth, setIsAuth,isAdmin, setIsAdmin,username,setUserName}) => {
+
     return <nav className='nav'>
         <Link to='/'><p>Home</p></Link>
 
@@ -24,7 +24,7 @@ export const NavApp = ({isAuth,username,isAdmin,setIsAuth,setIsAdmin}) => {
                     </>)
                     :
                     (<></>)}
-                <LogoutButton2 setIsAuth={setIsAuth} setIsAdmin={setIsAdmin}/>
+                <LogoutButton2 setIsAuth={setIsAuth} setIsAdmin={setIsAdmin}setUserName={setUserName}/>
 
             </>
         )}
