@@ -1,8 +1,8 @@
-import apiClient from "../../Auth/Functions/APIClient";
+import axios from "axios";
 
 export const FetchShowDetails = (BASE_URL, setShow, id) => {
 
-  const getVenueDetails = apiClient.get(`${BASE_URL}${id}`)
+  const getVenueDetails = axios.get(`${BASE_URL}${id}`)
     .then(response => {
       setShow(response.data);
     })

@@ -1,7 +1,5 @@
-import { useState } from "react";
 import { Routes,Route } from "react-router-dom"
 import Register from '../../Auth/Register';
-import Login from '../../Auth/Login';
 import ShowsList from '../../Shows/ShowsList';
 import VenueDetail from '../../Venues/VenueDetail';
 import ListVenues from '../../Venues/ListVenues';
@@ -14,7 +12,7 @@ export const RoutesApp=({username,setUsername,setisStaff,isAuth,setIsAuth,handle
   
     return <Routes className='routes'>
     <Route path='/' element={<ShowsList />} />
-    <Route path='/register' element={<Register />} />
+    <Route path='/register' element={<Register onloginSuccess={handleLoginSuccess} setAuth={setIsAuth} setUsernameGlobal={setUsername} setisStaff={setisStaff} />} />
     <Route path='/:id' element={<ListVenues className='listvenues' isAuth={isAuth} />} />
     <Route path=':id/venues/:venueId' element={<VenueDetail />} />
     <Route path='/reservations' element={<Reservations2 username={username} />} />

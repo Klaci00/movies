@@ -1,14 +1,18 @@
-import axios from "axios"
-import { useNavigate } from "react-router-dom"
-export const PostLogin= async (BASE_URL,username,password,setAuth)=>{
-    
-        const response = await axios.post(`${BASE_URL}login/`, { username, password });
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('userId', response.data.user_id); // Save user ID
-        console.log('Token:', response.data.token); // Log the token
-        console.log('User ID:', response.data.user_id); // Log the user ID
+export const PostLogin= async (setCookie,decode,axios,setError,BASE_URL,username,password,onLoginSuccess,setAuth,setisStaff,setUsernameGlobal)=>{
+    try {
+        const response = await axios.post(`${BASE_URL}token/`, { username, password });
+        const { access, refresh } = response.data;
+        setCookie('access',access,5);
+        setCookie('refresh',refresh,1620);
+        const decodedToken = decode(access);
+        onLoginSuccess(decodedToken);
         setAuth(true);
-        alert('Login successful!');
-        window.location.reload();
-      
-}
+        setisStaff(decodedToken['is_staff']);
+        setUsernameGlobal(decodedToken['username']);
+        window.alert('Login succesful!');
+        
+    } catch (err) {
+        console.log(err);
+        setError('Login failed. Please check your credentials and try again.');
+    }
+} 

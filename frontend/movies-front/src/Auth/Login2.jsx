@@ -1,8 +1,8 @@
-// Login2.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import {jwtDecode as decode} from 'jwt-decode';
-import { getCookie, setCookie } from './Functions/CookieHandler';
+import { setCookie } from './Functions/CookieHandler';
+import { PostLogin } from './HTTP/PostLogin';
 import { BASE_URL } from '../Settings';
 
 const Login2 = ({onLoginSuccess,setAuth,setisStaff,setUsernameGlobal }) => {
@@ -12,21 +12,7 @@ const Login2 = ({onLoginSuccess,setAuth,setisStaff,setUsernameGlobal }) => {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        try {
-            const response = await axios.post(`${BASE_URL}token/`, { username, password });
-            const { access, refresh } = response.data;
-            setCookie('access',access,5);
-            setCookie('refresh',refresh,1620);
-            const decodedToken = decode(access);
-            onLoginSuccess(decodedToken);
-            setAuth(true);
-            setisStaff(decodedToken['is_staff']);
-            setUsernameGlobal(decodedToken['username']);
-            
-        } catch (err) {
-            console.log(err);
-            setError('Login failed. Please check your credentials and try again.');
-        }
+        PostLogin(setCookie,decode,axios,setError,BASE_URL,username,password,onLoginSuccess,setAuth,setisStaff,setUsernameGlobal);
     };
 
     return (

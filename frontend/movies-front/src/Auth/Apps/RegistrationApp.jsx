@@ -4,6 +4,12 @@ export const RegistrationApp = (props) => {
             <h2>Register</h2>
             <input
                 type='text'
+                placeholder='First name'
+                value={props.firstname}
+                onChange={(e) => props.setFirstname(e.target.value)}
+            />
+            <input
+                type='text'
                 placeholder='Username'
                 value={props.username}
                 onChange={(e) => props.setUsername(e.target.value)}

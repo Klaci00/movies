@@ -1,8 +1,8 @@
-import apiClient from '../../Auth/Functions/APIClient';
+import axios from 'axios';
 
 export const FetchShowsList = async (BASE_URL, setShows) => {
     try {
-        const response = await apiClient.get(`${BASE_URL}`);
+        const response = await axios.get(`${BASE_URL}`);
         setShows(response.data);
     } catch (error) {
         console.error('There was an error fetching the shows!', error);

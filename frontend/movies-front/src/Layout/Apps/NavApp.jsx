@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom"
-import Logout from "../../Auth/Logout"
 import LogoutButton2 from "../../Auth/Apps/LogoutButton2"
 
 export const NavApp = ({isAuth, setIsAuth,isAdmin, setIsAdmin,username,setUserName}) => {
