@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const PostRegistration= async (BASE_URL,username,password,navigate)=> {try {
+export const PostRegistration= async (BASE_URL,username,password)=> {try {
     await axios.post(`${BASE_URL}register/`, { username, password });
     alert('Registration successful!');
   } catch (error) {
