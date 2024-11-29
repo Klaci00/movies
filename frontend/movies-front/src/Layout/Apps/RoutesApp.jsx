@@ -9,6 +9,7 @@ import { AddVenue } from '../../Admin/AddVenue';
 import Login2 from "../../Auth/Login2";
 import { ContactsApp } from "./ContactsApp";
 import { AdminInterface } from "../../Admin/Apps/AdminInterface";
+import { DeleteShow } from "../../Admin/DeleteShow";
 
 export const RoutesApp=({username,setUsername,setisStaff,isAuth,setIsAuth,handleLoginSuccess})=>{
   
@@ -28,7 +29,7 @@ export const RoutesApp=({username,setUsername,setisStaff,isAuth,setIsAuth,handle
     <Route path='/administration' element={<AdminInterface/>} ></Route>
     <Route path='/addshow' element={<AddShow/>} />
     <Route path='/addvenue' element={<AddVenue/>} />
-    <Route path='/deleteshow' ></Route>
+    <Route path='/deleteshow' element={<DeleteShow/>} ></Route>
     <Route path='/deletevenue'></Route>
     <Route path='/contact'element={<ContactsApp/>} ></Route>
   </Routes>

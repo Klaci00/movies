@@ -74,10 +74,13 @@ class ReservDestroy(generics.DestroyAPIView):
             self.perform_destroy(instance)
             return Response(status=status.HTTP_204_NO_CONTENT)
 
-
-
     def perform_destroy(self, instance):
         instance.delete()
+
+class ShowDestroy(generics.DestroyAPIView):
+    permission_classes =[IsAuthenticated]
+    queryset=Show.objects.all()
+    serializer_class=ShowSerializer
 
 class ReservDetail(generics.ListCreateAPIView):
     permission_classes =[IsAuthenticated]

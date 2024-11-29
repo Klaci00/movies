@@ -3,7 +3,6 @@ import apiClient from "../../Auth/Functions/APIClient";
 
 export const PostVenue = async (shows,selectedShow,selectedRoomName,showtime,BASE_URL)=>{
     const selectedShowObject = shows.find(show => show.id === parseInt(selectedShow));
-        console.log('Selected show object:', selectedShowObject);
         window.alert('Venue succesfully added!');
 
         if (!selectedShowObject) {
@@ -12,7 +11,6 @@ export const PostVenue = async (shows,selectedShow,selectedRoomName,showtime,BAS
         }
 
         const venueData = VenueDataMaker(selectedShowObject.title,selectedRoomName,showtime,selectedShowObject.id);
-        console.log(venueData)
 
         try {
             const response = await apiClient.post(`${BASE_URL}/admin-venues`, venueData);

@@ -14,12 +14,10 @@ export const AddVenue = () => {
     }, []);
 
     const handleDropdownChange = (e) => {
-        console.log('Selected show ID:', e.target.value);
         setSelectedShow(e.target.value);
     };
 
     const handleDropdownChange2 = (e) => {
-        console.log('Selected roomname:', e.target.value);
         setSelectedRoomname(e.target.value);
     };
 

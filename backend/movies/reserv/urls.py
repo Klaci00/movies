@@ -3,7 +3,7 @@ from .views import ShowDetail,ShowList,UserCreate,Logout,UserDetail,\
         CustomObtainAuthToken,show_venues,set_csrf_token,VenueDetail,\
         ReservDetail,ReservationListView,ReservDestroy,ListVenues,\
         CustomTokenObtainPairView,AuthStatusView,Logout2,\
-        CheckUsername,CheckEmail
+        CheckUsername,CheckEmail,ShowDestroy
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework.authtoken import views
@@ -20,6 +20,7 @@ urlpatterns = [
     path('venues/<int:pk>/', VenueDetail.as_view(), name='venue-detail2'),
     path('admin-venues',ListVenues.as_view(),name='admin-venues'),
     path('reservdestroy/<int:pk>/',ReservDestroy.as_view(),name='reserv-destroy'),
+    path('showdestroy/<int:pk>/',ShowDestroy.as_view(),name='showdestroy'),
     path('reservations/', ReservDetail.as_view(), name='reserv-detail'),
     path('reservations/<str:owner>/', ReservationListView.as_view(), name='reserv-list'),
     path('register/',UserCreate.as_view(),name='register'),

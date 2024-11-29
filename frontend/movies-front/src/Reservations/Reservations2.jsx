@@ -7,11 +7,10 @@ import { BASE_URL } from '../Settings';
 const Reservations2 = (props) => {
     const [reservationData, setReservationData] = useState([]);
     const [error, setError] = useState(null);
-    const token = localStorage.getItem('token');
 
     useEffect(() => {
         FetchReservations(BASE_URL,props.username,setReservationData,setError);
-    }, [token, props.username]);
+    }, [props.username]);
  
     function reservParser(x) {
         return (
@@ -25,7 +24,6 @@ const Reservations2 = (props) => {
                     seat_count={x.seat_count}
                     seatnames={x.seatnames}
                     BASE_URL={BASE_URL}
-                    token={token}
                     setReservationData={setReservationData}
                     reservationData={reservationData}
                     error={error}
