@@ -48,7 +48,6 @@ export const AddVenue = () => {
                         <option key={roomname} value={roomname}>{roomname}</option>
                     ))}
                 </select>
-
             </div>
             <div>
                 <label>Showtime (Budapest Time):</label>

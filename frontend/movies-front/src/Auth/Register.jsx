@@ -7,6 +7,7 @@ import { setCookie } from './Functions/CookieHandler';
 import {jwtDecode as decode} from 'jwt-decode';
 import axios from 'axios';
 import { CheckUserName } from './HTTP/CheckUserName';
+import { CheckEmail } from './HTTP/CheckEmail';
 import { ValidateInputs } from './Functions/ValidateInputs';
 
 const Register = ({ onloginSuccess, setAuth, setisStaff, setUsernameGlobal }) => {
@@ -34,12 +35,16 @@ const Register = ({ onloginSuccess, setAuth, setisStaff, setUsernameGlobal }) =>
         }
 
         try {
-            const response = await CheckUserName(BASE_URL, username, axios);
-            if (response === 'Username is available.') {
+            const response_username = await CheckUserName(BASE_URL, username, axios);
+            const response_email = await CheckEmail(BASE_URL,email,axios);
+            if (response_username === 'Username is available.'
+                &&
+                response_email ==='E-mail is available.'
+            ) {
                 await PostRegistration(BASE_URL, username, password,firstname,lastname,email);
                 await PostLogin(setCookie, decode, axios, setError, BASE_URL, username, password, onloginSuccess, setAuth, setisStaff, setUsernameGlobal);
             } else {
-                window.alert('This username is taken!');
+                window.alert('This username or e-mail address is taken! Please, choose another one.');
             }
         } catch (err) {
             console.error('Registration error:', err);

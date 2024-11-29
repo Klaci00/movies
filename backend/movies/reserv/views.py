@@ -180,6 +180,14 @@ class CheckUsername(APIView):
         else:
             return Response({'message': 'Username is available.'}, status=status.HTTP_200_OK)
 
+class CheckEmail(APIView):
+    def get(self,request,email):
+        email_exists=CustomUser.objects.filter(email=email).exists()
+        if email_exists:
+            return Response({'message':'E-mail is taken.'},status=status.HTTP_200_OK)
+        else:
+            return Response({'message':'E-mail is available.'},status=status.HTTP_200_OK)
+
 class Logout(APIView):
 
     def post(self, request):

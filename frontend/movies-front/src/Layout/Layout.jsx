@@ -15,6 +15,7 @@ const Layout = () => {
    setUser(decodedToken); // You can also redirect the user or store the token as needed 
    setUsername(decodedToken.username);
   };
+  
   const checkAuthStatus = async () => { 
     if(getCookie('refresh')){
     try {

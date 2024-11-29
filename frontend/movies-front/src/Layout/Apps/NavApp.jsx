@@ -4,8 +4,8 @@ import LogoutButton2 from "../../Auth/Apps/LogoutButton2"
 export const NavApp = ({isAuth, setIsAuth,isAdmin, setIsAdmin,username,setUserName}) => {
 
     return <nav className='nav'>
+        <Link to='/contact'>Contact us</Link>
         <Link to='/'><p>Home</p></Link>
-
         {!isAuth ? (
             <>
                 <Link to='/register'><p>Register</p></Link>
@@ -27,5 +27,6 @@ export const NavApp = ({isAuth, setIsAuth,isAdmin, setIsAdmin,username,setUserNa
 
             </>
         )}
+        
     </nav>
 }

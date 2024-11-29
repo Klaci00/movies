@@ -3,7 +3,7 @@ from .views import ShowDetail,ShowList,UserCreate,Logout,UserDetail,\
         CustomObtainAuthToken,show_venues,set_csrf_token,VenueDetail,\
         ReservDetail,ReservationListView,ReservDestroy,ListVenues,\
         CustomTokenObtainPairView,AuthStatusView,Logout2,\
-        CheckUsername
+        CheckUsername,CheckEmail
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework.authtoken import views
@@ -32,6 +32,7 @@ urlpatterns = [
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('auth-status/', AuthStatusView.as_view(), name='auth_status'),
     path('check-username/<str:username>/',CheckUsername.as_view(),name='check-username'),
+    path('check-email/<str:email>/',CheckEmail.as_view(),name='check-email'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

@@ -176,4 +176,5 @@ jspm_packages/
 # MacOS files
 .DS_Store
 
-.pyc
+backend/
+*.pyc
