@@ -54,4 +54,7 @@ class Reservation(models.Model):
         return self.owner.username+', '+', '+self.title+', '+self.room_name
 
 class CustomUser(AbstractUser):
-    pass
+    first_name = models.CharField(max_length=30, blank=False, null=False)
+    last_name = models.CharField(max_length=30, blank=False, null=False)
+    def __str__(self):
+        return self.username

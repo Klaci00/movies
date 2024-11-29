@@ -36,7 +36,7 @@ const Register = ({ onloginSuccess, setAuth, setisStaff, setUsernameGlobal }) =>
         try {
             const response = await CheckUserName(BASE_URL, username, axios);
             if (response === 'Username is available.') {
-                await PostRegistration(BASE_URL, username, password);
+                await PostRegistration(BASE_URL, username, password,firstname,lastname,email);
                 await PostLogin(setCookie, decode, axios, setError, BASE_URL, username, password, onloginSuccess, setAuth, setisStaff, setUsernameGlobal);
             } else {
                 window.alert('This username is taken!');
