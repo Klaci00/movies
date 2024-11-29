@@ -8,18 +8,28 @@ import AddShow from '../../Admin/AddShow';
 import { AddVenue } from '../../Admin/AddVenue';
 import Login2 from "../../Auth/Login2";
 import { ContactsApp } from "./ContactsApp";
+import { AdminInterface } from "../../Admin/Apps/AdminInterface";
 
 export const RoutesApp=({username,setUsername,setisStaff,isAuth,setIsAuth,handleLoginSuccess})=>{
   
     return <Routes className='routes'>
     <Route path='/' element={<ShowsList />} />
-    <Route path='/register' element={<Register onloginSuccess={handleLoginSuccess} setAuth={setIsAuth} setUsernameGlobal={setUsername} setisStaff={setisStaff} />} />
     <Route path='/:id' element={<ListVenues className='listvenues' isAuth={isAuth} />} />
     <Route path=':id/venues/:venueId' element={<VenueDetail />} />
-    <Route path='/reservations' element={<Reservations2 username={username} />} />
+    <Route path='/reservations' element={<Reservations2 username={username} />}/>
+    <Route path="/login2" element={<Login2 onLoginSuccess={handleLoginSuccess}
+                                           setAuth={setIsAuth}
+                                           setisStaff={setisStaff}
+                                           setUsernameGlobal={setUsername} />}/>
+    <Route path='/register' element={<Register onloginSuccess={handleLoginSuccess}
+                                               setAuth={setIsAuth}
+                                               setUsernameGlobal={setUsername}
+                                               setisStaff={setisStaff} />} />       
+    <Route path='/administration' element={<AdminInterface/>} ></Route>
     <Route path='/addshow' element={<AddShow/>} />
     <Route path='/addvenue' element={<AddVenue/>} />
-    <Route path="/login2" element={<Login2 onLoginSuccess={handleLoginSuccess} setAuth={setIsAuth} setisStaff={setisStaff} setUsernameGlobal={setUsername} />}/>
+    <Route path='/deleteshow' ></Route>
+    <Route path='/deletevenue'></Route>
     <Route path='/contact'element={<ContactsApp/>} ></Route>
   </Routes>
 }

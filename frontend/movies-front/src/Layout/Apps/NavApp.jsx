@@ -18,8 +18,7 @@ export const NavApp = ({isAuth, setIsAuth,isAdmin, setIsAdmin,username,setUserNa
                 <Link to='/reservations'><p>Reservations</p></Link>
                 {isAdmin ? (
                     <>
-                        <Link to='/addshow'><p>Add Show</p></Link>
-                        <Link to='/addvenue'><p>Add Venue</p></Link>
+                    <Link to='/administration'>Admin Interface</Link>                      
                     </>)
                     :
                     (<></>)}
