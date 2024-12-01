@@ -4,25 +4,27 @@ import { BASE_URL } from "../Settings";
 import { DestroyShow } from "./HTTP/DestroyShow";
 import { DeleteShowApp } from "./Apps/DeleteShowApp";
 
-export const DeleteShow=()=>{
-    const [shows,setShows]=useState([]);
-    const [selectedShow,setSelectedShow]=useState(0);
-    useEffect(()=>{
-       FetchShowsList(BASE_URL,setShows);
-    },[]);
+export const DeleteShow = () => {
+    const [shows, setShows] = useState([]);
+    const [selectedShow, setSelectedShow] = useState(0);
+    useEffect(() => {
+        FetchShowsList(BASE_URL, setShows);
+    }, []);
 
-    const handleDropdownChange=(e)=>{
+    const handleDropdownChange = (e) => {
         setSelectedShow(e.target.value);
-        console.log(e.target.value);
     };
 
-    const handleSubmit=async(e)=>{
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        await DestroyShow(selectedShow);
-        FetchShowsList(BASE_URL,setShows)
+        const confirmDelete = window.confirm('Are you sure you want to delete this venue?');
+        if (confirmDelete) {
+            await DestroyShow(selectedShow);
+            FetchShowsList(BASE_URL, setShows);
+        };
     };
 
-    return(<>
-            <DeleteShowApp handleSubmit={handleSubmit} selectedShow={selectedShow} handleDropdownChange={handleDropdownChange} shows={shows}></DeleteShowApp>
+    return (<>
+        <DeleteShowApp handleSubmit={handleSubmit} selectedShow={selectedShow} handleDropdownChange={handleDropdownChange} shows={shows}></DeleteShowApp>
     </>)
 }
