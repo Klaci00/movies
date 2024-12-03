@@ -1,4 +1,4 @@
-import { Routes,Route } from "react-router-dom"
+import { Routes, Route } from "react-router-dom"
 import Register from '../../Auth/Register';
 import ShowsList from '../../Shows/ShowsList';
 import VenueDetail from '../../Venues/VenueDetail';
@@ -11,27 +11,35 @@ import { ContactsApp } from "./ContactsApp";
 import { AdminInterface } from "../../Admin/Apps/AdminInterface";
 import { DeleteShow } from "../../Admin/DeleteShow";
 import { DeleteVenue } from "../../Admin/DeleteVenue";
+import { jwtDecode as decode } from "jwt-decode";
+import { getCookie } from "../../Auth/Functions/CookieHandler";
 
-export const RoutesApp=({username,setUsername,setisStaff,isAuth,setIsAuth,handleLoginSuccess})=>{
-  
-    return <Routes className='routes'>
+export const RoutesApp = ({ username, setUsername, setisStaff, isAuth, setIsAuth }) => {
+
+  const refresh = getCookie('refresh');
+  var decodedToken={};
+  if (refresh != undefined) {
+    decodedToken = decode(refresh);
+  }
+
+  return <Routes className='routes'>
     <Route path='/' element={<ShowsList />} />
     <Route path='/:id' element={<ListVenues className='listvenues' isAuth={isAuth} />} />
     <Route path=':id/venues/:venueId' element={<VenueDetail />} />
-    <Route path='/reservations' element={<Reservations2 username={username} />}/>
-    <Route path="/login2" element={<Login2 onLoginSuccess={handleLoginSuccess}
-                                           setAuth={setIsAuth}
-                                           setisStaff={setisStaff}
-                                           setUsernameGlobal={setUsername} />}/>
-    <Route path='/register' element={<Register onloginSuccess={handleLoginSuccess}
-                                               setAuth={setIsAuth}
-                                               setUsernameGlobal={setUsername}
-                                               setisStaff={setisStaff} />} />       
-    <Route path='/administration' element={<AdminInterface/>} ></Route>
-    <Route path='/addshow' element={<AddShow/>} />
-    <Route path='/addvenue' element={<AddVenue/>} />
-    <Route path='/deleteshow' element={<DeleteShow/>} ></Route>
-    <Route path='/deletevenue' element={<DeleteVenue/>}></Route>
-    <Route path='/contact'element={<ContactsApp/>} ></Route>
+    <Route path='/reservations' element={<Reservations2 username={username} />} />
+    <Route path="/login2" element={<Login2 
+      setAuth={setIsAuth}
+      setisStaff={setisStaff}
+      setUsernameGlobal={setUsername} />} />
+    <Route path='/register' element={<Register 
+      setAuth={setIsAuth}
+      setUsernameGlobal={setUsername}
+      setisStaff={setisStaff} />} />
+    <Route path='/administration' element={<AdminInterface />} ></Route>
+    <Route path='/addshow' element={<AddShow />} />
+    <Route path='/addvenue' element={<AddVenue />} />
+    <Route path='/deleteshow' element={<DeleteShow />} ></Route>
+    <Route path='/deletevenue' element={<DeleteVenue />}></Route>
+    <Route path='/contact' element={<ContactsApp />} ></Route>
   </Routes>
 }

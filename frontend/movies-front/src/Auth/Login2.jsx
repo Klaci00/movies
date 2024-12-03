@@ -1,18 +1,14 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import {jwtDecode as decode} from 'jwt-decode';
-import { setCookie } from './Functions/CookieHandler';
 import { PostLogin } from './HTTP/PostLogin';
-import { BASE_URL } from '../Settings';
 
-const Login2 = ({onLoginSuccess,setAuth,setisStaff,setUsernameGlobal }) => {
+const Login2 = ({setAuth,setisStaff,setUsernameGlobal }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        PostLogin(setCookie,decode,axios,setError,BASE_URL,username,password,onLoginSuccess,setAuth,setisStaff,setUsernameGlobal);
+        PostLogin(setError,username,password,setAuth,setisStaff,setUsernameGlobal);
     };
 
     return (

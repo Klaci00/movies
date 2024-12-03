@@ -3,28 +3,22 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import '../Cascade Style Sheets/VenueDetail.css';
 import { RoutesApp } from './Apps/RoutesApp';
 import { NavApp } from './Apps/NavApp';
-import apiClient from '../Auth/Functions/APIClient';
 import { getCookie, getCookieExpiryTime } from '../Auth/Functions/CookieHandler';
 import { refreshToken } from '../Auth/Functions/AuthService';
-import { AccessTokenServer } from '../Auth/Functions/AccessTokenServer';
+import { jwtDecode as decode } from 'jwt-decode';
 const Layout = () => {
   const [isAuth, setIsAuth] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [username, setUsername] = useState('');
-  const [user, setUser] = useState(null);
   const [time, setTime] = useState(1);
 
-  const handleLoginSuccess = (decodedToken) => {
-    setUser(decodedToken); // You can also redirect the user or store the token as needed 
-    setUsername(decodedToken.username);
-  };
-
   useEffect(() => { 
-    if (getCookie('refresh') === null) { //No refresh token? You are logged out!
+    if (getCookie('refresh') === undefined) { //No refresh token? You are logged out!
       setIsAuth(false);
+      setTime(1);
     }
     else {
-      if (getCookie('access') === null) { //No acces token? Let's get a new one!
+      if (getCookie('access') === undefined) { //No acces token? Let's get a new one!
         refreshToken();
         const newTime = getCookieExpiryTime('access');
         setTime(newTime);
@@ -40,37 +34,35 @@ const Layout = () => {
       }, 1000);
       return () => clearInterval(interval); //Get rid of the interval for optimisation.
     }
-  }, [time]);
+  }, [time,isAuth]);
   const checkAuthStatus = async () => {
-    if (getCookie('refresh')) {
+    const refresh=getCookie('refresh');
+    if (refresh!=undefined) {
       try {
-
-        const response = await apiClient.get('auth-status/');
-        if (response.data.user.username != null) {
+        const response = decode(refresh);
+        if (response.username != null) {
           setIsAuth(true);
-          setUsername(response.data.user.username);
-          setIsAdmin(response.data.user.is_staff);
+          setUsername(response.username);
+          setIsAdmin(response.is_staff);
         }
       }
       catch (error) {
         console.error('Error checking auth status:', error);
-        setUser(null);
+        setIsAuth(false);
       }
     }
+    else{setIsAuth(false);};
   };
 
   useEffect(() => {
     checkAuthStatus();
-    const cookieTime = getCookieExpiryTime('access');
-    console.log(`Cookie lifetime is ${cookieTime} seconds.`)
-    setTime(cookieTime);
   }, []);
 
   return (
     <Router className='router'>
       <div className='main_screen'>
         <NavApp isAuth={isAuth} setIsAuth={setIsAuth} isAdmin={isAdmin} setIsAdmin={setIsAdmin} username={username} setUserName={setUsername} />
-        <RoutesApp username={username} setUsername={setUsername} setisStaff={setIsAdmin} isAuth={isAuth} setIsAuth={setIsAuth} handleLoginSuccess={handleLoginSuccess} />
+        <RoutesApp username={username} setUsername={setUsername} setisStaff={setIsAdmin} isAuth={isAuth} setIsAuth={setIsAuth}/>
       </div>
     </Router>
   );
