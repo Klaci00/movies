@@ -29,7 +29,6 @@ const VenueDetail = () => {
     FetchVenueDetails_new(BASE_URL, setVenue, venueId, seats);
   }, [id, venueId,reservationComplete]);
 
-
   const reserveSeats = async () => {
     const dataToPatch = ConstructPatchData_new(seats, show, venue);
     await PatchVenue(BASE_URL, venueId, dataToPatch);
@@ -41,9 +40,6 @@ const VenueDetail = () => {
   };
 
   if (!show || !venue) return <div>Loading...</div>;
-
-
-
 
   const numSeatsToDisplay = {
     'Kisterem': 80,

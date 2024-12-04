@@ -10,8 +10,11 @@ function RoomApp(props) {
     for (let i = 0; i < indices.length - 1; i++) {
         if (Math.abs(indices[i] - indices[i + 1]) == 2) {
             stop = true;
+            props.seats[indices[i+1]].setSeat(0);
             window.alert('Egy helyet nem lehet kihagyni a foglalt helyek között!');
-        }
+            indices.pop(indices[i+1]);
+            props.setSeatNum(props.seatNum+1);
+                }
     }
     const isButtonDisabled = stop || indices.length === 0 || props.seatNum != 0 && NumSeatCheck(props.seatNum) != 0;
 
@@ -30,7 +33,7 @@ function RoomApp(props) {
                         <div
                             key={index}
                             className='seat'
-                            onClick={() => props.toggleSeat(seat, setSeat, props.seatNum, props.setSeatNum)}
+                            onClick={() =>props.toggleSeat(seat, setSeat, props.seatNum, props.setSeatNum)}
                             style={{
                                 width: '20px',
                                 height: '20px',
