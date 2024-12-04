@@ -19,22 +19,25 @@ const VenueDetail = () => {
   const [venue, setVenue] = useState(null);
   const seats = useSeatStates(1000);
   const [seatNum, setSeatNum] = useState(localStorage.getItem('seatnum'));
+  const [reservationComplete, setReservationComplete] = useState(false);
+
   useEffect(() => {
     // Fetch show details
     FetchShowDetails(BASE_URL, setShow, id);
 
     // Fetch venue details
     FetchVenueDetails_new(BASE_URL, setVenue, venueId, seats);
-  }, [id, venueId]);
+  }, [id, venueId,reservationComplete]);
 
 
   const reserveSeats = async () => {
     const dataToPatch = ConstructPatchData_new(seats, show, venue);
-    PatchVenue(BASE_URL, venueId, dataToPatch);
-
+    await PatchVenue(BASE_URL, venueId, dataToPatch);
     const dataToPOST = ConstructPostData_new(seats, show, venue);
-    PostReservation(BASE_URL, dataToPOST);
-
+    await PostReservation(BASE_URL, dataToPOST);
+    
+    // Set reservationComplete to true to trigger re-render 
+    setReservationComplete(prevState => !prevState);
   };
 
   if (!show || !venue) return <div>Loading...</div>;
