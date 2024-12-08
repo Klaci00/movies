@@ -1,4 +1,9 @@
-def seat_key_factory(i):
+def seat_key_factory(i:int):
+    '''
+    This function returns a str key for a dictionary
+    in a format like \'seat_00i\', or \'seat_0ii\'
+    or \'seat_iii'\' for a dictionary to use.
+    '''
     seat = 'seat_' + str(i).zfill(3)
     return seat
 
@@ -107,6 +112,23 @@ def venue_data_dict_maker(venue):
     return venue_data
 
 def validate(request_seats:dict,instance_seats:dict):
+    '''
+    This is function compares the two dictionaries,
+    and returns false if a prebooked seat is already
+    reserved, therefore prevents conflicting reservations.
+
+    Parameters
+    ----------
+    request_seats : dict
+        The seats sent by frontend.
+    instance_seats : dict
+        The already existing state on the backend.
+    
+    Returns
+    -------
+    bool
+        Whether the reservation is valid, or conflicting.
+    '''
     is_valid=True
     for key,value in request_seats.items():
         if value==1 and instance_seats[key]==2:

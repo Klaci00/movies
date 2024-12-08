@@ -13,24 +13,26 @@ const Layout = () => {
   const [time, setTime] = useState(1);
 
   useEffect(() => { 
+    console.log(time);
     if (getCookie('refresh') === undefined) { //No refresh token? You are logged out!
       setIsAuth(false);
-      setTime(1);
+      
     }
     else {
       if (getCookie('access') === undefined) { //No acces token? Let's get a new one!
         refreshToken();
-        const newTime = getCookieExpiryTime('access');
-        setTime(newTime);
+        
+        
       }
-      const interval = setInterval(() => { //Create 1 s interval to count 1 sec.
-        setTime((t) => t - 1);
-        if (time < 5) { //Access token is about to expire, let's get a new one!
+      const interval = setInterval(() => { //Create 60 s interval.
+        const newTime = getCookieExpiryTime('access');
+        setTime(newTime);    
+        if (newTime < 60) { //Access token is about to expire, let's get a new one!
           refreshToken();
           const newTime = getCookieExpiryTime('access');
           setTime(newTime);
         }
-      }, 1000);
+      }, 60000);
       return () => clearInterval(interval); //Get rid of the interval for optimisation.
     }
   }, [time,isAuth]);
