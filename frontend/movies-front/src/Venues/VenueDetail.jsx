@@ -27,16 +27,28 @@ const VenueDetail = () => {
 
     // Fetch venue details
     FetchVenueDetails_new(BASE_URL, setVenue, venueId, seats);
-  }, [id, venueId,reservationComplete]);
+  }, [id, venueId, reservationComplete]);
 
   const reserveSeats = async () => {
-    const dataToPatch = ConstructPatchData_new(seats, show, venue);
-    await PatchVenue(BASE_URL, venueId, dataToPatch);
-    const dataToPOST = ConstructPostData_new(seats, show, venue);
-    await PostReservation(BASE_URL, dataToPOST);
-    
-    // Set reservationComplete to true to trigger re-render 
-    setReservationComplete(prevState => !prevState);
+    try {
+      const dataToPatch = ConstructPatchData_new(seats, show, venue);
+      await PatchVenue(BASE_URL, venueId, dataToPatch);
+      
+      const dataToPOST = ConstructPostData_new(seats, show, venue);
+      await PostReservation(BASE_URL, dataToPOST);
+      
+      // Set reservationComplete to true to trigger re-render 
+      setReservationComplete(prevState => !prevState);
+    }
+    catch (error) {
+      console.log(error.message)
+      if (error.message == 'Conflict: Reservation already exists.') {
+        window.alert('Az egyik helyet már lefoglalták, kérem frissítse az oldalt!');
+      }
+      else {
+        window.alert('Ismeretlen hiba történt, kérem frissítse az oldalt!');
+      }
+    }
   };
 
   if (!show || !venue) return <div>Loading...</div>;

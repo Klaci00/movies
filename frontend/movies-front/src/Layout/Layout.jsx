@@ -30,7 +30,6 @@ const Layout = () => {
           const newTime = getCookieExpiryTime('access');
           setTime(newTime);
         }
-        console.log('Time is: ', time);
       }, 1000);
       return () => clearInterval(interval); //Get rid of the interval for optimisation.
     }

@@ -105,3 +105,13 @@ def venue_data_dict_maker(venue):
         return None
 
     return venue_data
+
+def validate(request_seats:dict,instance_seats:dict):
+    is_valid=True
+    for key,value in request_seats.items():
+        if value==1 and instance_seats[key]==2:
+            print('CORRUPTED DATA!')
+            is_valid=False
+            break
+    return is_valid
+        

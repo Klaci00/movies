@@ -18,7 +18,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
 from .seathandler.seathandler import reserv_data_maker,venue_data_dict_maker,\
                                      venue_data_updater2,seat_liberator2,\
-                                     seat_maker
+                                     seat_maker,validate
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 class ShowDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -37,17 +37,23 @@ class VenueDetail(generics.RetrieveUpdateDestroyAPIView):
             **kwargs
             ):
         instance=self.get_object()
-        data=request.data
-        #Update seats with my imported function!
-        serializer = self.get_serializer(
-                                        instance,
-                                        data=venue_data_updater2(data),
-                                        partial=True
-                                        )
-        serializer.is_valid(raise_exception=True)
-        self.perform_update(serializer)
+        request_seats=request.data['seats']
+        instance_seats=instance.seats
+        reservation_isvalid=validate(request_seats,instance_seats)
+        if reservation_isvalid:
+            data=request.data
+            #Update seats with my imported function!
+            serializer = self.get_serializer(
+                                            instance,
+                                            data=venue_data_updater2(data),
+                                            partial=True
+                                            )
+            serializer.is_valid(raise_exception=True)
+            self.perform_update(serializer)
 
-        return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(status=status.HTTP_409_CONFLICT)
 
 class ReservDestroy(generics.DestroyAPIView):
     permission_classes =[IsAuthenticated]
