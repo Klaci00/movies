@@ -1,8 +1,8 @@
 import axios from "axios";
 
-export const FetchShowDetails = (BASE_URL, setShow, id) => {
+export const FetchShowDetails = async (BASE_URL, setShow, id) => {
 
-  const getVenueDetails = axios.get(`${BASE_URL}${id}`)
+  const getVenueDetails = await axios.get(`${BASE_URL}${id}`)
     .then(response => {
       setShow(response.data);
     })

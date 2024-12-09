@@ -27,7 +27,7 @@ const Layout = () => {
       const interval = setInterval(() => { //Create 60 s interval.
         const newTime = getCookieExpiryTime('access');
         setTime(newTime);    
-        if (newTime < 60) { //Access token is about to expire, let's get a new one!
+        if (newTime < 90) { //Access token is about to expire, let's get a new one!
           refreshToken();
           const newTime = getCookieExpiryTime('access');
           setTime(newTime);

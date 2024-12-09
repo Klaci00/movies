@@ -12,6 +12,7 @@ from rest_framework.authtoken.models import Token
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import ensure_csrf_cookie
+from django.db import transaction
 from rest_framework.exceptions import NotFound
 from pprint import pprint
 from rest_framework.permissions import IsAuthenticated
@@ -36,24 +37,25 @@ class VenueDetail(generics.RetrieveUpdateDestroyAPIView):
             *args,
             **kwargs
             ):
-        instance=self.get_object()
-        request_seats=request.data['seats']
-        instance_seats=instance.seats
-        reservation_isvalid=validate(request_seats,instance_seats)
-        if reservation_isvalid:
-            data=request.data
-            #Update seats with my imported function!
-            serializer = self.get_serializer(
-                                            instance,
-                                            data=venue_data_updater2(data),
-                                            partial=True
-                                            )
-            serializer.is_valid(raise_exception=True)
-            self.perform_update(serializer)
+        with transaction.atomic():
+            instance=self.get_object()
+            request_seats=request.data['seats']
+            instance_seats=instance.seats
+            reservation_isvalid=validate(request_seats,instance_seats)
+            if reservation_isvalid:
+                data=request.data
+                #Update seats with my imported function!
+                serializer = self.get_serializer(
+                                                instance,
+                                                data=venue_data_updater2(data),
+                                                partial=True
+                                                )
+                serializer.is_valid(raise_exception=True)
+                self.perform_update(serializer)
 
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        else:
-            return Response(status=status.HTTP_409_CONFLICT)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            else:
+                return Response(status=status.HTTP_409_CONFLICT)
 
 class ReservDestroy(generics.DestroyAPIView):
     permission_classes =[IsAuthenticated]
