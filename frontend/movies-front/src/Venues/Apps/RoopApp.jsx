@@ -20,10 +20,10 @@ function RoomApp(props) {
 
     return (
         <div className='venuedetail_main'>
-            <h1>{props.title}</h1>
-            <img className='poster' src={props.poster} alt={props.title} />
-            <p>Showtime: {new Date(props.showtime).toLocaleString()}</p>
-            <p>Jegyek száma: {props.seatnum}</p>
+            <h1>{props.show.title}</h1>
+            <img className='poster' src={props.show.poster} alt={props.show.title} />
+            <p>Showtime: {new Date(props.venue.showtime).toLocaleString()}</p>
+            <p>Jegyek száma: {props.seatNum}</p>
             <div className={props.roomDict['screen']}>Screen</div>
             <div className={props.roomDict['corridor']}></div>
             <div className={props.roomDict['seatsandentrance']}>

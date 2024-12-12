@@ -32,6 +32,7 @@ class Venue(models.Model):
                                  max_length=100)
     showtime = models.DateTimeField("showtime")
     seats=models.JSONField(default=seat_maker)
+    capacity=models.IntegerField('Férőhelyek száma',default=0)
     reservations = models.ManyToManyField('Reservation',
                                           related_name='venues',
                                           blank=True,

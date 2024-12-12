@@ -31,7 +31,7 @@ const VenueDetail = () => {
 
   const reserveSeats = async () => {
     try {
-      const dataToPatch = ConstructPatchData_new(seats, show, venue);
+      const dataToPatch = ConstructPatchData_new(truncatedSeatlist, show, venue);
       await PatchVenue(BASE_URL, venueId, dataToPatch);
       
       const dataToPOST = ConstructPostData_new(seats, show, venue);
@@ -58,6 +58,7 @@ const VenueDetail = () => {
     'Közepes terem': 120,
     'Nagyterem': 180
   }
+  const truncatedSeatlist=seats.slice(0,numSeatsToDisplay[venue.room_name])
   // Remove spaces from the room name
   const room_name_without_spaces = venue.room_name.replace(/\s+/g, '');
 
@@ -66,11 +67,9 @@ const VenueDetail = () => {
 
   return (
     <RoomApp
-      title={show.title}
-      poster={show.poster}
-      showtime={venue.showtime}
-      seats={seats}
-      seatnum={seatNum}
+      show={show}
+      venue={venue}
+      seats={truncatedSeatlist}
       numSeatsToDisplay={numSeatsToDisplay[venue.room_name]}
       roomDict={roomDict}
       toggleSeat={toggleSeat}

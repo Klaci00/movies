@@ -39,7 +39,7 @@ def reserv_data_maker(user, data):
     return reserv_data
 
 
-def venue_data_updater2(data):
+def venue_data_updater2(data:dict):
     try:
         for i in range(1000):
             seat=seat_key_factory(i)
