@@ -17,7 +17,6 @@ function RoomApp(props) {
                 }
     }
     const isButtonDisabled = stop || indices.length === 0 || props.seatNum != 0 && NumSeatCheck(props.seatNum) != 0;
-    console.log(`seatsandentrance_${props.room_name_without_spaces}`)
     return (
         <div className='venuedetail_main'>
             <h1>{props.show.title}</h1>

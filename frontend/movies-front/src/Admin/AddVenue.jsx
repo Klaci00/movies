@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FetchShowsList } from '../Shows/HTTP/FetchShowsList';
 import { BASE_URL } from '../Settings';
 import { PostVenue } from './HTTP/PostVenue';
+import { RoomSizeDict } from '../Settings';
 
 export const AddVenue = () => {
     const [shows, setShows] = useState([]);
@@ -26,7 +27,6 @@ export const AddVenue = () => {
         PostVenue(shows,selectedShow,selectedRoomName,showtime,BASE_URL);
         
     };
-
     return (
         <form onSubmit={handleSubmit}>
             <div>
