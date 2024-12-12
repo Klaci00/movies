@@ -21,70 +21,63 @@ def reserv_data_maker(user, data):
             'title': data['title'],
             'room_name': data['room_name'],
             'showtime': data['showtime'],
-            'seats': data['seats'],
+            'seats': data.get('seats'),
             'seat_count': data['seat_count'],
             'seatnames': data.get('seatnames', '')
         }
         
     except KeyError as e:
-        print(f'Key error: {e}')
+        print(f'Key error occurred in reserv_data maker: {e}')
         return None
     except TypeError as e:
-        print(f'Type error: {e}')
+        print(f'Type error occurred in reserv_data maker: {e}')
         return None
     except Exception as e:
-        print(f'An unexpected error occurred: {e}')
+        print(f'An unexpected error occurred in reserv_data maker: {e}')
         return None
 
     return reserv_data
 
 
-def venue_data_updater2(data:dict):
+def venue_data_updater2(data):
     try:
-        for i in range(1000):
-            seat=seat_key_factory(i)
-            if seat in data['seats']:
-                if data['seats'][seat] == 1:
-                    data['seats'][seat] = 2
-            else: break
-                #raise KeyError(f'Seat \'{seat}\' not found in data')
-                # raising the above keyerror would be counterproductive,
-                # since the seat fields are nullable, to satisfy the
-                # need for different room sizes !!!
+        print(data)
+        for key,value in data['seats'].items():
+            print(f'key: {key}, value: {value}')
+            if value==1:
+                data.seats[key]=2
     except KeyError as e:
-        print(f'Key error: {e}')
+        print(f'Key error in venue_data_updater2: {e}')
         return None
     except TypeError as e:
-        print(f'Type error: {e}')
+        print(f'Type error in venue_data_updater2: {e}')
         return None
     except Exception as e:
-        print(f'An unexpected error occurred: {e}')
+        print(f'An unexpected error occurred in venue_data_updater2: {e}')
         return None
 
     return data
 
 
-def seat_liberator2(instance, venue):
+def seat_liberator2(instance: object, venue: object):
+    instance_seats: dict = instance.seats
+    venue_seats: dict =  venue.seats
     try:
-            if hasattr(instance, 'seats') and hasattr(venue,'seats'):
-                for i in range(1000):
-                    seat=seat_key_factory(i)
-                    if seat in instance.seats and instance.seats[seat]==1:
-                        venue.seats[seat]=0
-                
-            elif not hasattr(instance, 'seats'):
-                raise AttributeError(f'Attribute \'{seat}\' not found in instance')
-            elif not hasattr(venue, 'seats'):
-                raise AttributeError(f'Attribute \'{seat}\' not found in venue')
-                
+            for key,value in instance_seats.items():
+                if value==1:
+                    seat=venue_seats.get(key)
+                    if seat:
+                        venue_seats[key]=0
+                    elif venue_seats[key]==None:
+                        raise AttributeError(f'Attribute \'{key}\' not found in venue')
     except AttributeError as e:
-        print(f"Attribute error: {e}")
+        print(f"Attribute error in seat_liberator2: {e}")
         return None
     except TypeError as e:
-        print(f"Type error: {e}")
+        print(f"Type error in seat_liberator2: {e}")
         return None
     except Exception as e:
-        print(f"An unexpected error occurred: {e}")
+        print(f"An unexpected error occurred in seat_liberator2: {e}")
         return None
 
     return venue
@@ -131,7 +124,7 @@ def validate(request_seats:dict,instance_seats:dict):
     '''
     is_valid=True
     for key,value in request_seats.items():
-        if value==1 and instance_seats[key]==2:
+        if value==1 and instance_seats.get(key)==2:
             print('CORRUPTED DATA!')
             is_valid=False
             break

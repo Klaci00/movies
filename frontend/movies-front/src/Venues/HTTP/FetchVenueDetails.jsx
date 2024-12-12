@@ -1,13 +1,16 @@
 import apiClient from "../../Auth/Functions/APIClient";
 
-export const FetchVenueDetails_new = (BASE_URL, setVenue, venueId, seats) => {
-      const getVenues = apiClient.get(`${BASE_URL}venues/${venueId}`)
+export const FetchVenueDetails_new = async(BASE_URL, venue, setVenue, venueId, seats) => {
+      const getVenues = await apiClient.get(`${BASE_URL}venues/${venueId}`)
             .then(response => {
                   setVenue(response.data);
-                  seats.forEach((seatItem, index) => {
+                  seats.slice(0,response.data.capacity).forEach((seatItem, index) => {
                         const seatKey = `seat_${String(index).padStart(3, '0')}`;
                         if (response.data.seats[seatKey] !== undefined) {
                               seatItem.setSeat(response.data.seats[seatKey]);
+                        }
+                        else{
+                              seatItem.setSeat(0);
                         }
                   });
             }).catch(error => {

@@ -31,8 +31,8 @@ class Venue(models.Model):
                                  choices=ROOM_NAMES,
                                  max_length=100)
     showtime = models.DateTimeField("showtime")
-    seats=models.JSONField(default=seat_maker)
-    capacity=models.IntegerField('Férőhelyek száma',default=0)
+    seats=models.JSONField(default=dict, blank=True,null=True)
+    capacity=models.IntegerField('Férőhelyek',default=0)
     reservations = models.ManyToManyField('Reservation',
                                           related_name='venues',
                                           blank=True,
@@ -48,7 +48,7 @@ class Reservation(models.Model):
                               on_delete=models.CASCADE)
     room_name = models.CharField("room", max_length=100)
     showtime = models.DateTimeField("showtime")
-    seats=models.JSONField(default=seat_maker)
+    seats=models.JSONField(default=dict)
     seat_count = models.IntegerField(default=0)
     seatnames=models.CharField(max_length=1000,default=" ")
     def __str__(self) -> str:

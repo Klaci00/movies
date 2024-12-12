@@ -39,11 +39,13 @@ class VenueDetail(generics.RetrieveUpdateDestroyAPIView):
             ):
         with transaction.atomic():
             instance=self.get_object()
-            request_seats=request.data['seats']
+            print(request.data['seats'])
+            request_seats: dict=request.data['seats']
             instance_seats=instance.seats
-            reservation_isvalid=validate(request_seats,instance_seats)
+            reservation_isvalid: bool=validate(request_seats,instance_seats)
             if reservation_isvalid:
                 data=request.data
+                pprint(f'data: {data}')
                 #Update seats with my imported function!
                 serializer = self.get_serializer(
                                                 instance,
@@ -63,17 +65,10 @@ class ReservDestroy(generics.DestroyAPIView):
     serializer_class=ReservSerializer
     def destroy(self, request, *args, **kwargs):
         
-            instance = self.get_object()
-            # Custom logic before deletion
-            
-            # Example of custom logic: logging the deletion
-            
-            venue = Venue.objects.get(id=instance.venueId)
-            pprint(venue)
-
-            
+            instance: object = self.get_object()          
+            venue: object = Venue.objects.get(id=instance.venueId)
+            pprint(venue)            
             print(f'Venue associated with reservation: {venue.id}')
-            
             venue=seat_liberator2(instance,venue)
             venue.save()
             print(f'Deleting reservation: {instance.title}')
@@ -168,7 +163,7 @@ class ListVenues(generics.ListCreateAPIView):
             title=request_data.get('title'),
             room_name=request_data.get('room_name'),
             showtime=request_data.get('showtime'),
-            seats=seat_maker()
+            capacity=request_data.get('capacity')
         )
 
         show.venues.add(venue)

@@ -26,7 +26,7 @@ const VenueDetail = () => {
     FetchShowDetails(BASE_URL, setShow, id);
 
     // Fetch venue details
-    FetchVenueDetails_new(BASE_URL, setVenue, venueId, seats);
+    FetchVenueDetails_new(BASE_URL,venue, setVenue, venueId, seats);
   }, [id, venueId, reservationComplete]);
 
   const reserveSeats = async () => {
@@ -34,7 +34,7 @@ const VenueDetail = () => {
       const dataToPatch = ConstructPatchData_new(truncatedSeatlist, show, venue);
       await PatchVenue(BASE_URL, venueId, dataToPatch);
       
-      const dataToPOST = ConstructPostData_new(seats, show, venue);
+      const dataToPOST = ConstructPostData_new(truncatedSeatlist, show, venue);
       await PostReservation(BASE_URL, dataToPOST);
       
       // Set reservationComplete to true to trigger re-render 
@@ -58,7 +58,7 @@ const VenueDetail = () => {
     'Közepes terem': 120,
     'Nagyterem': 180
   }
-  const truncatedSeatlist=seats.slice(0,numSeatsToDisplay[venue.room_name])
+  const truncatedSeatlist=seats.slice(0,venue.capacity);
   // Remove spaces from the room name
   const room_name_without_spaces = venue.room_name.replace(/\s+/g, '');
 
