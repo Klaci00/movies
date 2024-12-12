@@ -1,21 +1,21 @@
-'''
-    This function compares the two dictionaries,
-    and returns false if a prebooked seat is already
-    reserved, therefore prevents conflicting reservations.
+def reserv_data_maker(user:object, data:dict):
+    '''
+    This function takes the two dictionaries,
+    and build one dict from them, which is going 
+    to be the reservation data.
 
     Parameters
     ----------
-    request_seats : dict
-        The seats sent by frontend.
-    instance_seats : dict
+    user : object
+        The CustomUser who will own the reservation.
+    data : dict
         The already existing state on the backend.
     
     Returns
     -------
-    bool
-        Whether the reservation is valid, or conflicting.
+    dict
+        The reservation data dict.
     '''
-def reserv_data_maker(user:object, data:dict):
     try:
         reserv_data = {
             'owner': user,
@@ -40,7 +40,23 @@ def reserv_data_maker(user:object, data:dict):
     return reserv_data
 
 
-def venue_data_updater2(data):
+def venue_data_updater2(data: dict):
+    '''
+    Iterates through the \'seats\' dict within the request data dict,
+    changing the \'prebooked\' seats with a value of 1 to \'booked\'
+    with a value of 2. 
+
+    Parameters:
+    -----------
+    data: dict
+        The request data from the HTTP Post request. Also the Venue
+        instance data.
+    
+    Returns:
+    --------
+    dict
+        The updated request/Venue instance data.
+    '''
     try:
         seats=data['seats']
         for key,value in seats.items():
@@ -55,11 +71,29 @@ def venue_data_updater2(data):
     except Exception as e:
         print(f'An unexpected error occurred in venue_data_updater2: {e}')
         return None
-    print(data)
     return data
 
 
 def seat_liberator2(instance: object, venue: object):
+    '''
+    This function takes the reservation and Venue
+    instances and iterates through their \'seats\' dict,
+    freeing them up once again.
+    This is an important step before finally deleting
+    the reservation.
+    
+    Parameters
+    ----------
+    instance: object
+        The Reservation model instance.
+    venue: object
+        The Venue model instance.
+    
+    Returns
+    -------
+    object
+        The Venue instance with the liberated seats.
+    '''  
     instance_seats: dict = instance.seats
     venue_seats: dict =  venue.seats
     try:
@@ -83,7 +117,21 @@ def seat_liberator2(instance: object, venue: object):
     return venue
 
 
-def venue_data_dict_maker(venue):
+def venue_data_dict_maker(venue: object):
+    '''
+    This function takes a Venue instance and returns a customized
+    and simplified dictionary for the frontend.
+
+    Parameters
+    -----------
+    venue: object
+        A Venue instance.
+    
+    Returns
+    -------
+    dict
+        The simplified data form the Venue instance.
+    '''
     try:
         venue_data = {
             'id': venue.id,
