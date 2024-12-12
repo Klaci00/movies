@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import RoomTypeDict from './RoomTypeDict';
 import '../Cascade Style Sheets/VenueDetail.css';
 import RoomApp from './Apps/RoopApp';
 import { useSeatStates } from './Functions/useSeatStates';
@@ -53,25 +52,18 @@ const VenueDetail = () => {
 
   if (!show || !venue) return <div>Loading...</div>;
 
-  const numSeatsToDisplay = {
-    'Kisterem': 80,
-    'Közepes terem': 120,
-    'Nagyterem': 180
-  }
+  
   const truncatedSeatlist=seats.slice(0,venue.capacity);
+
   // Remove spaces from the room name
   const room_name_without_spaces = venue.room_name.replace(/\s+/g, '');
-
-  // Use the cleaned room name to get the room dictionary
-  const roomDict = RoomTypeDict(room_name_without_spaces);
 
   return (
     <RoomApp
       show={show}
       venue={venue}
       seats={truncatedSeatlist}
-      numSeatsToDisplay={numSeatsToDisplay[venue.room_name]}
-      roomDict={roomDict}
+      room_name_without_spaces={room_name_without_spaces}
       toggleSeat={toggleSeat}
       seatNum={seatNum}
       setSeatNum={setSeatNum}

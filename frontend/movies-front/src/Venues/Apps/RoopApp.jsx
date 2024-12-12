@@ -17,19 +17,19 @@ function RoomApp(props) {
                 }
     }
     const isButtonDisabled = stop || indices.length === 0 || props.seatNum != 0 && NumSeatCheck(props.seatNum) != 0;
-
+    console.log(`seatsandentrance_${props.room_name_without_spaces}`)
     return (
         <div className='venuedetail_main'>
             <h1>{props.show.title}</h1>
             <img className='poster' src={props.show.poster} alt={props.show.title} />
             <p>Showtime: {new Date(props.venue.showtime).toLocaleString()}</p>
             <p>Jegyek száma: {props.seatNum}</p>
-            <div className={props.roomDict['screen']}>Screen</div>
-            <div className={props.roomDict['corridor']}></div>
-            <div className={props.roomDict['seatsandentrance']}>
-                <div className={props.roomDict['leftverticalcorridor']}> </div>
-                <div className={props.roomDict['seats_container']}>
-                    {props.seats.slice(0, props.numSeatsToDisplay).map(({ seat, setSeat }, index) => (
+            <div className={`screen_${props.room_name_without_spaces}`}>Screen</div>
+            <div className={`corridor_${props.room_name_without_spaces}`}></div>
+            <div className={`seatsandentrance_${props.room_name_without_spaces}`}>
+                <div className={`leftverticalcorridor_${props.room_name_without_spaces}`}> </div>
+                <div className={`seats_container_${props.room_name_without_spaces}`}>
+                    {props.seats.slice(0, props.venue.capacity).map(({ seat, setSeat }, index) => (
                         <div
                             key={index}
                             className='seat'
@@ -43,10 +43,10 @@ function RoomApp(props) {
                         ></div>
                     ))}
                 </div>
-                <div className={props.roomDict['entrance_and_gaps']}>
-                    <div className={props.roomDict['gap_upper']}></div>
-                    <div className={props.roomDict['entrance']}>BEJÁRAT</div>
-                    <div className={props.roomDict['gap_lower']}></div>
+                <div className={`entrance_and_gaps_${props.room_name_without_spaces}`}>
+                    <div className={`gap_upper_${props.room_name_without_spaces}`}></div>
+                    <div className={`entrance_${props.room_name_without_spaces}`}>BEJÁRAT</div>
+                    <div className={`gap_lower_${props.room_name_without_spaces}`}></div>
                 </div>
             </div>
             <button onClick={() => props.reserveSeats(props)} disabled={isButtonDisabled}>Reserve Seats</button>
