@@ -19,7 +19,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
 from .seathandler.seathandler import reserv_data_maker,venue_data_dict_maker,\
                                      venue_data_updater2,seat_liberator2,\
-                                     seat_maker,validate
+                                     validate
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 class ShowDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -39,13 +39,11 @@ class VenueDetail(generics.RetrieveUpdateDestroyAPIView):
             ):
         with transaction.atomic():
             instance=self.get_object()
-            print(request.data['seats'])
             request_seats: dict=request.data['seats']
-            instance_seats=instance.seats
+            instance_seats:dict=instance.seats
             reservation_isvalid: bool=validate(request_seats,instance_seats)
             if reservation_isvalid:
-                data=request.data
-                pprint(f'data: {data}')
+                data:dict=request.data
                 #Update seats with my imported function!
                 serializer = self.get_serializer(
                                                 instance,
@@ -63,20 +61,12 @@ class ReservDestroy(generics.DestroyAPIView):
     permission_classes =[IsAuthenticated]
     queryset=Reservation.objects.all()
     serializer_class=ReservSerializer
-    def destroy(self, request, *args, **kwargs):
-        
+    def destroy(self, request, *args, **kwargs):       
             instance: object = self.get_object()          
             venue: object = Venue.objects.get(id=instance.venueId)
-            pprint(venue)            
-            print(f'Venue associated with reservation: {venue.id}')
             venue=seat_liberator2(instance,venue)
-            venue.save()
-            print(f'Deleting reservation: {instance.title}')
-
-            # Perform the deletion
             self.perform_destroy(instance)
             return Response(status=status.HTTP_204_NO_CONTENT)
-
     def perform_destroy(self, instance):
         instance.delete()
 
@@ -91,9 +81,9 @@ class ReservDetail(generics.ListCreateAPIView):
     serializer_class = ReservSerializer
 
     def perform_create(self, serializer):
-        data = serializer.validated_data
+        data: dict = serializer.validated_data
         try:
-            user = CustomUser.objects.get(id=self.request.user.id)
+            user: object  = CustomUser.objects.get(id=self.request.user.id)
         except CustomUser.DoesNotExist:
             return Response(
                 {'error': 'User not found'},

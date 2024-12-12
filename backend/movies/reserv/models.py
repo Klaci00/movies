@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from .seathandler.seathandler import seat_maker
 
 ROOM_NAMES={'Kisterem':'Kisterem',
             'Nagyterem': 'Nagyterem',

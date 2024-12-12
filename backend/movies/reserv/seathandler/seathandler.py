@@ -1,20 +1,21 @@
-def seat_key_factory(i:int):
-    '''
-    This function returns a str key for a dictionary
-    in a format like \'seat_00i\', or \'seat_0ii\'
-    or \'seat_iii'\' for a dictionary to use.
-    '''
-    seat = 'seat_' + str(i).zfill(3)
-    return seat
+'''
+    This function compares the two dictionaries,
+    and returns false if a prebooked seat is already
+    reserved, therefore prevents conflicting reservations.
 
-def seat_maker():
-    seats={}
-    for i in range(1000):
-        seat=seat_key_factory(i)
-        seats[seat] = 0
-    return seats
-
-def reserv_data_maker(user, data):
+    Parameters
+    ----------
+    request_seats : dict
+        The seats sent by frontend.
+    instance_seats : dict
+        The already existing state on the backend.
+    
+    Returns
+    -------
+    bool
+        Whether the reservation is valid, or conflicting.
+    '''
+def reserv_data_maker(user:object, data:dict):
     try:
         reserv_data = {
             'owner': user,
@@ -41,11 +42,10 @@ def reserv_data_maker(user, data):
 
 def venue_data_updater2(data):
     try:
-        print(data)
-        for key,value in data['seats'].items():
-            print(f'key: {key}, value: {value}')
+        seats=data['seats']
+        for key,value in seats.items():
             if value==1:
-                data.seats[key]=2
+                seats[key]=2
     except KeyError as e:
         print(f'Key error in venue_data_updater2: {e}')
         return None
@@ -55,7 +55,7 @@ def venue_data_updater2(data):
     except Exception as e:
         print(f'An unexpected error occurred in venue_data_updater2: {e}')
         return None
-
+    print(data)
     return data
 
 
@@ -106,7 +106,7 @@ def venue_data_dict_maker(venue):
 
 def validate(request_seats:dict,instance_seats:dict):
     '''
-    This is function compares the two dictionaries,
+    This function compares the two dictionaries,
     and returns false if a prebooked seat is already
     reserved, therefore prevents conflicting reservations.
 
@@ -128,5 +128,4 @@ def validate(request_seats:dict,instance_seats:dict):
             print('CORRUPTED DATA!')
             is_valid=False
             break
-    return is_valid
-        
+    return is_valid     
