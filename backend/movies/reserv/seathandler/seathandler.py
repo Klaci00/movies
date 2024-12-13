@@ -22,10 +22,10 @@ def reserv_data_maker(user:object, data:dict):
             'title': data['title'],
             'room_name': data['room_name'],
             'showtime': data['showtime'],
-            'seats': data.get('seats'),
+            'seats': data['seats'],
             'seat_count': data['seat_count'],
-            'seatnames': data.get('seatnames', '')
-        }
+            'seatnames': data['seatnames']
+                            }
         
     except KeyError as e:
         print(f'Key error occurred in reserv_data maker: {e}')
@@ -101,7 +101,7 @@ def seat_liberator2(instance: object, venue: object):
                 if value==1:
                     seat=venue_seats.get(key)
                     if seat:
-                        venue_seats[key]=0
+                        venue.seats[key]=0
                     elif venue_seats[key]==None:
                         raise AttributeError(f'Attribute \'{key}\' not found in venue')
     except AttributeError as e:
@@ -113,7 +113,6 @@ def seat_liberator2(instance: object, venue: object):
     except Exception as e:
         print(f"An unexpected error occurred in seat_liberator2: {e}")
         return None
-
     return venue
 
 

@@ -65,7 +65,10 @@ class ReservDestroy(generics.DestroyAPIView):
             instance: object = self.get_object()          
             venue: object = Venue.objects.get(id=instance.venueId)
             venue=seat_liberator2(instance,venue)
+            print('venue: ',venue.seats)
+            print('instance',instance.seats)
             self.perform_destroy(instance)
+            venue.save()
             return Response(status=status.HTTP_204_NO_CONTENT)
     def perform_destroy(self, instance):
         instance.delete()
