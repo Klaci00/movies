@@ -4,12 +4,18 @@ from django.contrib.auth.models import AbstractUser
 ROOM_NAMES={'Kisterem':'Kisterem',
             'Nagyterem': 'Nagyterem',
             'Közepes terem':'Közepes terem'}
+
 RATINGS={'Korhatárra való tekintet nélkül megtekinthető': 
          'Korhatárra való tekintet nélkül megtekinthető',
          '6 éven felülieknek': '6 éven felülieknek',
          '12 éven felülieknek': '12 éven felülieknek',
          '16 éven felülieknek': '16 éven felülieknek',
          '18 éven felülieknek': '18 éven felülieknek'}
+
+ROOM_SIZES={'Kisterem':80,
+            'Nagyterem': 120,
+            'Közepes terem':180}
+
 class Show(models.Model):
     poster = models.ImageField(verbose_name="Poster",
                                upload_to="posters/")

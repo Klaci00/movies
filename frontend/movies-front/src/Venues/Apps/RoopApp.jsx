@@ -4,6 +4,7 @@ import { NumSeatCheck } from '../Functions/toggleSeat';
 
 function RoomApp(props) {
     var stop = false;
+    const ten=10;
     const target = 1;
     const indices = props.seats.map((item, index) => (item.seat === target ? index : -1))
         .filter(index => index !== -1);
@@ -26,7 +27,10 @@ function RoomApp(props) {
             <div className={`screen_${props.room_name_without_spaces}`}>Screen</div>
             <div className={`corridor_${props.room_name_without_spaces}`}></div>
             <div className={`seatsandentrance_${props.room_name_without_spaces}`}>
-                <div className={`leftverticalcorridor_${props.room_name_without_spaces}`}> </div>
+            <div>
+                <div className={'gap_upper_left'}> </div>
+                <div className='entrance'></div>
+            </div>
                 <div className={`seats_container_${props.room_name_without_spaces}`}>
                     {props.seats.slice(0, props.venue.capacity).map(({ seat, setSeat }, index) => (
                         <div
@@ -42,11 +46,14 @@ function RoomApp(props) {
                         ></div>
                     ))}
                 </div>
-                <div className={`entrance_and_gaps_${props.room_name_without_spaces}`}>
+                <div >
                     <div className={`gap_upper_${props.room_name_without_spaces}`}></div>
                     <div className={`entrance_${props.room_name_without_spaces}`}>BEJÁRAT</div>
-                    <div className={`gap_lower_${props.room_name_without_spaces}`}></div>
+                    
                 </div>
+            </div >
+            <div className='backwall'  ><div className='entrance'></div>
+            <div className='back_corridor' ></div>
             </div>
             <button onClick={() => props.reserveSeats(props)} disabled={isButtonDisabled}>Reserve Seats</button>
         </div>

@@ -51,13 +51,10 @@ const VenueDetail = () => {
   };
 
   if (!show || !venue) return <div>Loading...</div>;
-
   
   const truncatedSeatlist=seats.slice(0,venue.capacity);
-
   // Remove spaces from the room name
   const room_name_without_spaces = venue.room_name.replace(/\s+/g, '');
-
   return (
     <RoomApp
       show={show}
@@ -69,7 +66,5 @@ const VenueDetail = () => {
       setSeatNum={setSeatNum}
       reserveSeats={reserveSeats}
     />);
-
 };
-
 export default VenueDetail;

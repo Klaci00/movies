@@ -1,3 +1,8 @@
+:root{
+--row_length:8;
+--row_count:10;
+}
+
 .textinmiddle{
     text-align: center;
 }
@@ -107,28 +112,22 @@ listvenues_main{
     align-content: center;
 }
 
-.entrance_and_gaps{
-    width: 5vw;
-}
 
-.entrance_Kisterem{
-    background-color: greenyellow;
-    width: 5vw;
-    height: 5.5vh;
-    justify-content: center; /* Center the grid items horizontally */
-    align-content: center;
-}
 
-.gap_lower_Kisterem{
-    height: 15vh;
-}
 
 .gap_upper_Kisterem{
     height: 14.3vh;
 }
 
 .leftverticalcorridor_Kisterem{
+    
     width: 5vw;
+    
+}
+.gap_upper_left{
+    background-color: aqua;
+    width: 5vw;
+    height: 14.3vh;
 }
 .roomContainer_Kisterem{
     justify-content: center;
@@ -149,6 +148,15 @@ listvenues_main{
     align-items: center;
 }
 
+.seats_container {
+    height: 35vh;
+    display: grid;
+    grid-template-columns: repeat(var(--row_length), 1fr); 
+    grid-template-rows: repeat(6, 1fr) 7vh repeat(6, 1fr); /* Add a gap between the fifth and sixth row */
+    gap: 7px;
+    justify-content: center; /* Center the grid items horizontally */
+    align-content: center;   /* Center the grid items vertically */
+}
 .seats_container_Kisterem {
     height: 35vh;
     display: grid;
@@ -163,7 +171,7 @@ listvenues_main{
     display: flex;
     width: 35vw;
     justify-content: center;
-    height: 40vh;
+    height: 35vh;
 }
 
 .venuedetail_main {
@@ -175,10 +183,22 @@ listvenues_main{
     flex-direction: column;
 }
 
+.back_corridor{ 
+    background-color: antiquewhite;
+    height: 5.5vh;
+    width: 10vw;
+}
 
+.backwall{
+    display: flex;
+}
 
-.entrance_and_gaps{
+.entrance{
+    background-color: greenyellow;
     width: 5vw;
+    height: 5.5vh;
+    justify-content: center; /* Center the grid items horizontally */
+    align-content: center;
 }
 
 .entrance_Nagyterem{
@@ -188,10 +208,21 @@ listvenues_main{
     justify-content: center; /* Center the grid items horizontally */
     align-content: center;
 }
-
-.gap_lower_Nagyterem{
-    height: 0vh;
+.entrance_Közepesterem{
+    background-color: greenyellow;
+    width: 5vw;
+    height: 5.5vh;
+    justify-content: center; /* Center the grid items horizontally */
+    align-content: center;
 }
+.entrance_Kisterem{
+    background-color: greenyellow;
+    width: 5vw;
+    height: 5.5vh;
+    justify-content: center; /* Center the grid items horizontally */
+    align-content: center;
+}
+
 
 .gap_upper_Nagyterem{
     height: 26vh;
@@ -234,21 +265,10 @@ listvenues_main{
     height: 5vh;
 }
 
-.entrance_and_gaps{
-    width: 5vw;
-}
 
-.entrance_Közepesterem{
-    background-color: greenyellow;
-    width: 5vw;
-    height: 5.5vh;
-    justify-content: center; /* Center the grid items horizontally */
-    align-content: center;
-}
 
-.gap_lower_Közepesterem{
-    height: 0vh;
-}
+
+
 
 .gap_upper_Közepesterem{
     height: 26vh;

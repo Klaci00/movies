@@ -1,5 +1,5 @@
 from rest_framework.authtoken.views import ObtainAuthToken
-from .models import Show,CustomUser,Reservation,Venue
+from .models import Show,CustomUser,Reservation,Venue,ROOM_SIZES
 from .serializers import ShowSerializer,UserSerializer,\
                          VenueSerializer,ReservSerializer,\
                             CustomTokenObtainPairSerializer
