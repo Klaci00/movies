@@ -1,4 +1,4 @@
-from .models import Show,Venue,Reservation,CustomUser
+from .models import Show,Venue,Reservation,CustomUser,RoomStyleDict
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 class ShowSerializer(serializers.ModelSerializer):
     class Meta:
         model=Show
-        fields="__all__"
+        fields='__all__'
         depth=2
 
 User=get_user_model()
@@ -25,13 +25,13 @@ class UserSerializer(serializers.ModelSerializer):
 class VenueSerializer(serializers.ModelSerializer):
     class Meta:
         model=Venue
-        fields="__all__"
+        fields='__all__'
         depth=1
     
 class ReservSerializer(serializers.ModelSerializer):
     class Meta:
         model=Reservation
-        fields="__all__"
+        fields='__all__'
         depth=1
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):               
@@ -42,3 +42,15 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['username'] = user.username
         token['is_staff'] = user.is_staff
         return token
+    
+class RoomNameSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=RoomStyleDict
+        fields=['room_name']
+        depth=1
+
+class RoomStyleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=RoomStyleDict
+        fields='__all__'
+        depth=1

@@ -38,6 +38,7 @@ class Venue(models.Model):
     showtime = models.DateTimeField("showtime")
     seats=models.JSONField(default=dict, blank=True,null=True)
     capacity=models.IntegerField('Férőhelyek',default=0)
+    room_style=models.ManyToManyField('RoomStyleDict',related_name='venues')
     reservations = models.ManyToManyField('Reservation',
                                           related_name='venues',
                                           blank=True,
@@ -64,3 +65,58 @@ class CustomUser(AbstractUser):
     last_name = models.CharField(max_length=30, blank=False, null=False)
     def __str__(self):
         return self.username
+
+class RoomStyleDict(models.Model):
+    room_name=models.CharField(max_length=100)
+    
+    style_dict=models.CharField(default={      
+        'screen':{  'backgroundColor': 'rgb(58, 170, 170)',
+                    'width': '30vw',
+                    'fontSize': 'x-large'
+                    },
+        'corridor': {
+            'height': '5vw'
+        },
+        'seats_and_entrance': {
+            'display': 'flex',
+            'width': '45vw',
+            'justifyContent': 'center'
+        },
+        'gap_upper_left':{
+            'width': '5vw',
+            'height': '14.3vh'
+        },
+        'gap_upper': {
+            'height': '14.3vh'
+        },
+        'entrance': {
+            'backgroundColor': 'greenyellow',
+            'width': '5vw',
+            'height': '5.5vh',
+            'justifyContent': 'center',
+            'alignContent': 'center'
+        },
+        'back_corridor': {
+            'height': '5.5vh',
+            'width': '10vw'
+        },
+        'seats_container': {
+            'display': 'grid',
+            'height': '35vh',
+            'gridTemplateColumns': 'repeat(8,1fr)',
+            'gridTemplateRows': 'repeat(4,1fr)',
+            'gap': '7px',
+            'justifyContent': 'center',
+            'alignContent': 'center'
+
+        }},max_length=2048)
+    def __str__(self):
+        return self.room_name
+    '''
+gap_upper_left
+gap_upper
+entrance
+back corridor
+seats_container
+
+    })'''

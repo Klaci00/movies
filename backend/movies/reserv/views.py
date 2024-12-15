@@ -1,10 +1,11 @@
 from rest_framework.authtoken.views import ObtainAuthToken
-from .models import Show,CustomUser,Reservation,Venue,ROOM_SIZES
+from .models import Show,CustomUser,Reservation,Venue,RoomStyleDict
 from .serializers import ShowSerializer,UserSerializer,\
                          VenueSerializer,ReservSerializer,\
-                            CustomTokenObtainPairSerializer
+                            CustomTokenObtainPairSerializer,\
+                            RoomNameSerializer,RoomStyleSerializer
 from rest_framework.views import APIView
-from rest_framework.generics import CreateAPIView
+from rest_framework.generics import CreateAPIView,ListAPIView
 from rest_framework import generics, status
 from rest_framework_simplejwt.token_blacklist.models import BlacklistedToken, OutstandingToken
 from rest_framework.response import Response
@@ -266,3 +267,11 @@ class AuthStatusView(APIView):
                 'is_staff': user.is_staff,
                  }
         })
+
+class RoomNameView(ListAPIView):
+    queryset=RoomStyleDict.objects.all()
+    serializer_class=RoomNameSerializer
+
+class RoomStyleView(ListAPIView):
+    queryset=RoomStyleDict.objects.all()
+    serializer_class=RoomStyleSerializer

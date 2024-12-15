@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django import forms
-from .models import Show,CustomUser,Reservation,Venue
+from .models import Show,CustomUser,Reservation,Venue,RoomStyleDict
 # Register your models here.
 
 class ShowAdin(admin.ModelAdmin):
@@ -20,11 +20,16 @@ class VenueAdmin(admin.ModelAdmin):
             kwargs.pop('queryset', None)
             return forms.ModelChoiceField(queryset=Show.objects.all(), empty_label="Select show title")
         return super().formfield_for_dbfield(db_field, request, **kwargs)
+
+class RoomStyleDictAdmin(admin.ModelAdmin):
+    pass
+
     
 admin.site.register(Show,ShowAdin)
 admin.site.register(CustomUser,CustomUserAdmin)
 admin.site.register(Reservation,ReservationAdmin)
 admin.site.register(Venue,VenueAdmin)
+admin.site.register(RoomStyleDict,RoomStyleDictAdmin)
 
 #Itt voltam BCS
 #én is

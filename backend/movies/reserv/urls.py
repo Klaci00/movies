@@ -3,7 +3,8 @@ from .views import ShowDetail,ShowList,UserCreate,Logout,UserDetail,\
         CustomObtainAuthToken,show_venues,set_csrf_token,VenueDetail,\
         ReservDetail,ReservationListView,ReservDestroy,ListVenues,\
         CustomTokenObtainPairView,AuthStatusView,Logout2,\
-        CheckUsername,CheckEmail,ShowDestroy
+        CheckUsername,CheckEmail,ShowDestroy,RoomNameView,\
+        RoomStyleView
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework.authtoken import views
@@ -34,6 +35,8 @@ urlpatterns = [
     path('auth-status/', AuthStatusView.as_view(), name='auth_status'),
     path('check-username/<str:username>/',CheckUsername.as_view(),name='check-username'),
     path('check-email/<str:email>/',CheckEmail.as_view(),name='check-email'),
+    path('roomnames/',RoomNameView.as_view(),name='roomnnames'),
+    path('roomstyles/',RoomStyleView.as_view(),name='roomstyles')
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
