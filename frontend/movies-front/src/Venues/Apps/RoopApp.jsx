@@ -3,7 +3,9 @@ import '../../Cascade Style Sheets/VenueDetail.css';
 import { NumSeatCheck } from '../Functions/toggleSeat';
 
 function RoomApp(props) {
-    const StyleDict =JSON.parse( props.venue.room_style[0].style_dict);
+
+    const StyleDict =props.venue.room_style[0].style_dict;
+    console.log(StyleDict)
     var stop = false;
     const target = 1;
     const indices = props.seats.map((item, index) => (item.seat === target ? index : -1))
@@ -26,12 +28,12 @@ function RoomApp(props) {
             <p>Jegyek száma: {props.seatNum}</p>
             <div style={StyleDict.screen}>Screen</div>
             <div style={StyleDict.corridor}></div>
-            <div className={`seatsandentrance_${props.room_name_without_spaces}`}>
+            <div style={StyleDict.seats_and_entrance}>
             <div>
-                <div className={'gap_upper_left'}> </div>
-                <div className='entrance'></div>
+                <div style={StyleDict.gap_upper_left}> </div>
+                <div style={StyleDict.entrance_left}>left</div>
             </div>
-                <div className={`seats_container_${props.room_name_without_spaces}`}>
+                <div style={StyleDict.seats_container}>
                     {props.seats.slice(0, props.venue.capacity).map(({ seat, setSeat }, index) => (
                         <div
                             key={index}
@@ -47,13 +49,13 @@ function RoomApp(props) {
                     ))}
                 </div>
                 <div >
-                    <div className={`gap_upper_${props.room_name_without_spaces}`}></div>
-                    <div className={`entrance_${props.room_name_without_spaces}`}>BEJÁRAT</div>
+                    <div style={StyleDict.gap_upper}></div>
+                    <div style={StyleDict.entrance}>BEJÁRAT</div>
                     
                 </div>
             </div >
-            <div className='backwall'  ><div className='entrance'></div>
-            <div className='back_corridor' ></div>
+            <div className='backwall'  ><div style={StyleDict.entrance_back}>back</div>
+            <div style={StyleDict.back_corridor}></div>
             </div>
             <button onClick={() => props.reserveSeats(props)} disabled={isButtonDisabled}>Reserve Seats</button>
         </div>
