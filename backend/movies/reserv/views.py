@@ -3,9 +3,9 @@ from .models import Show,CustomUser,Reservation,Venue,RoomStyleDict
 from .serializers import ShowSerializer,UserSerializer,\
                          VenueSerializer,ReservSerializer,\
                             CustomTokenObtainPairSerializer,\
-                            RoomNameSerializer,RoomStyleSerializer
+                            RoomNameSerializer
 from rest_framework.views import APIView
-from rest_framework.generics import CreateAPIView,ListAPIView
+from rest_framework.generics import CreateAPIView,ListAPIView,RetrieveAPIView
 from rest_framework import generics, status
 from rest_framework_simplejwt.token_blacklist.models import BlacklistedToken, OutstandingToken
 from rest_framework.response import Response
@@ -271,7 +271,3 @@ class AuthStatusView(APIView):
 class RoomNameView(ListAPIView):
     queryset=RoomStyleDict.objects.all()
     serializer_class=RoomNameSerializer
-
-class RoomStyleView(ListAPIView):
-    queryset=RoomStyleDict.objects.all()
-    serializer_class=RoomStyleSerializer

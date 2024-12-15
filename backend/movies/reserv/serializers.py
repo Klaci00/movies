@@ -48,9 +48,3 @@ class RoomNameSerializer(serializers.ModelSerializer):
         model=RoomStyleDict
         fields=['room_name']
         depth=1
-
-class RoomStyleSerializer(serializers.ModelSerializer):
-    class Meta:
-        model=RoomStyleDict
-        fields='__all__'
-        depth=1

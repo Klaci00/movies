@@ -3,8 +3,8 @@ import '../../Cascade Style Sheets/VenueDetail.css';
 import { NumSeatCheck } from '../Functions/toggleSeat';
 
 function RoomApp(props) {
+    const StyleDict =JSON.parse( props.venue.room_style[0].style_dict);
     var stop = false;
-    const ten=10;
     const target = 1;
     const indices = props.seats.map((item, index) => (item.seat === target ? index : -1))
         .filter(index => index !== -1);
@@ -24,8 +24,8 @@ function RoomApp(props) {
             <img className='poster' src={props.show.poster} alt={props.show.title} />
             <p>Showtime: {new Date(props.venue.showtime).toLocaleString()}</p>
             <p>Jegyek száma: {props.seatNum}</p>
-            <div className={`screen_${props.room_name_without_spaces}`}>Screen</div>
-            <div className={`corridor_${props.room_name_without_spaces}`}></div>
+            <div style={StyleDict.screen}>Screen</div>
+            <div style={StyleDict.corridor}></div>
             <div className={`seatsandentrance_${props.room_name_without_spaces}`}>
             <div>
                 <div className={'gap_upper_left'}> </div>

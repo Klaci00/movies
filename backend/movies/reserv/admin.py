@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django import forms
+from .forms import RoomStyleDictForm
 from .models import Show,CustomUser,Reservation,Venue,RoomStyleDict
 # Register your models here.
 
@@ -22,6 +23,7 @@ class VenueAdmin(admin.ModelAdmin):
         return super().formfield_for_dbfield(db_field, request, **kwargs)
 
 class RoomStyleDictAdmin(admin.ModelAdmin):
+    form=RoomStyleDictForm
     pass
 
     

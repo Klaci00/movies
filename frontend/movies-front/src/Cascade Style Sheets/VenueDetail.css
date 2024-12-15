@@ -125,7 +125,6 @@ listvenues_main{
     
 }
 .gap_upper_left{
-    background-color: aqua;
     width: 5vw;
     height: 14.3vh;
 }
@@ -184,13 +183,14 @@ listvenues_main{
 }
 
 .back_corridor{ 
-    background-color: antiquewhite;
     height: 5.5vh;
-    width: 10vw;
+    width: 15vw;
 }
 
 .backwall{
+    width: 20vw;
     display: flex;
+    justify-content: right;
 }
 
 .entrance{

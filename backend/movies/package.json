@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "axios": "^1.7.7",
+    "jsoneditor": "^10.1.1",
     "jwt-decode": "^4.0.0"
   }
 }

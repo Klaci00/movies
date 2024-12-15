@@ -19,7 +19,7 @@ const VenueDetail = () => {
   const seats = useSeatStates(1000);
   const [seatNum, setSeatNum] = useState(localStorage.getItem('seatnum'));
   const [reservationComplete, setReservationComplete] = useState(false);
-
+  
   useEffect(() => {
     // Fetch show details
     FetchShowDetails(BASE_URL, setShow, id);
