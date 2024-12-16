@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import ShowDetail,ShowList,UserCreate,Logout,UserDetail,\
+from .views import ShowDetail,ShowList,UserCreate,UserDetail,\
         CustomObtainAuthToken,show_venues,set_csrf_token,VenueDetail,\
         ReservDetail,ReservationListView,ReservDestroy,ListVenues,\
         CustomTokenObtainPairView,AuthStatusView,Logout2,\
@@ -8,7 +8,6 @@ from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework.authtoken import views
 from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
     TokenRefreshView,
 )
 
@@ -25,7 +24,6 @@ urlpatterns = [
     path('reservations/<str:owner>/', ReservationListView.as_view(), name='reserv-list'),
     path('register/',UserCreate.as_view(),name='register'),
     path('login/', CustomObtainAuthToken.as_view(), name='login'),
-    path('logout/', Logout.as_view(), name='logout'),
     path('logout2/',Logout2.as_view(),name='logout2'),
     path('user/', UserDetail.as_view(), name='user-detail'),
     path('set_csrf_token/',set_csrf_token,name='set_csrf_token'),

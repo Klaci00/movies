@@ -188,15 +188,6 @@ class CheckEmail(APIView):
         else:
             return Response({'message':'E-mail is available.'},status=status.HTTP_200_OK)
 
-class Logout(APIView):
-
-    def post(self, request):
-        try:
-            request.user.auth_token.delete()
-        except (AttributeError, Token.DoesNotExist):
-            return Response(status=status.HTTP_400_BAD_REQUEST)
-        return Response(status=status.HTTP_200_OK)
-
 class Logout2(APIView):
     def post(self, request):
         try:
