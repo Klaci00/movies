@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JSON Editor</title>
+    <link href="{% static 'jsoneditor.min.css' %}" rel="stylesheet" type="text/css">
+    <script src="{% static 'jsoneditor.min.js' %}"></script>
+</head>
+<body>
+    <div id="jsoneditor" style="width: 100%; height: 100%;"></div>
+    <textarea id="{{ widget.attrs.id }}" name="{{ widget.name }}" hidden>{{ widget.value }}</textarea>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var container = document.getElementById("jsoneditor");
+            var options = {
+                mode: 'code',
+                onChange: function() {
+                    var json = editor.getText();
+                    document.getElementById('{{ widget.attrs.id }}').value = json;
+                }
+            };
+            var editor = new JSONEditor(container, options);
+            editor.setText(document.getElementById('{{ widget.attrs.id }}').value);
+        });
+    </script>
+</body>
+</html>

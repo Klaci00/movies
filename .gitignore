@@ -1,12 +1,14 @@
+# Ignore the virtual environment
 testbed1/
+
 # Django
 *.log
 *.pot
 *.pyc
-__pycache__/
-db.sqlite3
+
 media/
 myvenv/
+
 # Backup files
 *.bak
 
@@ -175,6 +177,3 @@ jspm_packages/
 
 # MacOS files
 .DS_Store
-
-backend/
-*.pyc
