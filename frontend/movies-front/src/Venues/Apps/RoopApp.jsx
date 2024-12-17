@@ -5,21 +5,21 @@ import { NumSeatCheck } from '../Functions/toggleSeat';
 function RoomApp(props) {
 
     const StyleDict =props.venue.room_style[0].style_dict;
-    console.log(StyleDict)
+    const Capacity = props.venue.room_style[0].capacity;
     var stop = false;
-    const target = 1;
-    const indices = props.seats.map((item, index) => (item.seat === target ? index : -1))
+    const Target = 1;
+    const Indices = props.seats.map((item, index) => (item.seat === Target ? index : -1))
         .filter(index => index !== -1);
-    for (let i = 0; i < indices.length - 1; i++) {
-        if (Math.abs(indices[i] - indices[i + 1]) == 2) {
+    for (let i = 0; i < Indices.length - 1; i++) {
+        if (Math.abs(Indices[i] - Indices[i + 1]) == 2) {
             stop = true;
-            props.seats[indices[i+1]].setSeat(0);
+            props.seats[Indices[i+1]].setSeat(0);
             window.alert('Egy helyet nem lehet kihagyni a foglalt helyek között!');
-            indices.pop(indices[i+1]);
+            Indices.pop(Indices[i+1]);
             props.setSeatNum(props.seatNum+1);
                 }
     }
-    const isButtonDisabled = stop || indices.length === 0 || props.seatNum != 0 && NumSeatCheck(props.seatNum) != 0;
+    const isButtonDisabled = stop || Indices.length === 0 || props.seatNum != 0 && NumSeatCheck(props.seatNum) != 0;
     return (
         <div className='venuedetail_main'>
             <h1>{props.show.title}</h1>
@@ -34,7 +34,7 @@ function RoomApp(props) {
                 <div style={StyleDict.entrance_left}>left</div>
             </div>
                 <div style={StyleDict.seats_container}>
-                    {props.seats.slice(0, props.venue.capacity).map(({ seat, setSeat }, index) => (
+                    {props.seats.slice(0, Capacity).map(({ seat, setSeat }, index) => (
                         <div
                             key={index}
                             className='seat'

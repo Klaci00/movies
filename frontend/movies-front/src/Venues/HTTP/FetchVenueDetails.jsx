@@ -4,7 +4,7 @@ export const FetchVenueDetails_new = async(BASE_URL, venue, setVenue, venueId, s
       const getVenues = await apiClient.get(`${BASE_URL}venues/${venueId}`)
             .then(response => {
                   setVenue(response.data);
-                  seats.slice(0,response.data.capacity).forEach((seatItem, index) => {
+                  seats.slice(0,response.data.room_style.capacity).forEach((seatItem, index) => {
                         const seatKey = `seat_${String(index).padStart(3, '0')}`;
                         if (response.data.seats[seatKey] !== undefined) {
                               seatItem.setSeat(response.data.seats[seatKey]);
