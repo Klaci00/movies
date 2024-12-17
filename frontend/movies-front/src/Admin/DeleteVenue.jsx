@@ -15,8 +15,10 @@ export const DeleteVenue=()=>{
 
     const handleDropdownChange=async(e)=>{ //Selecting the show
         const showId=e.target.value
+        setVenues([]);
         setSelectedShow(showId)
-        await FetchVenues(selectedShow,setVenues);
+        await FetchVenues(showId,setVenues);
+        console.log(venues);
     };
 
     const handleDropdownChange2=(e)=>{ //Selecting the venue

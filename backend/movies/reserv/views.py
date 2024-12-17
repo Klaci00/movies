@@ -160,7 +160,6 @@ class ListVenues(generics.ListCreateAPIView):
             title=request_data.get('title'),
             room_name=request_data.get('room_name'),
             showtime=request_data.get('showtime'),
-            capacity=request_data.get('capacity'),
         )
         venue.room_style.add(room_style)
         show.venues.add(venue)

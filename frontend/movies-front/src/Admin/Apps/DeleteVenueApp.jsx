@@ -14,7 +14,7 @@ export const DeleteVenueApp=(props)=>{
             <select value={props.selectedVenue} onChange={props.handleDropdownChange2} required>
                 <option value="" disabled>Select a venue</option>
                 {props.venues && props.venues.map(venue => (
-                    <option key={venue.id} value={venue.id}>{`${venue.showtime} - ${venue.room_name}`}</option>
+                    <option key={venue.id} value={venue.id}>{`${venue.showtime} - ${venue.room_name}-${venue.title}`}</option>
                 ))}
             </select>
         </div>

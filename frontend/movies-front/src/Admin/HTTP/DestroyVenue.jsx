@@ -6,6 +6,6 @@ export const DestroyVenue=async(selectedVenue)=>{
         await apiClient.delete(`${BASE_URL}venues/${selectedVenue}/`);
     }
     catch (error) {
-        console.error('Therewas an error posting the Venue for deletion!',error);
+        console.error('There was an error posting the Venue for deletion!',error);
     }
 }
