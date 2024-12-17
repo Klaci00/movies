@@ -35,8 +35,3 @@ urlpatterns = [
     path('roomnames/',RoomNameView.as_view(),name='roomnnames')
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-urlpatterns += [
-    path('api-token-auth/', views.obtain_auth_token),
-    
-]
