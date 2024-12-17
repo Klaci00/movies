@@ -40,8 +40,8 @@ function RoomApp(props) {
                             className='seat'
                             onClick={() =>props.toggleSeat(seat, setSeat, props.seatNum, props.setSeatNum)}
                             style={{
-                                width: '20px',
-                                height: '20px',
+                                width: '2vmin',
+                                height: '2vmin',
                                 backgroundColor: seat === 0 ? 'green' : seat === 1 ? 'red' : 'gray',
                                 cursor: seat !== 2 ? 'pointer' : 'not-allowed',
                             }}

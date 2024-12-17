@@ -20,6 +20,7 @@ export const PostVenue = async (shows,selectedShow,roomTypes,selectedRoomTypeID,
         try {
             const response = await apiClient.post(`${BASE_URL}admin-venues/`, venueData);
             console.log(response.data);
+            window.alert('Venue added succesfully!');
         } catch (error) {
             console.error('There was an error posting the venue!', error);
         }
