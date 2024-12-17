@@ -12,7 +12,7 @@ export const ListVenuesApp = (show, isAuth, seatNum, handleChange, venues, id) =
       <p className='textinmiddle'>Korhatár: {show.rating}</p>
       <p className='textinmiddle'>Műsoridő: {show.playtime} perc</p>
 
-      <h2 className='textinmiddle'>Venues</h2>
+      <h2 className='textinmiddle'>Vetítések</h2>
       <div>
         <h3 className='ticketcount'>Reserve Your Seats</h3>
         <label>
@@ -32,8 +32,8 @@ export const ListVenuesApp = (show, isAuth, seatNum, handleChange, venues, id) =
           {venues.map(venue => (
             <li key={venue.id}>
               <Link to={`/${id}/venues/${venue.id}`}>
-                <p>Room Name: {venue.room_name}</p>
-                <p>Showtime: {new Date(venue.showtime).toLocaleString('en-GB', { timeZone: 'Europe/Budapest' })}</p>
+                <p>A terem neve: {venue.room_name}</p>
+                <p>Vetítés kezdete: {new Date(venue.showtime).toLocaleString('hu-HU', { timeZone: 'Europe/Budapest' })}</p>
               </Link>
             </li>
           ))}
@@ -58,8 +58,8 @@ export const ListVenuesApp = (show, isAuth, seatNum, handleChange, venues, id) =
         <strong>A foglaláshoz be kell jelentkeznie!</strong>
         {venues.map(venue => (
           <li key={venue.id}>
-            <p>Room Name: {venue.room_name}</p>
-            <p>Showtime: {new Date(venue.showtime).toLocaleString('en-GB', { timeZone: 'Europe/Budapest' })}</p>
+            <p>A terem neve: {venue.room_name}</p>
+            <p>Vetítés kezdete: {new Date(venue.showtime).toLocaleString('hu-HU', { timeZone: 'Europe/Budapest' })}</p>
           </li>
         ))}
       </ul>
