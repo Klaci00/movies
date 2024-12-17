@@ -1,5 +1,5 @@
-export const DeleteVenueApp=(props)=>{
-    return( <form onSubmit={props.handleSubmit}>
+export const DeleteVenueApp = (props) => {
+    return (<form onSubmit={props.handleSubmit}>
         <div>
             <label>Select Show:</label>
             <select value={props.selectedShow} onChange={props.handleDropdownChange} required>

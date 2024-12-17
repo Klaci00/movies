@@ -23,7 +23,7 @@ import { ConstructSeatNames } from "./ConstructSeatNames";
             }}
         });
     
-        data.seatnames = seatnamesArray.join(', ');
+        data.seatnames = seatnamesArray.join('; ');
         return data;
     };
     
