@@ -46,5 +46,5 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 class RoomNameSerializer(serializers.ModelSerializer):
     class Meta:
         model=RoomStyleDict
-        fields=['room_name']
+        fields=['id','room_name','capacity']
         depth=1

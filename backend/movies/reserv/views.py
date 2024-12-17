@@ -144,23 +144,28 @@ class ListVenues(generics.ListCreateAPIView):
     serializer_class=VenueSerializer
 
     def perform_create(self, serializer):
-        pprint(self.request.data)
         request_data = self.request.data
         show_id = request_data.get('show_id')
-
+        room_style_id=request_data.get('room_style_id')
+        pprint(request_data)
+        try:
+            room_style=RoomStyleDict.objects.get(id=room_style_id)
+        except RoomStyleDict.DoesNotExist:
+            raise NotFound('Room style dictionary not found!')
         try:
             show = Show.objects.get(id=show_id)
         except Show.DoesNotExist:
             raise NotFound('Show not found')
-
         venue = serializer.save(
             title=request_data.get('title'),
             room_name=request_data.get('room_name'),
             showtime=request_data.get('showtime'),
-            capacity=request_data.get('capacity')
+            capacity=request_data.get('capacity'),
         )
-
+        venue.room_style.add(room_style)
         show.venues.add(venue)
+        venue.save()
+        show.save()
 
 class UserCreate(CreateAPIView):
     serializer_class = UserSerializer

@@ -2,16 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { FetchShowsList } from '../Shows/HTTP/FetchShowsList';
 import { BASE_URL } from '../Settings';
 import { PostVenue } from './HTTP/PostVenue';
-import { RoomSizeDict } from '../Settings';
+import { FetchRoomStyles } from './HTTP/FetchRoomStyles';
+
 
 export const AddVenue = () => {
     const [shows, setShows] = useState([]);
     const [selectedShow, setSelectedShow] = useState('');
     const [showtime, setShowtime] = useState('');
-    const [selectedRoomName,setSelectedRoomname]=useState('');
-    const roomNames=['Nagyterem','Közepes terem','Kisterem'];
+    const [roomTypes,setRoomTypes]=useState([]);
+    const [selectedRoomTypeID,setSelectedRoomTypeID]=useState('');
     useEffect(() => {
         FetchShowsList(BASE_URL,setShows);
+        FetchRoomStyles(setRoomTypes);
     }, []);
 
     const handleDropdownChange = (e) => {
@@ -19,13 +21,12 @@ export const AddVenue = () => {
     };
 
     const handleDropdownChange2 = (e) => {
-        setSelectedRoomname(e.target.value);
+        setSelectedRoomTypeID(e.target.value);
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        PostVenue(shows,selectedShow,selectedRoomName,showtime,BASE_URL);
-        
+        PostVenue(shows,selectedShow,roomTypes,selectedRoomTypeID,showtime,BASE_URL);       
     };
     return (
         <form onSubmit={handleSubmit}>
@@ -40,10 +41,10 @@ export const AddVenue = () => {
             </div>
             <div>
                 <label>Room Name:</label>
-                <select value={selectedRoomName} onChange={handleDropdownChange2} required>
+                <select value={selectedRoomTypeID} onChange={handleDropdownChange2} required>
                     <option value="" disabled>Select a room</option>
-                    {roomNames.map(roomname => (
-                        <option key={roomname} value={roomname}>{roomname}</option>
+                    {roomTypes.map(roomType => (
+                        <option key={roomType.id} value={roomType.id}>{roomType.room_name}</option>
                     ))}
                 </select>
             </div>
