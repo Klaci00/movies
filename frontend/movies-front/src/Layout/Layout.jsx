@@ -6,12 +6,13 @@ import { NavApp } from './Apps/NavApp';
 import { getCookie, getCookieExpiryTime } from '../Auth/Functions/CookieHandler';
 import { refreshToken } from '../Auth/Functions/AuthService';
 import { jwtDecode as decode } from 'jwt-decode';
+import CookieWarning from '../Auth/Apps/CookieWarning';
 const Layout = () => {
   const [isAuth, setIsAuth] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [username, setUsername] = useState('');
   const [time, setTime] = useState(1);
-
+  const [showWarning, setShowWarning] = useState(false);
   useEffect(() => { 
     console.log(time);
     if (getCookie('refresh') === undefined) { //No refresh token? You are logged out!
@@ -62,8 +63,9 @@ const Layout = () => {
   return (
     <Router className='router'>
       <div className='main_screen'>
-        <NavApp isAuth={isAuth} setIsAuth={setIsAuth} isAdmin={isAdmin} setIsAdmin={setIsAdmin} username={username} setUserName={setUsername} />
+        <NavApp isAuth={isAuth} setIsAuth={setIsAuth} isAdmin={isAdmin} setIsAdmin={setIsAdmin} username={username} setUserName={setUsername} setShowWarning={setShowWarning} />
         <RoutesApp username={username} setUsername={setUsername} setisStaff={setIsAdmin} isAuth={isAuth} setIsAuth={setIsAuth}/>
+        <CookieWarning showWarning={showWarning} setShowWarning={setShowWarning} />
       </div>
     </Router>
   );
