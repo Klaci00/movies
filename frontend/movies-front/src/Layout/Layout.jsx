@@ -13,6 +13,17 @@ const Layout = () => {
   const [username, setUsername] = useState('');
   const [time, setTime] = useState(1);
   const [showWarning, setShowWarning] = useState(false);
+  const [innerWidth, setInnerWidth] = useState(0);
+  const [update, setUpdate] = useState(0);
+  const [hideNav, setHideNav] = useState(false);
+  useEffect(() => {
+    const interval = setInterval(() => {
+        setInnerWidth(window.innerWidth);
+        setUpdate(update + 1);
+    }, 1000); () => {
+        clearInterval(interval);
+    }, [update]
+});
   useEffect(() => { 
     console.log(time);
     if (getCookie('refresh') === undefined) { //No refresh token? You are logged out!
@@ -62,8 +73,8 @@ const Layout = () => {
 
   return (
     <Router className='router'>
-      <div className='main_screen'>
-        <NavApp isAuth={isAuth} setIsAuth={setIsAuth} isAdmin={isAdmin} setIsAdmin={setIsAdmin} username={username} setUserName={setUsername} setShowWarning={setShowWarning} />
+      <div className='main_screen'>{hideNav ? <button onClick={()=>setHideNav(false)} >Menü</button> :
+        <NavApp isAuth={isAuth} setIsAuth={setIsAuth} isAdmin={isAdmin} setIsAdmin={setIsAdmin} username={username} setUserName={setUsername} setShowWarning={setShowWarning} setHideNav={setHideNav} innerWidth={innerWidth} />}
         <RoutesApp username={username} setUsername={setUsername} setisStaff={setIsAdmin} isAuth={isAuth} setIsAuth={setIsAuth}/>
         <CookieWarning showWarning={showWarning} setShowWarning={setShowWarning} />
       </div>

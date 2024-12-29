@@ -12,7 +12,7 @@ function ReservApp({ id, title, room_name, showtime, seat_count, onDelete, seatn
                 <ul>
                     {seatnames.split(';').map(
                         seatname => 
-                        <li>{seatname}</li>)
+                        <li key={seatname} >{seatname}</li>)
                         }
                 </ul>
             </strong>

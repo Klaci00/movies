@@ -2,34 +2,28 @@
 --row_length:8;
 --row_count:10;
 }
-
 .textinmiddle{
     text-align: center;
 }
-
 listvenues_main{
     display: list-item;
     justify-content: center;
     align-content: center;
     width: 95vw;
 }
-
 .listvenues{
     display: flex;
     align-content: center;
     justify-content: center;
 }
-
 .listvenues_img{
     display: flex;
     justify-content: center;
     align-content: center;
 }
-
 .listvenues_title{
     text-align: center;
 }
-
 .main_screen{
     display: flex;
     justify-content: center;
@@ -37,9 +31,9 @@ listvenues_main{
     width: 100vw;
     flex-direction: column;
 }
-
 .nav{
     display: flex;
+    flex-direction: row;
     width: 100vw;
     justify-content: space-evenly;
     align-content: center;
@@ -53,7 +47,6 @@ listvenues_main{
     }
     a{
         border-radius: 10%;
-
     }
     a>p{
         padding: 0.5%;
@@ -65,19 +58,52 @@ listvenues_main{
     span{
         padding: 0.5%;
         border-radius: 5%;
-
-
     }
-
 }
 
+@media (max-width: 600px){
+    .nav{
+        display: flex;
+        flex-direction: column;
+        width: 100vw;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        height: 40vh;
+        background-color: rgba(201, 135, 35, 0.607);
+        padding: 1%;
+    }
+    .nav>a{
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        width: 100vw;
+        padding: 3%;
+    }
+    .nav>button{
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        width: 95vw;
+        padding: 3%;
+        margin: 1%;
+    }
+    .nav>a>p{
+        width: 100vw;
+        text-align: center;
+    }
+    .nav>:hover{
+        background-color: rgba(201, 135, 35, 0.607);
+    }
+}
 
 .nav>:hover{
     transition: background-color 1s ease, color 0.3s ease;
     background-color: rgba(201, 135, 35, 0.294);
 
 }
-
 
 .router{
     display: flex;
@@ -106,73 +132,6 @@ listvenues_main{
     color: rgb(249, 151, 39);
 
 }
-.corridor_Kisterem{
-    height: 5vh;
-    width: 20vw;
-    align-content: center;
-}
-
-
-
-
-.gap_upper_Kisterem{
-    height: 14.3vh;
-}
-
-.leftverticalcorridor_Kisterem{
-    
-    width: 5vw;
-    
-}
-.gap_upper_left{
-    width: 5vw;
-    height: 14.3vh;
-}
-.roomContainer_Kisterem{
-    justify-content: center;
-    align-items: center;
-    height: 60vh;
-    display: flex;
-    flex-direction: column;
-}
-.screen_Kisterem{
-    background-color: rgb(58, 170, 170);
-    width: 20vw;
-    font-size: x-large;
-}
-
-.seat {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.seats_container {
-    height: 35vh;
-    display: grid;
-    grid-template-columns: repeat(var(--row_length), 1fr); 
-    grid-template-rows: repeat(6, 1fr) 7vh repeat(6, 1fr); /* Add a gap between the fifth and sixth row */
-    gap: 7px;
-    justify-content: center; /* Center the grid items horizontally */
-    align-content: center;   /* Center the grid items vertically */
-}
-.seats_container_Kisterem {
-    height: 35vh;
-    display: grid;
-    grid-template-columns: repeat(8, 1fr); 
-    grid-template-rows: repeat(4, 1fr) 7vh repeat(5, 1fr); /* Add a gap between the fifth and sixth row */
-    gap: 7px;
-    justify-content: center; /* Center the grid items horizontally */
-    align-content: center;   /* Center the grid items vertically */
-}
-
-.seatsandentrance_Kisterem{
-    display: flex;
-    width: 35vw;
-    justify-content: center;
-    height: 35vh;
-}
-
 .venuedetail_main {
     width: 95vw;
     text-align: center;
@@ -180,131 +139,6 @@ listvenues_main{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-}
-
-.back_corridor{ 
-    height: 5.5vh;
-    width: 15vw;
-}
-
-.backwall{
-    width: 20vw;
-    display: flex;
-    justify-content: right;
-}
-
-.entrance{
-    background-color: greenyellow;
-    width: 5vw;
-    height: 5.5vh;
-    justify-content: center; /* Center the grid items horizontally */
-    align-content: center;
-}
-
-.entrance_Nagyterem{
-    background-color: greenyellow;
-    width: 5vw;
-    height: 5.5vh;
-    justify-content: center; /* Center the grid items horizontally */
-    align-content: center;
-}
-.entrance_Közepesterem{
-    background-color: greenyellow;
-    width: 5vw;
-    height: 5.5vh;
-    justify-content: center; /* Center the grid items horizontally */
-    align-content: center;
-}
-.entrance_Kisterem{
-    background-color: greenyellow;
-    width: 5vw;
-    height: 5.5vh;
-    justify-content: center; /* Center the grid items horizontally */
-    align-content: center;
-}
-
-
-.gap_upper_Nagyterem{
-    height: 26vh;
-}
-
-.leftverticalcorridor_Nagyterem{
-    width: 5vw;
-}
-
-
-.screen_Nagyterem{
-    background-color: rgb(58, 170, 170);
-    width: 30vw;
-    font-size: x-large;
-}
-
-.seat {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.seats_container_Nagyterem {
-    height: 55vh;
-    display: grid;
-    grid-template-columns: repeat(15, 1fr); 
-    grid-template-rows: repeat(6, 1fr) 7vh repeat(6, 1fr); /* Add a gap between the fifth and sixth row */
-    gap: 7px;
-    justify-content: center; /* Center the grid items horizontally */
-    align-content: center;   /* Center the grid items vertically */
-}
-
-.seatsandentrance_Nagyterem{
-    display: flex;
-    width: 45vw;
-    justify-content: center;
-}
-
-.corridor_Közepesterem{
-    height: 5vh;
-}
-
-
-
-
-
-
-.gap_upper_Közepesterem{
-    height: 26vh;
-}
-
-.leftverticalcorridor_Közepesterem{
-    width: 5vw;
-}
-
-
-.screen_Közepesterem{
-    background-color: rgb(58, 170, 170);
-    width: 30vw;
-    font-size: x-large;
-}
-
-.seat {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.seats_container_Közepesterem {
-    height: 55vh;
-    display: grid;
-    grid-template-columns: repeat(12, 1fr); 
-    grid-template-rows: repeat(6, 1fr) 7vh repeat(6, 1fr); /* Add a gap between the fifth and sixth row */
-    gap: 7px;
-    justify-content: center; /* Center the grid items horizontally */
-    align-content: center;   /* Center the grid items vertically */
-}
-
-.seatsandentrance_Közepesterem{
-    display: flex;
-    width: 45vw;
-    justify-content: center;
 }
 
 .poster{
