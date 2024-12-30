@@ -43,8 +43,8 @@ def reserv_data_maker(user:object, data:dict):
 def venue_data_updater2(data: dict):
     '''
     Iterates through the \'seats\' dict within the request data dict,
-    changing the \'prebooked\' seats with a value of 1 to \'booked\'
-    with a value of 2. 
+    changing the \'prebooked\' seats with a value of False to \'booked\'
+    with a value of True. 
 
     Parameters:
     -----------
@@ -60,8 +60,8 @@ def venue_data_updater2(data: dict):
     try:
         seats=data['seats']
         for key,value in seats.items():
-            if value==1:
-                seats[key]=2
+            if value==False:
+                seats[key]=True
     except KeyError as e:
         print(f'Key error in venue_data_updater2: {e}')
         return None
@@ -78,9 +78,9 @@ def seat_liberator2(instance: object, venue: object):
     '''
     This function takes the reservation and Venue
     instances and iterates through their \'seats\' dict,
-    freeing them up once again.
-    This is an important step before finally deleting
-    the reservation.
+    deleting the appropriate key:value pairs, therefore freeing
+    the seats up once again. This is an important step before finally
+    deleting the reservation.
     
     Parameters
     ----------
@@ -94,14 +94,15 @@ def seat_liberator2(instance: object, venue: object):
     object
         The Venue instance with the liberated seats.
     '''  
-    instance_seats: dict = instance.seats
+    reservation_seats: dict = instance.seats
     venue_seats: dict =  venue.seats
+    print(venue)
     try:
-            for key,value in instance_seats.items():
-                if value==1:
+            for key,value in reservation_seats.items():
+                if value==True:
                     seat=venue_seats.get(key)
                     if seat:
-                        venue.seats[key]=0
+                        del venue.seats[key]
                     elif venue_seats[key]==None:
                         raise AttributeError(f'Attribute \'{key}\' not found in venue')
     except AttributeError as e:
@@ -113,6 +114,7 @@ def seat_liberator2(instance: object, venue: object):
     except Exception as e:
         print(f"An unexpected error occurred in seat_liberator2: {e}")
         return None
+    print(venue)
     return venue
 
 
@@ -171,7 +173,7 @@ def validate(request_seats:dict,instance_seats:dict):
     '''
     is_valid=True
     for key,value in request_seats.items():
-        if value==1 and instance_seats.get(key)==2:
+        if value==False and instance_seats.get(key)==True:
             print('CORRUPTED DATA!')
             is_valid=False
             break

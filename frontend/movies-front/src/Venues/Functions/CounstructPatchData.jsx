@@ -9,7 +9,7 @@ export const ConstructPatchData_new = (seats, show, venue) => {
     seats.forEach((seatItem, index) => {
         const seatKey = `seat_${String(index).padStart(3, '0')}`;
         if (seatItem.seat!=0){
-        data.seats[seatKey] = seatItem.seat;}
+        data.seats[seatKey] = seatItem.seat==1? false : true ;}
     });
     console.log(data);
     return data;

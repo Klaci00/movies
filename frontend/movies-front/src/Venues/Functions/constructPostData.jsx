@@ -17,8 +17,7 @@ import { ConstructSeatNames } from "./ConstructSeatNames";
         seats.forEach((seatItem, index) => {
             const seatKey = `seat_${String(index).padStart(3, '0')}`;
             if(seatItem.seat!=0)
-            {data.seats[seatKey] = seatItem.seat;
-            if (seatItem.seat === 1) {
+            {if(seatItem.seat===1) {data.seats[seatKey] =  true;
                 seatnamesArray.push(ConstructSeatNames(venue.room_name,index));
             }}
         });
