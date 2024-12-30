@@ -22,6 +22,9 @@ from .seathandler.seathandler import reserv_data_maker,venue_data_dict_maker,\
                                      venue_data_updater2,seat_liberator2,\
                                      validate
 from rest_framework_simplejwt.views import TokenObtainPairView
+import logging
+
+logger = logging.getLogger(__name__)
 
 class ShowDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset=Show.objects.all()
@@ -39,24 +42,32 @@ class VenueDetail(generics.RetrieveUpdateDestroyAPIView):
             **kwargs
             ):
         with transaction.atomic():
-            instance=self.get_object()
-            request_seats: dict=request.data['seats']
-            instance_seats:dict=instance.seats
-            reservation_isvalid: bool=validate(request_seats,instance_seats)
-            if reservation_isvalid:
-                data:dict=request.data
-                #Update seats with my imported function!
-                serializer = self.get_serializer(
-                                                instance,
-                                                data=venue_data_updater2(data),
-                                                partial=True
-                                                )
-                serializer.is_valid(raise_exception=True)
-                self.perform_update(serializer)
+            try:
+                print('Request data:')
+                pprint(request.data)
+                instance=self.get_object()
+                request_seats: dict=request.data['seats']
+                instance_seats:dict=instance.seats
+                reservation_isvalid: bool=validate(request_seats,instance_seats)
+                if reservation_isvalid:
+                    request_data:dict=request.data
+                    logger.debug('Request data: %s', request_data)
+                    logger.debug('Instance data: %s', instance.__dict__)
+                    updated_instance_data=venue_data_updater2(instance,request_data)
+                    #Update seats with my imported function!
+                    serializer = self.get_serializer(
+                                                    instance,
+                                                    updated_instance_data,
+                                                    partial=True)
+                    serializer.is_valid(raise_exception=True)
+                    self.perform_update(serializer)
 
-                return Response(serializer.data, status=status.HTTP_200_OK)
-            else:
-                return Response(status=status.HTTP_409_CONFLICT)
+                    return Response(serializer.data, status=status.HTTP_200_OK)
+                else:
+                    return Response(status=status.HTTP_409_CONFLICT)
+            except Exception as e:
+                logger.error('An unexpected error occurred in VenueDetail: %s', e)
+                return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class ReservDestroy(generics.DestroyAPIView):
     permission_classes =[IsAuthenticated]

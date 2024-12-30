@@ -40,39 +40,48 @@ def reserv_data_maker(user:object, data:dict):
     return reserv_data
 
 
-def venue_data_updater2(data: dict):
-    '''
-    Iterates through the \'seats\' dict within the request data dict,
-    changing the \'prebooked\' seats with a value of False to \'booked\'
+import logging
+
+logger = logging.getLogger(__name__)
+
+def venue_data_updater2(instance, request_data: dict) -> dict:
+    """
+    Iterates through the 'seats' dict within the request data dict,
+    changing the 'prebooked' seats with a value of False to 'booked'
     with a value of True. 
 
     Parameters:
     -----------
-    data: dict
-        The request data from the HTTP Post request. Also the Venue
-        instance data.
+    request_data: dict
+        The request data from the HTTP POST request.
+    instance: Venue
+        The Venue instance.
     
     Returns:
     --------
     dict
-        The updated request/Venue instance data.
-    '''
+        The updated data for the serializer.
+    """
     try:
-        seats=data['seats']
-        for key,value in seats.items():
-            if value==False:
-                seats[key]=True
-    except KeyError as e:
-        print(f'Key error in venue_data_updater2: {e}')
-        return None
-    except TypeError as e:
-        print(f'Type error in venue_data_updater2: {e}')
-        return None
-    except Exception as e:
-        print(f'An unexpected error occurred in venue_data_updater2: {e}')
-        return None
-    return data
+        instance_seats = instance.seats
+        request_seats = request_data.get('seats', {})
+        
+        for key, value in request_seats.items():
+            if value is False:
+                instance_seats[key] = True
+                
+        instance.seats = instance_seats
+        instance_data = {"seats": instance_seats}
+        return instance_data
 
+    except KeyError as e:
+        logger.error('Key error in venue_data_updater2: %s', e)
+    except TypeError as e:
+        logger.error('Type error in venue_data_updater2: %s', e)
+    except Exception as e:
+        logger.error('An unexpected error occurred in venue_data_updater2: %s', e)
+
+    return None
 
 def seat_liberator2(instance: object, venue: object):
     '''
