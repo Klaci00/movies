@@ -3,7 +3,7 @@ import { BASE_URL } from "../../Settings"
 
 export const FetchRoomStyles = async (setRoomTypes) => {
     try {
-        await apiClient.get(`${BASE_URL}/roomnames/`).then(
+        await apiClient.get(`${BASE_URL}roomnames/`).then(
             response => {
                 setRoomTypes(
                     response.data
