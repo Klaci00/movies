@@ -16,11 +16,6 @@ import { getCookie } from "../../Auth/Functions/CookieHandler";
 
 export const RoutesApp = ({ username, setUsername, setisStaff, isAuth, setIsAuth }) => {
 
-  const refresh = getCookie('refresh');
-  var decodedToken={};
-  if (refresh != undefined) {
-    decodedToken = decode(refresh);
-  }
 
   return <Routes className='routes'>
     <Route path='/' element={<ShowsList />} />

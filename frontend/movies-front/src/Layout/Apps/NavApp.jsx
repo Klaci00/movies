@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import LogoutButton2 from "../../Auth/Apps/LogoutButton2";
 
-export const NavApp = ({ isAuth, setIsAuth, isAdmin, setIsAdmin, username, setUserName, setShowWarning,setHideNav,innerWidth }) => {
+export const NavApp = ({ isAuth, setIsAuth, isAdmin, setIsAdmin, username, setUserName, setShowWarning,setVisible,setHideNav,innerWidth }) => {
     const cookiesAccepted = localStorage.getItem('cookiesAccepted') === 'true';
     
     return (
@@ -11,9 +11,17 @@ export const NavApp = ({ isAuth, setIsAuth, isAdmin, setIsAdmin, username, setUs
             {!isAuth ? (
                 <>
                     <Link to={cookiesAccepted ? '/register' : ''}>
-                        <p onClick={() => setShowWarning(!cookiesAccepted)}>Register</p>
+                        <p onClick={() => {
+                            setShowWarning(!cookiesAccepted);
+                            setTimeout(() => {
+                            setVisible(true);},500)
+                            }}>Register</p>
                     </Link>
-                    <Link to={cookiesAccepted ? '/login2' : ''}><p onClick={() => setShowWarning(!cookiesAccepted)}>Login</p>
+                    <Link to={cookiesAccepted ? '/login2' : ''}><p onClick={() => {
+                        setShowWarning(!cookiesAccepted);
+                        setTimeout(() => {
+                        setVisible(true);},500)
+                        }}>Login</p>
                     </Link>
                 </>
             ) : (
