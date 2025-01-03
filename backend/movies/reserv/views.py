@@ -129,9 +129,6 @@ class ShowList(generics.ListCreateAPIView):
     queryset=Show.objects.all()
     serializer_class=ShowSerializer
     def list(self, request, *args, **kwargs):
-        #print('Request data:', request.data)          # Request body data
-        #print('Request headers:', request.headers)    # Request headers
-        #print('Request query params:', request.query_params)  # Query parameters
         response = super().list(request, *args, **kwargs)
         return response
 
