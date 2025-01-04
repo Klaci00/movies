@@ -13,12 +13,14 @@ import { DeleteShow } from "../../Admin/DeleteShow";
 import { DeleteVenue } from "../../Admin/DeleteVenue";
 import { jwtDecode as decode } from "jwt-decode";
 import { getCookie } from "../../Auth/Functions/CookieHandler";
+import ShowsSlideshow from "../../Shows/ShowsSlideShow";
+import { Index } from "../Index";
 
 export const RoutesApp = ({ username, setUsername, setisStaff, isAuth, setIsAuth }) => {
 
 
   return <Routes className='routes'>
-    <Route path='/' element={<ShowsList />} />
+    <Route path='/' element={<Index />} />
     <Route path='/:id' element={<ListVenues className='listvenues' isAuth={isAuth} />} />
     <Route path=':id/venues/:venueId' element={<VenueDetail />} />
     <Route path='/reservations' element={<Reservations2 username={username} />} />

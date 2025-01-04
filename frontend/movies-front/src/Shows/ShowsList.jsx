@@ -10,7 +10,7 @@ const ShowsList = () => {
   }, []);
 
   return (
-    <div>
+    <div style={{top: '80vh', position: 'relative'}}>
       {shows.map(show => (
         <div key={show.id} className='show'>
           <h2 className='textinmiddle'>

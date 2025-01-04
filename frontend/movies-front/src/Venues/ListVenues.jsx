@@ -4,7 +4,6 @@ import { BASE_URL } from '../Settings';
 import { FetchVenues } from './HTTP/FetchVenues';
 import { FetchShowDetails } from './HTTP/FetchShowDetails';
 import { ListVenuesApp } from './Apps/ListVenuesApp';
-import '../Cascade Style Sheets/VenueDetail.css';
 
 const ListVenues = ({isAuth}) => {
   const { id } = useParams();

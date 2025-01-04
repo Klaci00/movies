@@ -6,7 +6,7 @@ export const NavApp = ({ isAuth, setIsAuth, isAdmin, setIsAdmin, username, setUs
     
     return (
         <nav className='nav'>
-            <Link to='/contact'>Contact us</Link>
+            <Link to='/contact'><p>Contact us</p></Link>
             <Link to='/'><p>Home</p></Link>
             {!isAuth ? (
                 <>
@@ -26,15 +26,17 @@ export const NavApp = ({ isAuth, setIsAuth, isAdmin, setIsAdmin, username, setUs
                 </>
             ) : (
                 <>
-                    <span>Welcome, {username}!</span>
+                    <Link><p>Welcome, {username}!</p></Link>
                     <Link to='/reservations'><p>Reservations</p></Link>
                     {isAdmin && (
-                        <Link to='/administration'>Admin Interface</Link>
+                        <Link to='/administration'><p>Admin Interface</p></Link>
                     )}
                     <LogoutButton2 setIsAuth={setIsAuth} setIsAdmin={setIsAdmin} setUserName={setUserName} />
-                    {innerWidth <= 600 ? <button onClick={()=>setHideNav(true)}>Menü elrejtése</button> : null}
+                   
                 </>
+                
             )}
+             {innerWidth <= 600 ? <button onClick={()=>setHideNav(true)}>Menü elrejtése</button> : null}
         </nav>
     );
 };

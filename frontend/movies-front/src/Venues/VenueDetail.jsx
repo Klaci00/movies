@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import '../Cascade Style Sheets/VenueDetail.css';
 import RoomApp from './Apps/RoopApp';
 import { useSeatStates } from './Functions/useSeatStates';
 import { FetchShowDetails } from './HTTP/FetchShowDetails';

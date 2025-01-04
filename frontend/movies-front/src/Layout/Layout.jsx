@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import '../Cascade Style Sheets/VenueDetail.css';
 import { RoutesApp } from './Apps/RoutesApp';
 import { NavApp } from './Apps/NavApp';
 import { getCookie, getCookieExpiryTime } from '../Auth/Functions/CookieHandler';
 import { refreshToken } from '../Auth/Functions/AuthService';
 import { jwtDecode as decode } from 'jwt-decode';
 import CookieWarning from '../Auth/Apps/CookieWarning';
+import JumpUpButton from './Apps/JumpUpButton';
 const Layout = () => {
   const [isAuth, setIsAuth] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -78,6 +78,7 @@ const Layout = () => {
         <NavApp isAuth={isAuth} setIsAuth={setIsAuth} isAdmin={isAdmin} setIsAdmin={setIsAdmin} username={username} setUserName={setUsername} setShowWarning={setShowWarning} setVisible={setVisible} setHideNav={setHideNav} innerWidth={innerWidth} />}
         <RoutesApp username={username} setUsername={setUsername} setisStaff={setIsAdmin} isAuth={isAuth} setIsAuth={setIsAuth}/>
         <CookieWarning showWarning={showWarning} setShowWarning={setShowWarning} visible={visible} setVisible={setVisible} />
+        <JumpUpButton innerWidth={innerWidth} />
       </div>
     </Router>
   );

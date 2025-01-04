@@ -1,5 +1,4 @@
 import React from 'react';
-import '../../Cascade Style Sheets/VenueDetail.css';
 import { NumSeatCheck } from '../Functions/toggleSeat';
 
 function RoomApp(props) {
@@ -29,12 +28,12 @@ function RoomApp(props) {
             <p>Jegyek száma: {props.seatNum}</p>
             <div style={StyleDict.screen}>{InnerText.screen}</div>
             <div style={StyleDict.corridor}>{InnerText.corridor}</div>
-            <div style={StyleDict.seats_and_entrance}>
+            <div className='seats_and_entrance' style={StyleDict.seats_and_entrance}>
                 <div>
                     <div style={StyleDict.gap_upper_left}> </div>
                     <div style={StyleDict.entrance_left}>{InnerText.entrance_left}</div>
                 </div>
-                <div style={StyleDict.seats_container}>
+                <div className='seats_container' style={StyleDict.seats_container}>
                     {props.seats.slice(0, Capacity).map(({ seat, setSeat }, index) => (
                         <div
                             key={index}
@@ -43,6 +42,7 @@ function RoomApp(props) {
                             style={{
                                 width: '2vmin',
                                 height: '2vmin',
+                                borderRadius: '10%',
                                 backgroundColor: seat === 0 ? 'green' : seat === 1 ? 'red' : 'gray',
                                 cursor: seat !== 2 ? 'pointer' : 'not-allowed',
                             }}
