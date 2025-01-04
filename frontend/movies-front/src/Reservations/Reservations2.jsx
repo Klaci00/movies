@@ -36,7 +36,7 @@ const Reservations2 = (props) => {
 
     return (
         <>
-            <h1>Reservations</h1>
+            <h1>Foglalások</h1>
             {error && <p>{error}</p>}
             {reservationData.length > 0 ? (
                 <div>

@@ -64,6 +64,7 @@ button:focus-visible {
   }
   .textinmiddle{
       text-align: center;
+      font-size: larger;
   }
   listvenues_main{
       display: list-item;
@@ -241,7 +242,7 @@ button:focus-visible {
   }
   
   .poster{
-      width: 25vw;
+      width: 20vw;
       }
 
   a {
