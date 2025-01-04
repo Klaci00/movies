@@ -6,8 +6,8 @@ export const NavApp = ({ isAuth, setIsAuth, isAdmin, setIsAdmin, username, setUs
     
     return (
         <nav className='nav'>
-            <Link to='/contact'><p>Contact us</p></Link>
-            <Link to='/'><p>Home</p></Link>
+            <Link to='/contact'><p>Kapcsolat</p></Link>
+            <Link to='/'><p>Kezdőoldal</p></Link>
             {!isAuth ? (
                 <>
                     <Link to={cookiesAccepted ? '/register' : ''}>
@@ -21,15 +21,15 @@ export const NavApp = ({ isAuth, setIsAuth, isAdmin, setIsAdmin, username, setUs
                         setShowWarning(!cookiesAccepted);
                         setTimeout(() => {
                         setVisible(true);},500)
-                        }}>Login</p>
+                        }}>Bejelentkezés</p>
                     </Link>
                 </>
             ) : (
                 <>
-                    <Link><p>Welcome, {username}!</p></Link>
-                    <Link to='/reservations'><p>Reservations</p></Link>
+                    <Link><p>Üdvözöljük!, {username}!</p></Link>
+                    <Link to='/reservations'><p>Foglalások</p></Link>
                     {isAdmin && (
-                        <Link to='/administration'><p>Admin Interface</p></Link>
+                        <Link to='/administration'><p>Admin Felület</p></Link>
                     )}
                     <LogoutButton2 setIsAuth={setIsAuth} setIsAdmin={setIsAdmin} setUserName={setUserName} />
                    

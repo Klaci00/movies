@@ -14,10 +14,10 @@ export const ListVenuesApp = (show, isAuth, seatNum, handleChange, venues, id) =
 
       <h2 className='textinmiddle'>Vetítések</h2>
       <div>
-        <h3 className='ticketcount'>Reserve Your Seats</h3>
-        <label>
-          How many seats would you like to reserve?
-          <select value={seatNum} onChange={handleChange}>
+        <h3 className='ticketcount'>Foglalja le a helyeket</h3>
+        <label className='ticketcount'>
+          Hány helyet szeretne lefoglalni?
+          <select className='ticket_select' value={seatNum} onChange={handleChange}>
             {Array.from({ length: 30 }, (_, i) => i + 1).map((number) => (
               <option key={number} value={number}>
                 {number}

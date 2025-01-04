@@ -133,6 +133,10 @@ button:focus-visible {
       border-radius: 4px;
   }
   @media (max-width: 600px) or (max-height: 600px) {
+    .poster {
+     min-width: 80vw; 
+      
+    }
     .nav {
         display: flex;
         flex-direction: column;
@@ -141,13 +145,19 @@ button:focus-visible {
         align-items: center;
         height: auto;
         background-color: #333;
-        padding: 10px 0;
+        padding: 10px 0;       
+        gap: 5px;
+    }
+    .nav button{
+        display: block;
+        width: 100%;
+        text-align: center;
+        background-color: darkorange;
     }
     .nav a {
         display: block;
         width: 100%;
-        padding: 14px 0;
-        text-align: center;
+        text-align: center;;
     }
     .nav a:hover {
         background-color: #575757;
@@ -169,7 +179,7 @@ button:focus-visible {
         display: flex;
         justify-content: center;
         align-items: center;
-        flex-direction: column;
+        flex-direction: row;
     }
     .seat{
      width: 40px;
@@ -224,4 +234,18 @@ button:focus-visible {
     text-decoration: none;
     transition: color 0.25s;
     font-weight: 500;
+  }
+
+  .ticketcount{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    font-size: xx-large;
+  }
+  .ticket_select{
+    width: 5vw;
+    font-size: x-large;
+    font-weight: bold;
+    text-align: center;
   }

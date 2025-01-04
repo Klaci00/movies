@@ -17,7 +17,7 @@ const LogoutButton2 = ({setIsAuth,setIsAdmin,setUserName}) => {
 
     return (
         <button onClick={handleLogout}>
-            Logout
+            Kijelentkezés
         </button>
     );
 };

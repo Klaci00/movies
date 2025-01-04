@@ -43,7 +43,6 @@ const ShowsSlideshow = () => {
           <h2 className={styles.textinmiddle}>
             <Link className={styles.showlink} to={`/${show.id}`}>{show.title}</Link>
           </h2>
-          <p className={styles.textinmiddle}>{show.description}</p>
           <div className={styles.listvenues_img}>
             <img className={styles.poster} src={show.poster} alt={show.title} />
           </div>
