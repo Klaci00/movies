@@ -42,7 +42,7 @@ const Register = ({ onloginSuccess, setAuth, setisStaff, setUsernameGlobal }) =>
                 response_email ==='E-mail is available.'
             ) {
                 await PostRegistration(BASE_URL, username, password,firstname,lastname,email);
-                await PostLogin(setCookie, decode, axios, setError, BASE_URL, username, password, onloginSuccess, setAuth, setisStaff, setUsernameGlobal);
+                await PostLogin( setError,username, password, setAuth, setisStaff, setUsernameGlobal);
             } else {
                 window.alert('This username or e-mail address is taken! Please, choose another one.');
             }
