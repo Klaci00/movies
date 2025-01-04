@@ -15,11 +15,13 @@ const Layout = () => {
   const [showWarning, setShowWarning] = useState(false);
   const [visible, setVisible] = useState(true);
   const [innerWidth, setInnerWidth] = useState(0);
+  const [innerHeight, setInnerHeight] = useState(0);
   const [update, setUpdate] = useState(0);
   const [hideNav, setHideNav] = useState(false);
   useEffect(() => {
     const interval = setInterval(() => {
         setInnerWidth(window.innerWidth);
+        setInnerHeight(window.innerHeight);
         setUpdate(update + 1);
     }, 1000); () => {
         clearInterval(interval);
@@ -75,7 +77,7 @@ const Layout = () => {
   return (
     <Router className='router'>
       <div className='main_screen'>{hideNav ? <button onClick={()=>setHideNav(false)} >Menü</button> :
-        <NavApp isAuth={isAuth} setIsAuth={setIsAuth} isAdmin={isAdmin} setIsAdmin={setIsAdmin} username={username} setUserName={setUsername} setShowWarning={setShowWarning} setVisible={setVisible} setHideNav={setHideNav} innerWidth={innerWidth} />}
+        <NavApp isAuth={isAuth} setIsAuth={setIsAuth} isAdmin={isAdmin} setIsAdmin={setIsAdmin} username={username} setUserName={setUsername} setShowWarning={setShowWarning} setVisible={setVisible} setHideNav={setHideNav} innerWidth={innerWidth} innerHeight={innerHeight} />}
         <RoutesApp username={username} setUsername={setUsername} setisStaff={setIsAdmin} isAuth={isAuth} setIsAuth={setIsAuth}/>
         <CookieWarning showWarning={showWarning} setShowWarning={setShowWarning} visible={visible} setVisible={setVisible} />
         <JumpUpButton innerWidth={innerWidth} />

@@ -109,7 +109,16 @@ button:focus-visible {
       font-size: 17px;
       transition: background-color 0.3s ease;
   }
-  
+  #logout{
+      color: #fff;
+      padding: 14px 20px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 17px;
+      transition: background-color 0.3s ease;
+      vertical-align: middle;
+      line-height: 2.9;
+  }
   .nav a:hover {
       background-color: #575757;
       border-radius: 4px;
@@ -121,6 +130,8 @@ button:focus-visible {
       text-decoration: none;
       font-size: 17px;
       transition: background-color 0.3s ease;
+      vertical-align: middle;
+      height: max-parent;
   }
   .nav p:hover {
     background-color: #575757;
@@ -184,6 +195,10 @@ button:focus-visible {
     .seat{
      width: 40px;
       height: 40px;
+    }
+    #logout{
+      width: 100%;
+      font-weight: bolder;
     }
 }  
   

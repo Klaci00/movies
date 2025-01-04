@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import LogoutButton2 from "../../Auth/Apps/LogoutButton2";
 
-export const NavApp = ({ isAuth, setIsAuth, isAdmin, setIsAdmin, username, setUserName, setShowWarning,setVisible,setHideNav,innerWidth }) => {
+export const NavApp = ({ isAuth, setIsAuth, isAdmin, setIsAdmin, username, setUserName, setShowWarning,setVisible,setHideNav,innerWidth,innerHeight }) => {
     const cookiesAccepted = localStorage.getItem('cookiesAccepted') === 'true';
     
     return (
@@ -15,7 +15,7 @@ export const NavApp = ({ isAuth, setIsAuth, isAdmin, setIsAdmin, username, setUs
                             setShowWarning(!cookiesAccepted);
                             setTimeout(() => {
                             setVisible(true);},500)
-                            }}>Register</p>
+                            }}>Regisztráció</p>
                     </Link>
                     <Link to={cookiesAccepted ? '/login2' : ''}><p onClick={() => {
                         setShowWarning(!cookiesAccepted);
@@ -36,7 +36,7 @@ export const NavApp = ({ isAuth, setIsAuth, isAdmin, setIsAdmin, username, setUs
                 </>
                 
             )}
-             {innerWidth <= 600 ? <button onClick={()=>setHideNav(true)}>Menü elrejtése</button> : null}
+             {(innerWidth <= 600 || innerHeight <= 600) ? <button onClick={() => setHideNav(true)}>Menü elrejtése</button> : null}
         </nav>
     );
 };

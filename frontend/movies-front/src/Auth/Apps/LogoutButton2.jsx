@@ -1,6 +1,7 @@
 import React from 'react';
 import { logout2 } from '../Functions/Logout2';
 import { deleteCookie } from '../Functions/CookieHandler';
+import { Link } from 'react-router-dom';
 
 const LogoutButton2 = ({setIsAuth,setIsAdmin,setUserName}) => {
     const handleLogout = async () => {
@@ -16,9 +17,9 @@ const LogoutButton2 = ({setIsAuth,setIsAdmin,setUserName}) => {
     };
 
     return (
-        <button onClick={handleLogout}>
+        <p id='logout' onClick={handleLogout}>
             Kijelentkezés
-        </button>
+        </p>
     );
 };
 
