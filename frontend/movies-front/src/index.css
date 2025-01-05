@@ -69,12 +69,15 @@ button:focus-visible {
 }
 
 .show{
-  height: 500px;
-font-size: 45%;}
+  height: 600px;
+font-size: 85%;
+margin: 40px;
+padding:40px;}
 .show img{
-   height:30%;}
+   height:500px;}
 
 .foglalasok {
+  text-align: center;
   display: flex;
   justify-content: space-evenly;
   align-items: left;
