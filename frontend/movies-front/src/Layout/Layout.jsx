@@ -42,7 +42,7 @@ const Layout = () => {
     return (
       <Router className='router'>
         <div className='main_screen'>
-          <nav className='nav'>
+          <nav className='nav' role='navigation'>
             <Link to='/'><p>Home</p></Link>
             {!isAuth ? (
               <>

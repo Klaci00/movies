@@ -34,27 +34,53 @@ const AddShow = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='addshow'>
+            <br/>
             <div>
-                <label>Title:</label>
-                <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
+                <p>
+                    <label>Title:</label>
+                </p>
+                <p>
+                    <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
+                </p>
             </div>
+            <br/>
             <div>
-                <label>Description:</label>
-                <textarea value={description} onChange={(e) => setDescription(e.target.value)} required />
+                <p>
+                    <label>Description:</label>
+                </p>
+                <p>
+                    <textarea value={description} onChange={(e) => setDescription(e.target.value)} required />
+                </p>
             </div>
+            <br/>
             <div>
+                <p>
                 <label>Rating:</label>
+                </p>
+                <p>
                 <input type="text" value={rating} onChange={(e) => setRating(e.target.value)} required />
+                </p>
             </div>
+            <br/>
             <div>
+                <p>
                 <label>Playtime:</label>
+                </p>
+                <p>
                 <input type="number" value={playtime} onChange={(e) => setPlaytime(Number(e.target.value))} required />
+                </p>
             </div>
+            <br/>
             <div>
-                <label>Poster:</label>
+                <p>
+                    <label>Poster:</label>
+                </p>
+                <p>
                 <input type="file" onChange={(e) => setPoster(e.target.files[0])} required />
+                </p>
             </div>
+            <br/>
             <button type="submit">Add Show</button>
         </form>
     );

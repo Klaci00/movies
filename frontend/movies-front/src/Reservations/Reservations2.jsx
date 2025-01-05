@@ -63,7 +63,7 @@ const Reservations2 = () => {
 
     function reservParser(x) {
         return (
-            <div key={x.id}>
+            <div key={x.id} className='foglalasok'>
                 <ReservApp
                     id={x.id}
                     title={x.title}

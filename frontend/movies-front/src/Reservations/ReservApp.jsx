@@ -8,7 +8,11 @@ function ReservApp({ id, title, owner, room_name, showtime, seat_count, onDelete
     return (
         <div>
             <h3>{title}</h3>
-            <strong>Helyszín: {room_name}, Kezdés: {convertDateTime(showtime)}, Foglalt székek száma: {seat_count}, Helyek: {seatnames}</strong>
+            <strong>
+                Helyszín: {room_name},<br/>
+                Kezdés: {convertDateTime(showtime)},<br/>
+                Foglalt székek száma: {seat_count},<br/>
+                Helyek: {seatnames}</strong><br/>
             <button onClick={() => onDelete(id)}>Delete</button>
         </div>
     );
