@@ -94,3 +94,10 @@ font-size: 45%;}
   margin: 40px;
   padding:40px;
 }
+
+.addvenue{
+  width: 30%;
+  margin: 40px;
+  padding: 10px;
+  background-color: rgb(51, 109, 136);
+}

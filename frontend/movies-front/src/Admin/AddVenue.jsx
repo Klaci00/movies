@@ -54,9 +54,9 @@ export const AddVenue = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='addvenue'>
             <div>
-                <label>Show:</label>
+                <label>Show:</label><br/>
                 <select value={selectedShow} onChange={handleDropdownChange} required>
                     <option value="" disabled>Select a show</option>
                     {shows.map(show => (
@@ -65,7 +65,7 @@ export const AddVenue = () => {
                 </select>
             </div>
             <div>
-                <label>Room Name:</label>
+            <br/><label>Room Name:</label><br/>
                 <select value={selectedRoomName} onChange={handleDropdownChange2} required>
                     <option value="" disabled>Select a room</option>
                     {roomNames.map(roomname => (
@@ -75,10 +75,10 @@ export const AddVenue = () => {
 
             </div>
             <div>
-                <label>Showtime (Budapest Time):</label>
+            <br/><label>Showtime (Budapest Time):</label><br/>
                 <input type="datetime-local" value={showtime} onChange={(e) => setShowtime(e.target.value)} required />
             </div>
-            <button type="submit">Post Venue</button>
+            <br/><button type="submit">Post Venue</button>
         </form>
     );
 };
