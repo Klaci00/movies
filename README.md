@@ -16,12 +16,12 @@ Vizsgaremekünkben egy __full-stack__ alkalmazást valósítottunk meg, mely egy
   - [A működés alapelve](#a-működés-alapelve)
   - [Backend](#backend)
     - [Modellek](#modellek)
-    - [Relációk](#relációk)
+      - [Relációk](#relációk)
     - [Adminisztrációs felület](#adminisztrációs-felület)
     - [Funkciók](#funkciók)
-    - [Helyfoglalás](#helyfoglalás)
-    - [Foglalás törlése](#foglalás-törlése)
-    - [Adminisztratív funkciók](#adminisztratív-funkciók)
+      - [Helyfoglalás](#helyfoglalás)
+      - [Foglalás törlése](#foglalás-törlése)
+      - [Adminisztratív funkciók](#adminisztratív-funkciók)
     - [Biztonság](#biztonság)
   - [Frontend](#frontend)
     - [A kezdőoldal tagoltsága](#a-kezdőoldal-tagoltsága)
@@ -198,7 +198,7 @@ A projekt a következő osztály alapú adatmodellekre épül:
 
 [Vissza az oldal tetejére](#)
 
-### Relációk
+#### Relációk
 <img src="./readme images/db_rel.png">
  
  [Vissza az oldal tetejére](#)
@@ -266,7 +266,7 @@ A kódban látható a „seat_liberator2” függvény. A kód átláthatósága
 
 [Vissza az oldal tetejére](#)
 
-### Helyfoglalás
+#### Helyfoglalás
 A bevezetőben is taglaltak szerint, a backend a frontendtől kap egy PATCH http kérést, amit a partial_update metódus kezel. Mivel várhatóan egyszerre több ember is foglalhat jegyet ugyanarra a filmre, fontos felkészülni az esetleges konfliktusokra is. Ezt a Django transaction modullal oldottuk meg, azon belül is az atomic() metódussal. Ennek a metódusnak a lényege, hogy a try blokkban levő folyamatok vagy egységesen (atomikusan) lefutnak, vagy visszaállnak a belépési pont előtti állapotra. A seathandler.validate() függvény ellenőrzi, hogy az előfoglalt helyek nincsenek-e már benne a vetítés üléseiben, tehát nem foglaltak-e. Amennyiben nincsenek, úgy ezeket a változókat hozzáadja a vetítés JSONFieldjéhez, true értékkel, és 200-as OK http kóddal jelzi a frontendnek, hogy rendben ment a foglalás, majd a serializer elvégzi a módosításokat. Ha valamelyik széket már lefoglalták, akkor __http 409__-es __CONFLICT__ üzenetet küld a frontendnek.
 
 <img src="./readme images/200.png">
@@ -274,7 +274,7 @@ A bevezetőben is taglaltak szerint, a backend a frontendtől kap egy PATCH http
 
 [Vissza az oldal tetejére](#)
 
-### Foglalás törlése
+#### Foglalás törlése
 A törlést a rest-framework generics.DestroyAPIView nézetével oldottuk meg. Az ezen nézetet használó URL-re csak DELETE http kérést lehet küldeni. Természetesen csak autentikált kérést fogad el a nézet. Itt a seathandler modul seat_liberator2 függvénye végzi el a helyek felszabadítását a következő módon:
 *	a Django a nézet példány self.get_object() metódusával megkeresi a Reservation azaz a foglalás példányt
 *	a Model osztály Venue.objects.get() metódussal megkeresi az érintett Venue, azaz a vetítés példányt
@@ -285,7 +285,7 @@ A törlést a rest-framework generics.DestroyAPIView nézetével oldottuk meg. A
 
 [Vissza az oldal tetejére](#)
 
-### Adminisztratív funkciók
+#### Adminisztratív funkciók
 A használat megkönnyítése céljából a frontend oldalról is lehetővé tettük az olyan funkciókat, mint a 
 *	film hozzáadása
 *	vetítés hozzáadása adott filmhez
@@ -294,6 +294,8 @@ A használat megkönnyítése céljából a frontend oldalról is lehetővé tet
 Így olyan .is_staff attribútummal rendelkező felhasználó is elvégezheti ezeket a műveleteket, akik valamilyen okból nem férnek hozzá a Django adminisztrációs felületéhez.
 Ez akkor is célravezető lehet, ha a backend külön domainen helyezkedik el.
 Ezeket a funkciókat is a rest framework generic nézeteivel oldottuk meg. 
+
+[Vissza az oldal tetejére](#)
 
 ### Biztonság
 
@@ -310,6 +312,8 @@ A frontenden szintén a JSON Web Token könyvtár JavaScript megfelelője dekód
 A frontenden a biztonság elsősorban a regisztrációnál a jelszóbiztonság kikényszerítésében összpontosul.
 
 <img src="./readme images/regist01.png">
+
+[Vissza az oldal tetejére](#)
 
 ## Frontend
 A frontend alapja egy, a Node.js futtatási környezetben futó Vite fejlesztési szerver, amin a React nevű, nyílt forráskódú JavaScript könyvtárat használtuk.
@@ -336,6 +340,9 @@ A frontend felépítése a következő:
  <img src="./readme images/loggedin.png">
  <img src="./readme images/loggedout.png">
 
+[Vissza az oldal tetejére](#)
+
+
 ### A kezdőoldal tagoltsága
 A kezdőoldal tartalma kizárólag a műsoron levő filmekből áll, tehát vetítéseket nem tartalmaz. Ez részben az áttekinthetőséget szolgálja, részben pedig egyfajta pagináció, mely megakadályozza a nagy mennyiségű adat lekérését.
 A kényelem kedvéért elhelyeztünk egy gombot a jobb alsó sarokban, amire kattintva felgördül a viewport az oldal tetejére.
@@ -346,6 +353,8 @@ A kezdőoldal kettő fő részből áll:
 
  <img src="./readme images/slideshow.png">
  <img src="./readme images/listview.png">
+
+[Vissza az oldal tetejére](#)
 
 ### Reszponzivitás
 Az oldal szinte kizárólag __relatív__ mértékegységeket használ, így mindig jól igazodik a viewport méretéhez.
@@ -368,6 +377,7 @@ A CSS __@media__ dekorátorának köszönhetően feltételekhez kötötten könn
     }
 }
 ```
+[Vissza az oldal tetejére](#)
 
 ### Helyfoglalás
 A filmcímre kattintva a következő aloldalon az elérhető vetítéseket látjuk, és eldönthetjük, hogy hány helyet szeretnénk lefoglalni.
@@ -381,6 +391,8 @@ A navigációs sáv foglalások menüpontjára kattintva meggyőződhetünk ról
  <img src="./readme images/reserv.png">
 
 Ha a foglalás törlése mellett döntünk, akkor az adott gombra kattintva megtehetjük azt, a foglalás törlődik a helyek pedig újra felszabadulnak.
+
+[Vissza az oldal tetejére](#)
 
 ### Regisztráció
 
@@ -464,3 +476,5 @@ A kapcsolattartást megkönnyítendő, az adott mozi egy kapcsolat oldalt is lé
 [Vissza az oldal tetejére](#)
 
 ## English version <a id='english'></a>
+
+*In development...*
