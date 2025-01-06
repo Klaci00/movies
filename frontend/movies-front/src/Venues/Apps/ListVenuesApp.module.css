@@ -1,0 +1,62 @@
+.listvenues_main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.textinmiddle {
+    text-align: center;
+    color: #333;
+}
+
+.listvenues_img {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.poster {
+    max-width: 80%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.ticketcount {
+    margin: 20px 0;
+    font-size: 18px;
+    color: #555;
+}
+
+.ticket_select {
+    margin-left: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+li a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 18px;
+}
+
+li a:hover {
+    text-decoration: underline;
+}

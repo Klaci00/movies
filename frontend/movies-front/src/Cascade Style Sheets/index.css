@@ -95,6 +95,7 @@ button:focus-visible {
       flex-direction: column;
   }
   .nav {
+      position: relative;
       background-color: #333;
       overflow: hidden;
       display: flex;

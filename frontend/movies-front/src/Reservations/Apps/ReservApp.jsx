@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './ReservApp.module.css'; // Import the CSS module
 function ReservApp({ id, title, room_name, showtime, seat_count, onDelete, seatnames, BASE_URL, setReservationData, reservationData, error, setError }) {
     function convertDateTime(datetime) {
         const date = new Date(datetime);
@@ -15,17 +16,17 @@ function ReservApp({ id, title, room_name, showtime, seat_count, onDelete, seatn
     }
 
     return (
-        <div>
-            <h2>{title}</h2>
+        <div className={styles.container}>
+            <div className={styles.title} >{title}</div>
             <strong>Helyszín: {room_name},<br></br> Kezdés: {convertDateTime(showtime)},<br></br> Foglalt székek száma: {seat_count},<br></br> Helyek:
-                <ul>
+                <ul className={styles.ul}> 
                     {typeof seatnames === 'string' && seatnames.split(';').map(
                         seatname => 
-                        <li key={seatname} >{seatname}</li>)
+                        <li key={seatname} className={styles.li} >{seatname}</li>)
                         }
                 </ul>
             </strong>
-            <button onClick={() => { if (confirmDelete()) onDelete(BASE_URL, id, setReservationData, reservationData, error, setError); }}>Foglalás törlése</button>
+            <button  onClick={() => { if (confirmDelete()) onDelete(BASE_URL, id, setReservationData, reservationData, error, setError); }}>Foglalás törlése</button>
         </div>
     );
 }
