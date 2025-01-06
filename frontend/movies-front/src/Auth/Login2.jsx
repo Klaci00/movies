@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import { PostLogin } from './HTTP/PostLogin';
+import styles from './Login2.module.css'; // Import the CSS module
 
-const Login2 = ({setAuth,setisStaff,setUsernameGlobal }) => {
+const Login2 = ({ setAuth, setisStaff, setUsernameGlobal }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        PostLogin(setError,username,password,setAuth,setisStaff,setUsernameGlobal);
+        PostLogin(setError, username, password, setAuth, setisStaff, setUsernameGlobal);
     };
 
     return (
-        <div>
+        <div className={styles.container}>
             <h2>Login</h2>
             <form onSubmit={handleLogin}>
                 <div>
@@ -31,7 +32,7 @@ const Login2 = ({setAuth,setisStaff,setUsernameGlobal }) => {
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </div>
-                {error && <p style={{ color: 'red' }}>{error}</p>}
+                {error && <p>{error}</p>}
                 <button type="submit">Login</button>
             </form>
         </div>
