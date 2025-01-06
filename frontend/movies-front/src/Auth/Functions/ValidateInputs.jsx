@@ -5,31 +5,31 @@ export const ValidateInputs = (firstname, lastname, email, username, password, c
     const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s])[A-Za-z\d\s\W]+$/;
 
     if (firstname.length < 1 || lastname.length < 1) {
-        problemText += 'First and last name are mandatory!\n';
+        problemText += 'A keresztnév és a vezetéknév megadása kötelező!\n';
         valid = false;
     }
     if (username.length < 5) {
-        problemText += 'The username must be at least 5 characters long!\n';
+        problemText += 'A felhasználónévnek legalább 5 karakter hosszúnak kell lennie!\n';
         valid = false;
     }
     if (/\s/.test(username)) {
-        problemText += 'The username is not supposed to contain spaces!\n';
+        problemText += 'A felhasználónév nem tartalmazhat szóközt!\n';
         valid = false;
     }
     if (!emailRegex.test(email)) {
-        problemText += 'The email must be in a correct format!\n';
+        problemText += 'Az email cím formátuma nem megfelelő!\n';
         valid = false;
     }
     if (password.length < 8) {
-        problemText += 'The password must be at least 8 characters long!\n';
+        problemText += 'A jelszónak legalább 8 karakter hosszúnak kell lennie!\n';
         valid = false;
     }
     if (!passRegex.test(password)) {
-        problemText += 'The password must contain at least one uppercase letter, at least one lowercase letter, one digit, and one special character!\n';
+        problemText += 'A jelszónak tartalmaznia kell legalább egy nagybetűt, egy kisbetűt, egy számjegyet és egy speciális karaktert!\n';
         valid = false;
     }
     if (password !== confPW) {
-        problemText += 'The passwords do not match!\n';
+        problemText += 'A jelszavak nem egyeznek!\n';
         valid = false;
     }
 
