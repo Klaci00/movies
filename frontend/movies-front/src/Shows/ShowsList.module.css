@@ -1,0 +1,46 @@
+.container {
+    position: relative;
+    top: 80vh;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 800px;
+}
+
+.show {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.textinmiddle {
+    text-align: center;
+    color: #333;
+}
+
+.showlink {
+    color: #d69813;
+    text-decoration: none;
+    font-size: 34px;
+}
+
+.showlink:hover {
+    text-decoration: none;
+    color: #f99727;
+}
+
+.listvenues_img {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.poster {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}

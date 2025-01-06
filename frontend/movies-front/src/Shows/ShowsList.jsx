@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FetchShowsList } from './HTTP/FetchShowsList';
 import { BASE_URL } from '../Settings';
+import styles from './ShowsList.module.css'; // Import the CSS module
+
 const ShowsList = () => {
   const [shows, setShows] = useState([]);
 
@@ -10,15 +12,15 @@ const ShowsList = () => {
   }, []);
 
   return (
-    <div style={{top: '80vh', position: 'relative'}}>
+    <div className={styles.container}>
       {shows.map(show => (
-        <div key={show.id} className='show'>
-          <h2 className='textinmiddle'>
-            <Link className='showlink' to={`/${show.id}`}>{show.title}</Link>
+        <div key={show.id} className={styles.show}>
+          <h2 className={styles.textinmiddle}>
+            <Link className={styles.showlink} to={`/${show.id}`}>{show.title}</Link>
           </h2>
-          <p className='textinmiddle'>{show.description}</p>
-          <div className='listvenues_img'>
-            <img className='poster' src={show.poster} alt={show.title} />
+          <p className={styles.textinmiddle}>{show.description}</p>
+          <div className={styles.listvenues_img}>
+            <img className={styles.poster} src={show.poster} alt={show.title} />
           </div>
         </div>
       ))}
