@@ -336,7 +336,65 @@ Ha a foglalás törlése mellett döntünk, akkor az adott gombra kattintva megt
 A biztonság érdekében a regisztrációnál __regular expressiont__ illetve __proptypes__ használatával felépített függvény ellenőrzi a jelszó erősségét és az adatok helyes formátumát, például az email címet.
 Regisztráció előtt a frontend elküldi az email címet és a felhasználónevet egy külön erre a célra megírt nézetnek, amely választ küld aszerint, hogy a felhasználónév és az email cím foglalt-e már. Sikertelen regisztráció esetén *window.alert* buborék formájában figyelmeztetést kap a felhasználó. Sikeres regisztráció esetén a frontend be is jelentkezteti a felhasználót.
 
- <img src="./readme images/regist02.png">
+ <img src="./readme images/regist01.png">
 
+```js
+export const ValidateInputs = (firstname, lastname, email, username, password, confPW, setProblem, setButtonDisabled) => {
+    let valid = true;
+    let problemText = '';
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s])[A-Za-z\d\s\W]+$/;
+
+    if (firstname.length < 1 || lastname.length < 1) {
+        problemText += 'A keresztnév és a vezetéknév megadása kötelező!\n';
+        valid = false;
+    }
+    if (username.length < 5) {
+        problemText += 'A felhasználónévnek legalább 5 karakter hosszúnak kell lennie!\n';
+        valid = false;
+    }
+    if (/\s/.test(username)) {
+        problemText += 'A felhasználónév nem tartalmazhat szóközt!\n';
+        valid = false;
+    }
+    if (!emailRegex.test(email)) {
+        problemText += 'Az email cím formátuma nem megfelelő!\n';
+        valid = false;
+    }
+    if (password.length < 8) {
+        problemText += 'A jelszónak legalább 8 karakter hosszúnak kell lennie!\n';
+        valid = false;
+    }
+    if (!passRegex.test(password)) {
+        problemText += 'A jelszónak tartalmaznia kell legalább egy nagybetűt, egy kisbetűt, egy számjegyet és egy speciális karaktert!\n';
+        valid = false;
+    }
+    if (password !== confPW) {
+        problemText += 'A jelszavak nem egyeznek!\n';
+        valid = false;
+    }
+
+    setProblem(problemText);
+    setButtonDisabled(!valid);
+    return valid;
+}
+```
+### Adminisztratív funkciók
+A frontend a személyre szabott tokeneknek köszönhetően eldönti, hogy adminisztrátor-e a felhasználó, és a menüt eszerint jeleníti meg. Az admin felületen a felhasználó mindig az API végpontokról lekért friss információt látja. A négy funkció:
+*	Film hozzáadása
+*	Vetítés hozzáadása
+*	Film törlése
+*	Vetítés törlése
+
+ <img src="./readme images/addshow.png">
+*Film hozzáadása*
+ <img src="./readme images/addvenue.png">
+*Vetítés hozzáadása*
+
+ <img src="./readme images/deleteshow.png">
+*Film törlése*
+
+ <img src="./readme images/deletevenue.png">
+*Vetítés törlése*
 
 ## English version <a id='english'></a>
