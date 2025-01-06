@@ -1,9 +1,37 @@
-# Vizsgaremek  
-# _Movies_
+# Vizsgaremek
 
 ### Üdvözlök minden kedves érdeklődőt! ([English version](#english))
 
 Vizsgaremekünkben egy __full-stack__ alkalmazást valósítottunk meg, mely egy mozik számára hasznos foglalási alkalmazás.
+
+# Tartalomjegyzék
+- [Vizsgaremek](#vizsgaremek)
+    - [Üdvözlök minden kedves érdeklődőt! (English version)](#üdvözlök-minden-kedves-érdeklődőt-english-version)
+- [Tartalomjegyzék](#tartalomjegyzék)
+  - [Rendszerkövetelmények](#rendszerkövetelmények)
+  - [Életre keltés](#életre-keltés)
+    - [Amennyiben a git még nincs konfigurálva:](#amennyiben-a-git-még-nincs-konfigurálva)
+    - [VS Code bejelentkezés GitHub-ba.](#vs-code-bejelentkezés-github-ba)
+  - [Movies](#movies)
+  - [A működés alapelve](#a-működés-alapelve)
+  - [Backend](#backend)
+    - [Modellek](#modellek)
+    - [Relációk](#relációk)
+    - [Adminisztrációs felület](#adminisztrációs-felület)
+    - [Funkciók](#funkciók)
+    - [Helyfoglalás](#helyfoglalás)
+    - [Foglalás törlése](#foglalás-törlése)
+    - [Adminisztratív funkciók](#adminisztratív-funkciók)
+    - [Biztonság](#biztonság)
+  - [Frontend](#frontend)
+    - [A kezdőoldal tagoltsága](#a-kezdőoldal-tagoltsága)
+    - [Reszponzivitás](#reszponzivitás)
+    - [Helyfoglalás](#helyfoglalás-1)
+    - [Regisztráció](#regisztráció)
+    - [Adminisztratív funkciók a frontenden](#adminisztratív-funkciók-a-frontenden)
+    - [Kapcsolattartás](#kapcsolattartás)
+- [Köszönjük a megtisztelő figyelmet!](#köszönjük-a-megtisztelő-figyelmet)
+  - [English version ](#english-version-)
 
 ## Rendszerkövetelmények
 
@@ -26,6 +54,9 @@ Vizsgaremekünkben egy __full-stack__ alkalmazást valósítottunk meg, mely egy
 
     entert nyomunk
 
+[Vissza az oldal tetejére](#)
+
+
 ### VS Code bejelentkezés GitHub-ba.
 * VS Code: __Account__ gomb, az *Activity bar* alján (egy emberre emlékeztető ikon a képernyő bal alsó sarkában)
 
@@ -46,7 +77,9 @@ Majd entert nyomni.
 
 A frontend és a backend szervert érdemes a gyökérkönyvtárban levő .batch fájlokkal elindítani.
 
-# Vizsgaremek
+[Vissza az oldal tetejére](#)
+
+
 ## Movies
 
 A vizsgaremek egy, elsősorban mozik számára készült helyfoglalási rendszer, mely a következő igények kiszolgálására valósult meg:
@@ -77,6 +110,9 @@ A forráskövető rendszer a __GIT__, melyet a __github.com__ oldalon használtu
 *	kódszerkesztő:
     *	__Visual Studio Code__  <img src="https://chris-ayers.com/assets/images/vscode-logo.png" height=100 alt="visual studio code logo">
 
+    [Vissza az oldal tetejére](#)
+
+
 ## A működés alapelve 
 Minden ülést egy frontenden megjelenő apró négyzet reprezentál. A háttérben a frontend a backend által küldött __JSON__ adatmodellt interpretálja a weboldal megjelenítésekor. A _json_ tartalma egy _dictionary_, ahol a _kulcsok stringek_, pontosabban a _seat_ szó + ülések száma, pl. _“seat_003”_. A _dictionary_ értékei _boolean_ változók. Kétféle foglalás van. Az előfoglalt ülés értéke _false_, a foglalt ülés értéke _true_. A szabad ülés értéke _null_, pontosabban nem képezi részét a dictionary-nek. Ez is azt a célt szolgálja, hogy minél kisebb mennyiségű adatot kelljen a frontend és a backend között továbbítani. A frontend a terem kapacitásának függvényében hoz létre változókat, melyek nevei megegyeznek a backendről származó dictionary kulcsaival (pl. “seat_043”). Amikor a kulcshoz tartozó érték true, az azonos nevű változó értéke 2 lesz, ha false, akkor pedig 1. Ha pedig az érték null, tehát nem található a dictionary-ben, akkor a változó értéke 0 lesz. A frontend egy tömböt tölt fel ezekkel a változókkal. A megjelenítés folyamán minden változóra jut egy HTML elem (div) melyek színes négyzetekként jelölik az ülések foglaltságát. A 0 értékű változó eleme zöld, tehát a szabad ülés zöld színű. Az 1 értékű változó eleme piros színű, ez az előfoglalt ülés. A 2 értékű változóhoz tartozó elem színe szürke, ez reprezentálja a foglalt ülést. Az ülések szimbólumai, egy, a moziterem kialakítására nagyban hasonlító felülnézetes térképen jelennek meg a képernyőn. Az ülések sorrendje és elhelyezkedése hűen tükrözi a valóságot. Ezen a felületen megtalálhatóak egyéb fontos elemek is, például a mozivászon, a bejárat, de az átjárók is. Az ülések gombokként működnek, ha a leendő vendég rákattint a neki tetsző zöld ülésre, akkor az piros színű lesz, és a hozzá kapcsolódó változó értéke 0-ról 1-re változik. Amennyiben a vendég meggondolja magát, és újra rákattint a piros ülésre, akkor az újra zöld lesz, a változó értéke pedig visszaáll nullára. A szürke ülésekre nem lehet kattintani, hiszen azokat már lefoglalta valaki. Amikor a vendég a foglalás gombra kattint, a frontend interpretálja a változókat a következő módon:
 
@@ -85,6 +121,8 @@ Minden ülést egy frontenden megjelenő apró négyzet reprezentál. A háttér
 *	A frontend egy __HTTP POST__ kérést is küld a backendre, az pedig létrehoz egy Reservation példányt.
 
 A másik fontos mozzanat a foglalás törlése. A frontend a megfelelő backend API-végpontról lekéri a felhasználó foglalásait, és megjeleníti azokat egy aloldalon. Amikor a felhasználó az adott foglalás törlése mellett dönt, akkor a frontend egy __HTTP DELETE__ kérést küld, a backend a foglaláshoz kötődő helyeket pedig „felszabadítja” majd törli a foglalás példányt. Így a helyek újra felszabadulnak a többi vevő számára.
+
+[Vissza az oldal tetejére](#)
 
 ## Backend
 
@@ -100,6 +138,8 @@ A backend alapja a Python3 nyelven íródott Django fejlesztési környezetben, 
     * __Cross-Origin Resource Sharing__ (CORS) headerek hozzáadása a kérésekhez, a biztonságos források eléréséért
 *	__JSON Web Tokens__
     *	kódolt token párokat használó könyvtár az autentikációhoz
+
+[Vissza az oldal tetejére](#)
 
 ### Modellek
 
@@ -156,9 +196,13 @@ A projekt a következő osztály alapú adatmodellekre épül:
         *	<div Style={style_dict[’entrance_left’]}>{inner_text[’entrance_left’]} </div>
         *	ez azért lehet célszerű, mert így az ügyfél közvetlenül a backendről tud újfajta termet hozzáadni a mozihoz, illetve átalakítani azokat
 
+[Vissza az oldal tetejére](#)
+
 ### Relációk
 <img src="./readme images/db_rel.png">
  
+ [Vissza az oldal tetejére](#)
+
 ### Adminisztrációs felület
 
 A csapat a Django által biztosított jól bevált admin felületet használta ki. A backenden a ModelAdmin osztály segítségével regisztráltuk a modelleket.
@@ -193,6 +237,7 @@ class ReservationAdmin(admin.ModelAdmin):
 
 <img src="./readme images/admin%20inline.png">
 
+[Vissza az oldal tetejére](#)
 
 ### Funkciók
 
@@ -219,11 +264,15 @@ Ezen esetben a foglalás törléséért felelős nézetet látjuk. A destroy met
 A kódban látható a „seat_liberator2” függvény. A kód átláthatósága végett az ülésekkel kapcsolatos függvényeket egy saját magunk által írt modulban, a „seathandler” azaz „ülés kezelő” modulban írtuk meg.
 <img src="./readme images/importmodule.png">
 
+[Vissza az oldal tetejére](#)
+
 ### Helyfoglalás
 A bevezetőben is taglaltak szerint, a backend a frontendtől kap egy PATCH http kérést, amit a partial_update metódus kezel. Mivel várhatóan egyszerre több ember is foglalhat jegyet ugyanarra a filmre, fontos felkészülni az esetleges konfliktusokra is. Ezt a Django transaction modullal oldottuk meg, azon belül is az atomic() metódussal. Ennek a metódusnak a lényege, hogy a try blokkban levő folyamatok vagy egységesen (atomikusan) lefutnak, vagy visszaállnak a belépési pont előtti állapotra. A seathandler.validate() függvény ellenőrzi, hogy az előfoglalt helyek nincsenek-e már benne a vetítés üléseiben, tehát nem foglaltak-e. Amennyiben nincsenek, úgy ezeket a változókat hozzáadja a vetítés JSONFieldjéhez, true értékkel, és 200-as OK http kóddal jelzi a frontendnek, hogy rendben ment a foglalás, majd a serializer elvégzi a módosításokat. Ha valamelyik széket már lefoglalták, akkor __http 409__-es __CONFLICT__ üzenetet küld a frontendnek.
 
 <img src="./readme images/200.png">
 <img src="./readme images/409.png">
+
+[Vissza az oldal tetejére](#)
 
 ### Foglalás törlése
 A törlést a rest-framework generics.DestroyAPIView nézetével oldottuk meg. Az ezen nézetet használó URL-re csak DELETE http kérést lehet küldeni. Természetesen csak autentikált kérést fogad el a nézet. Itt a seathandler modul seat_liberator2 függvénye végzi el a helyek felszabadítását a következő módon:
@@ -233,6 +282,8 @@ A törlést a rest-framework generics.DestroyAPIView nézetével oldottuk meg. A
 *	végül törli a foglalás példányt
 
 <img src="./readme images/delete.png">
+
+[Vissza az oldal tetejére](#)
 
 ### Adminisztratív funkciók
 A használat megkönnyítése céljából a frontend oldalról is lehetővé tettük az olyan funkciókat, mint a 
@@ -379,7 +430,10 @@ export const ValidateInputs = (firstname, lastname, email, username, password, c
     return valid;
 }
 ```
-### Adminisztratív funkciók
+
+[Vissza az oldal tetejére](#)
+
+### Adminisztratív funkciók a frontenden
 A frontend a személyre szabott tokeneknek köszönhetően eldönti, hogy adminisztrátor-e a felhasználó, és a menüt eszerint jeleníti meg. Az admin felületen a felhasználó mindig az API végpontokról lekért friss információt látja. A négy funkció:
 *	Film hozzáadása
 *	Vetítés hozzáadása
@@ -396,5 +450,17 @@ A frontend a személyre szabott tokeneknek köszönhetően eldönti, hogy admini
 
  <img src="./readme images/deletevenue.png">
 *Vetítés törlése*
+
+[Vissza az oldal tetejére](#)
+
+
+### Kapcsolattartás
+A kapcsolattartást megkönnyítendő, az adott mozi egy kapcsolat oldalt is létrehozhat az alkalmazásban.
+ <img src="./readme images/contacts.png">
+
+
+# Köszönjük a megtisztelő figyelmet!
+
+[Vissza az oldal tetejére](#)
 
 ## English version <a id='english'></a>
