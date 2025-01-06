@@ -50,17 +50,17 @@
 }
 
 .prevButton {
-    left: 30vw;
+    left: 20vw;
     font-size: 8vh;
 }
 
 .nextButton {
     font-size: 8vh;
-    right: 30vw;
+    right: 20vw;
 }
 
 .prevButton:hover, .nextButton:hover {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.162);
 }
 .showlink:hover {
     color: rgb(249, 151, 39);
@@ -75,10 +75,10 @@
     }
     .prevButton{
         left: 0vw;
-        transform: translateY(610%);
+        transform: translateY(310%);
     }
     .nextButton{
         right: 0vw;
-        transform: translateY(610%);
+        transform: translateY(310%);
     }
 }
