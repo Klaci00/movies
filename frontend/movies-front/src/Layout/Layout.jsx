@@ -95,10 +95,11 @@ const Layout = () => {
     <Router className='router'>
       <div className='main_screen'>{hideNav ? <button onClick={()=>setHideNav(false)} >Menü</button> :
         <NavApp isAuth={isAuth} setIsAuth={setIsAuth} isAdmin={isAdmin} setIsAdmin={setIsAdmin} username={username} setUserName={setUsername} setShowWarning={setShowWarning} setVisible={setVisible} setHideNav={setHideNav} innerWidth={innerWidth} innerHeight={innerHeight} />}
-        <RoutesApp username={username} setUsername={setUsername} setisStaff={setIsAdmin} isAuth={isAuth} setIsAuth={setIsAuth}/>
+        <RoutesApp username={username} setUsername={setUsername} setisStaff={setIsAdmin} isAuth={isAuth} setIsAuth={setIsAuth} darkMode={darkMode}/>
         <CookieWarning showWarning={showWarning} setShowWarning={setShowWarning} visible={visible} setVisible={setVisible} />
         <JumpUpButton innerWidth={innerWidth} darkMode={darkMode} />
         <DarkModeButton darkMode={darkMode} toggleDarkMode={toggleDarkMode}></DarkModeButton>
+        <div className='background'></div>
       </div>
     </Router>
   );

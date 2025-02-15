@@ -95,7 +95,10 @@ button:focus-visible {
       flex-direction: column;
   }
   .nav {
-      position: relative;
+      z-index: 3;
+      top: 0;
+      width: 100vw;
+      position: fixed;
       background-color: #333;
       overflow: hidden;
       display: flex;
@@ -212,6 +215,7 @@ button:focus-visible {
   }
   
   .routes{
+    z-index: 2;
       display: flex;
       width: 95vw;
       justify-content: center;
@@ -265,4 +269,13 @@ button:focus-visible {
     font-size: x-large;
     font-weight: bold;
     text-align: center;
+  }
+  .background{
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
   }

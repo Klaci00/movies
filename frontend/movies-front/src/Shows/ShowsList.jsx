@@ -4,7 +4,7 @@ import { FetchShowsList } from './HTTP/FetchShowsList';
 import { BASE_URL } from '../Settings';
 import styles from './ShowsList.module.css'; // Import the CSS module
 
-const ShowsList = () => {
+const ShowsList = ({darkMode}) => {
   const [shows, setShows] = useState([]);
 
   useEffect(() => {
@@ -12,7 +12,7 @@ const ShowsList = () => {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${!darkMode ? styles.dark : ''}`}>
       {shows.map(show => (
         <div key={show.id} className={styles.show}>
           <h2 className={styles.textinmiddle}>

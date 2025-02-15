@@ -1,4 +1,6 @@
 .slideshow {
+    top: 10vh;
+    z-index: 2;
     position: relative;
     width: 100%;
     height: auto;
