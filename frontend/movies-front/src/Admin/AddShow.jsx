@@ -3,7 +3,7 @@ import { BASE_URL } from '../Settings';
 import FormApp from './Apps/FormApp';
 import { HandleSubmit } from './HTTP/HandleSubmit';
 
-const AddShow = () => {
+const AddShow = (props) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [playtime, setPlaytime] = useState(0);
@@ -28,7 +28,7 @@ const AddShow = () => {
 
 
     return (<>
-        <FormApp handleSubmit={handleSubmit} title={title} setTitle={setTitle} description={description} setDescription={setDescription} selectedRestriction={selectedRestriction} handleDropdownChange={handleDropdownChange} Restrictions={Restrictions} playtime={playtime} setPlaytime={setPlaytime} handlePlaytimeFocus={handlePlaytimeFocus} setPoster={setPoster} />
+        <FormApp handleSubmit={handleSubmit} title={title} setTitle={setTitle} description={description} setDescription={setDescription} selectedRestriction={selectedRestriction} handleDropdownChange={handleDropdownChange} Restrictions={Restrictions} playtime={playtime} setPlaytime={setPlaytime} handlePlaytimeFocus={handlePlaytimeFocus} setPoster={setPoster} darkMode={props.darkMode} />
     </>
     );
 };

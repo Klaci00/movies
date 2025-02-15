@@ -1,11 +1,12 @@
+import styles from './FormApp.module.css';
 const FormApp=(props)=>{
-    return( <form onSubmit={props.handleSubmit}>
-    <div>
-        <label>Title:</label>
+    return( <form onSubmit={props.handleSubmit} className={props.darkMode?styles.light:styles.dark}>
+    <div >
+        <label><p>Title:</p></label>
         <input type="text" value={props.title} onChange={(e) => props.setTitle(e.target.value)} required />
     </div>
     <div>
-        <label>Description:</label>
+        <label><p>Description:</p></label>
         <textarea value={props.description} onChange={(e) => props.setDescription(e.target.value)} required />
     </div>
     <div>

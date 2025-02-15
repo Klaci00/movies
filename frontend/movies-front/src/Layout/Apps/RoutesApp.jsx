@@ -33,7 +33,7 @@ export const RoutesApp = ({ username, setUsername, setisStaff, isAuth, setIsAuth
       setUsernameGlobal={setUsername}
       setisStaff={setisStaff} />} />
     <Route path='/administration' element={<AdminInterface />} ></Route>
-    <Route path='/addshow' element={<AddShow />} />
+    <Route path='/addshow' element={<AddShow darkMode={darkMode} />} />
     <Route path='/addvenue' element={<AddVenue />} />
     <Route path='/deleteshow' element={<DeleteShow />} ></Route>
     <Route path='/deletevenue' element={<DeleteVenue />}></Route>

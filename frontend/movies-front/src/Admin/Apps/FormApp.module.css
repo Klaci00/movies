@@ -1,0 +1,17 @@
+*{z-index: 2;}
+
+.light{
+    *{
+        color: black;
+    }
+    
+    
+}
+.dark{
+    *{
+        color: white;
+    }
+    option,select,input,textarea{
+        background-color: rgb(88, 87, 87);
+    }
+}

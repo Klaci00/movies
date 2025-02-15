@@ -1,6 +1,6 @@
-.nav {
+.navadmin {
     z-index: 3;
-    top: 0;
+    top: 10vh;
     width: 100vw;
     position: fixed;
     background-color: #333;
@@ -34,9 +34,6 @@
         background-color: #575757;
         border-radius: 4px;
       }
-}.admin.nav{
-    position: absolute;
-    top: 10vh;
 }
 
 
@@ -45,7 +42,7 @@
    min-width: 80vw; 
     
   }
-  .nav {
+  .navadmin{
       display: flex;
       flex-direction: column;
       width: 100vw;
@@ -56,22 +53,22 @@
       padding: 10px 0;       
       gap: 5px;
   }
-  .nav button{
+  .navadmin button{
       display: block;
       width: 100%;
       text-align: center;
       background-color: darkorange;
   }
-  .nav a {
+  .navadmin a {
       display: block;
       width: 100%;
       text-align: center;;
   }
-  .nav a:hover {
+  .navadmin a:hover {
       background-color: #575757;
       border-radius: 0;
   }
-  .nav a.active {
+  .navadmin a.active {
       background-color: #4CAF50;
       color: white;
       border-radius: 0;
