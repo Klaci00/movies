@@ -8,7 +8,7 @@ const DarkModeButton = (props) => {
         right: '20px',
         width: '80px',
         height: '80px',
-        backgroundColor: props.darkMode?'#f2f2f2' :'#000',
+        backgroundColor: props.darkMode?'#f2f2f2' : '#133',
         color: '#fff',
         display: 'flex',
         justifyContent: 'center',

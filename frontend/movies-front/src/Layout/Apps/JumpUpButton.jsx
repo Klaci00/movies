@@ -1,15 +1,17 @@
+import { all } from 'axios';
 import React from 'react';
 
 
 const JumpUpButton = (props) => {
     const styles = {
+        transition: 'all 0.5s',
         position: 'fixed',
         bottom: '20px',
         right: '20px',
         width: '80px',
         height: '80px',
-        backgroundColor: '#000',
-        color: '#fff',
+        backgroundColor: props.darkMode?'black' : 'white',
+        color: props.darkMode?'white':'black' ,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',

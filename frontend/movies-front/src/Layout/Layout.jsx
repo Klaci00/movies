@@ -23,11 +23,16 @@ const Layout = () => {
   const [darkMode, setDarkMode] = useState(false);
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
-    localStorage.setItem('darkmode', !darkMode);
+    localStorage.setItem('darkmode', darkMode);
+    document.body.style.transition = 'all 0.5s';
+    document.body.style.backgroundColor = !darkMode ? 'white' : '#000';
+
   }
   useEffect(() => {
     if (localStorage.getItem('darkmode') === 'true') {
       setDarkMode(true);
+      document.body.style.transition = 'all 0.5s';
+      document.body.style.backgroundColor = !darkMode ? 'white' : 'black';  
     }
   }, []);
   useEffect(() => {
@@ -92,7 +97,7 @@ const Layout = () => {
         <NavApp isAuth={isAuth} setIsAuth={setIsAuth} isAdmin={isAdmin} setIsAdmin={setIsAdmin} username={username} setUserName={setUsername} setShowWarning={setShowWarning} setVisible={setVisible} setHideNav={setHideNav} innerWidth={innerWidth} innerHeight={innerHeight} />}
         <RoutesApp username={username} setUsername={setUsername} setisStaff={setIsAdmin} isAuth={isAuth} setIsAuth={setIsAuth}/>
         <CookieWarning showWarning={showWarning} setShowWarning={setShowWarning} visible={visible} setVisible={setVisible} />
-        <JumpUpButton innerWidth={innerWidth} />
+        <JumpUpButton innerWidth={innerWidth} darkMode={darkMode} />
         <DarkModeButton darkMode={darkMode} toggleDarkMode={toggleDarkMode}></DarkModeButton>
       </div>
     </Router>
