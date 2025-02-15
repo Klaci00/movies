@@ -5,7 +5,7 @@ import { FetchVenues } from './HTTP/FetchVenues';
 import { FetchShowDetails } from './HTTP/FetchShowDetails';
 import { ListVenuesApp } from './Apps/ListVenuesApp';
 
-const ListVenues = ({isAuth}) => {
+const ListVenues = ({isAuth,darkMode}) => {
   const { id } = useParams();
   const [show, setShow] = useState(null);
   const [venues, setVenues] = useState([]);
@@ -25,7 +25,7 @@ const ListVenues = ({isAuth}) => {
     localStorage.setItem('seatnum', value);
   };
 
-  return ListVenuesApp(show, isAuth, seatNum, handleChange, venues, id);
+  return ListVenuesApp(show, isAuth, seatNum, handleChange, venues, id,darkMode);
 
 };
 

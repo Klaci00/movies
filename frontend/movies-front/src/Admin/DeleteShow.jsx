@@ -4,7 +4,7 @@ import { BASE_URL } from "../Settings";
 import { DestroyShow } from "./HTTP/DestroyShow";
 import { DeleteShowApp } from "./Apps/DeleteShowApp";
 
-export const DeleteShow = () => {
+export const DeleteShow = (props) => {
     const [shows, setShows] = useState([]);
     const [selectedShow, setSelectedShow] = useState(0);
     useEffect(() => {
@@ -25,6 +25,6 @@ export const DeleteShow = () => {
     };
 
     return (<>
-        <DeleteShowApp handleSubmit={handleSubmit} selectedShow={selectedShow} handleDropdownChange={handleDropdownChange} shows={shows}></DeleteShowApp>
+        <DeleteShowApp handleSubmit={handleSubmit} selectedShow={selectedShow} handleDropdownChange={handleDropdownChange} shows={shows} darkMode={props.darkMode}></DeleteShowApp>
     </>)
 }

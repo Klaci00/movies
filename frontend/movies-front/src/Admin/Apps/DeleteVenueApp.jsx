@@ -1,5 +1,7 @@
+import styles from './FormApp.module.css';
+
 export const DeleteVenueApp = (props) => {
-    return (<form onSubmit={props.handleSubmit}>
+    return (<form onSubmit={props.handleSubmit} className={props.darkMode?styles.light:styles.dark}>
         <div>
             <label>Select Show:</label>
             <select value={props.selectedShow} onChange={props.handleDropdownChange} required>

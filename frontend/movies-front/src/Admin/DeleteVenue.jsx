@@ -4,7 +4,7 @@ import { BASE_URL } from "../Settings";
 import { DestroyVenue } from "./HTTP/DestroyVenue";
 import { DeleteVenueApp } from "./Apps/DeleteVenueApp";
 import { FetchVenues } from "./HTTP/FetchVenues";
-export const DeleteVenue=()=>{
+export const DeleteVenue=(props)=>{
     const [shows,setShows]=useState([]);
     const [selectedShow,setSelectedShow]=useState('');
     const [venues,setVenues]=useState([]);
@@ -42,6 +42,7 @@ export const DeleteVenue=()=>{
         selectedVenue={selectedVenue}
         handleDropdownChange2={handleDropdownChange2}
         venues={venues}
+        darkMode={props.darkMode}
         ></DeleteVenueApp>
     </>)
 }

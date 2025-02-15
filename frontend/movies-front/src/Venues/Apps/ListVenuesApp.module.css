@@ -9,6 +9,23 @@
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
+}.dark.listvenues_main{
+    background-color: black;
+    color: white;
+    li{
+        border: solid 2px lightblue;
+    }
+    a{
+        p{
+
+        
+        color: lightblue;}
+    }
+    *{
+        background-color: black;
+        color: white;
+    }
+    
 }
 
 .textinmiddle {
@@ -52,6 +69,7 @@ li {
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: solid 2px transparent;
 }
 
 li a {

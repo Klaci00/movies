@@ -3,9 +3,10 @@ import { FetchShowsList } from '../Shows/HTTP/FetchShowsList';
 import { BASE_URL } from '../Settings';
 import { PostVenue } from './HTTP/PostVenue';
 import { FetchRoomStyles } from './HTTP/FetchRoomStyles';
+import styles from './Apps/FormApp.module.css';
 
 
-export const AddVenue = () => {
+export const AddVenue = (props) => {
     const [shows, setShows] = useState([]);
     const [selectedShow, setSelectedShow] = useState('');
     const [showtime, setShowtime] = useState('');
@@ -29,7 +30,7 @@ export const AddVenue = () => {
         PostVenue(shows,selectedShow,roomTypes,selectedRoomTypeID,showtime,BASE_URL);       
     };
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className={props.darkMode?styles.light:styles.dark} >
             <div>
                 <label>Show:</label>
                 <select value={selectedShow} onChange={handleDropdownChange} required>

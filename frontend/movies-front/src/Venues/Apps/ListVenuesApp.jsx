@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import styles from './ListVenuesApp.module.css'; // Import the CSS module
-export const ListVenuesApp = (show, isAuth, seatNum, handleChange, venues, id) => {
+export const ListVenuesApp = (show, isAuth, seatNum, handleChange, venues, id,darkMode) => {
   if (!show) return <div>Loading...</div>;
   else if (isAuth) return (
-    <div className={styles.listvenues_main}>
+    <div className={`${!darkMode?styles.dark:''} ${styles.listvenues_main}`}>
       <h1 className={styles.textinmiddle}>{show.title}</h1>
       <div className={styles.listvenues_img}>
         <img className={styles.poster} src={show.poster} alt={show.title} />

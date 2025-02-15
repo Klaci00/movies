@@ -21,7 +21,7 @@ export const RoutesApp = ({ username, setUsername, setisStaff, isAuth, setIsAuth
 
   return <Routes className='routes'>
     <Route path='/' element={<Index darkMode={darkMode}/>} />
-    <Route path='/:id' element={<ListVenues className='listvenues' isAuth={isAuth} />} />
+    <Route path='/:id' element={<ListVenues className='listvenues' isAuth={isAuth} darkMode={darkMode} />}  />
     <Route path=':id/venues/:venueId' element={<VenueDetail />} />
     <Route path='/reservations' element={<Reservations2 username={username} darkMode={darkMode} />} />
     <Route path="/login2" element={<Login2 
@@ -34,9 +34,9 @@ export const RoutesApp = ({ username, setUsername, setisStaff, isAuth, setIsAuth
       setisStaff={setisStaff} />} />
     <Route path='/administration' element={<AdminInterface />} ></Route>
     <Route path='/addshow' element={<AddShow darkMode={darkMode} />} />
-    <Route path='/addvenue' element={<AddVenue />} />
-    <Route path='/deleteshow' element={<DeleteShow />} ></Route>
-    <Route path='/deletevenue' element={<DeleteVenue />}></Route>
+    <Route path='/addvenue' element={<AddVenue darkMode={darkMode} />} />
+    <Route path='/deleteshow' element={<DeleteShow darkMode={darkMode} />} ></Route>
+    <Route path='/deletevenue' element={<DeleteVenue darkMode={darkMode} />}></Route>
     <Route path='/contact' element={<ContactsApp darkMode={darkMode} />} ></Route>
   </Routes>
 }
