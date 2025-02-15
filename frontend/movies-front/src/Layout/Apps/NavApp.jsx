@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import LogoutButton2 from "../../Auth/Apps/LogoutButton2";
-
+import styles from './NavApp.module.css';
 export const NavApp = ({ isAuth, setIsAuth, isAdmin, setIsAdmin, username, setUserName, setShowWarning,setVisible,setHideNav,innerWidth,innerHeight }) => {
     const cookiesAccepted = localStorage.getItem('cookiesAccepted') === 'true';
     
     return (
-        <nav className='nav'>
+        <nav className={styles.nav}>
             <Link to='/contact'><p>Kapcsolat</p></Link>
             <Link to='/'><p>Kezdőoldal</p></Link>
             {!isAuth ? (
