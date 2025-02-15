@@ -24,11 +24,17 @@
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s;
+}.dark.show{
+    background-color: #333;
 }
 
 .textinmiddle {
+    transition: all 0.5s;
     text-align: center;
     color: #333;
+}.dark.textinmiddle{
+    color: white;
 }
 
 .showlink {

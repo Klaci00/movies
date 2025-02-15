@@ -14,11 +14,11 @@ const ShowsList = ({darkMode}) => {
   return (
     <div className={`${styles.container} ${!darkMode ? styles.dark : ''}`}>
       {shows.map(show => (
-        <div key={show.id} className={styles.show}>
+        <div key={show.id} className={`${!darkMode?styles.dark:' '} ${styles.show}`}>
           <h2 className={styles.textinmiddle}>
             <Link className={styles.showlink} to={`/${show.id}`}>{show.title}</Link>
           </h2>
-          <p className={styles.textinmiddle}>{show.description}</p>
+          <p className={`${!darkMode?styles.dark: ''} ${styles.textinmiddle}`}>{show.description}</p>
           <div className={styles.listvenues_img}>
             <img className={styles.poster} src={show.poster} alt={show.title} />
           </div>

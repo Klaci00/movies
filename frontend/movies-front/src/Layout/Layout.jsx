@@ -23,16 +23,11 @@ const Layout = () => {
   const [darkMode, setDarkMode] = useState(false);
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
-    localStorage.setItem('darkmode', darkMode);
-    document.body.style.transition = 'all 0.5s';
-    document.body.style.backgroundColor = !darkMode ? 'white' : '#000';
-
+    localStorage.setItem('darkmode', !darkMode);
   }
   useEffect(() => {
     if (localStorage.getItem('darkmode') === 'true') {
       setDarkMode(true);
-      document.body.style.transition = 'all 0.5s';
-      document.body.style.backgroundColor = !darkMode ? 'white' : 'black';  
     }
   }, []);
   useEffect(() => {
@@ -99,7 +94,7 @@ const Layout = () => {
         <CookieWarning showWarning={showWarning} setShowWarning={setShowWarning} visible={visible} setVisible={setVisible} />
         <JumpUpButton innerWidth={innerWidth} darkMode={darkMode} />
         <DarkModeButton darkMode={darkMode} toggleDarkMode={toggleDarkMode}></DarkModeButton>
-        <div className={darkMode ? 'background-dark' : 'background'}></div>
+        <div className={`${darkMode ? 'dark ':''}background`}></div>
       </div>
     </Router>
   );
