@@ -199,6 +199,7 @@ button:focus-visible {
     text-align: center;
   }
   .background{
+    visibility: visible;
     z-index: 1;
     position: fixed;
     top: 0;
@@ -206,4 +207,7 @@ button:focus-visible {
     width: 100vw;
     height: 100vh;
     background-color: black;
+    transition: all 0.5s;
+  }.dark.background{
+    background-color: white;
   }

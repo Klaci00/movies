@@ -23,7 +23,7 @@ export const RoutesApp = ({ username, setUsername, setisStaff, isAuth, setIsAuth
     <Route path='/' element={<Index darkMode={darkMode}/>} />
     <Route path='/:id' element={<ListVenues className='listvenues' isAuth={isAuth} />} />
     <Route path=':id/venues/:venueId' element={<VenueDetail />} />
-    <Route path='/reservations' element={<Reservations2 username={username} />} />
+    <Route path='/reservations' element={<Reservations2 username={username} darkMode={darkMode} />} />
     <Route path="/login2" element={<Login2 
       setAuth={setIsAuth}
       setisStaff={setisStaff}

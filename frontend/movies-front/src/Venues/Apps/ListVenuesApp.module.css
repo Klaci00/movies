@@ -1,4 +1,7 @@
 .listvenues_main {
+    position: relative;
+    top: 18vh;
+    z-index: 2;
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;

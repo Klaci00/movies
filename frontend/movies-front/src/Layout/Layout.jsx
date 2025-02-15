@@ -99,7 +99,7 @@ const Layout = () => {
         <CookieWarning showWarning={showWarning} setShowWarning={setShowWarning} visible={visible} setVisible={setVisible} />
         <JumpUpButton innerWidth={innerWidth} darkMode={darkMode} />
         <DarkModeButton darkMode={darkMode} toggleDarkMode={toggleDarkMode}></DarkModeButton>
-        <div className='background'></div>
+        <div className={darkMode ? 'background-dark' : 'background'}></div>
       </div>
     </Router>
   );

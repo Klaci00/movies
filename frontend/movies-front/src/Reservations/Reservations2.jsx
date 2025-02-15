@@ -3,6 +3,7 @@ import ReservApp from './Apps/ReservApp';
 import { FetchReservations } from './HTTP/FetchReservations';
 import { DeleteReservation } from './HTTP/DeleteReservation';
 import { BASE_URL } from '../Settings';
+import styles from './Apps/ReservApp.module.css'
 
 const Reservations2 = (props) => {
     const [reservationData, setReservationData] = useState([]);
@@ -14,7 +15,7 @@ const Reservations2 = (props) => {
  
     function reservParser(x) {
         return (
-            <div key={x.id}>
+            <div key={x.id} >
                 <ReservApp
                     id={x.id}
                     title={x.title}
@@ -29,6 +30,7 @@ const Reservations2 = (props) => {
                     error={error}
                     setError={setError}
                     onDelete={DeleteReservation}
+                    darkMode={props.darkMode}
                 />
             </div>
         );
@@ -36,10 +38,10 @@ const Reservations2 = (props) => {
 
     return (
         <>
-            <h1 style={{textAlign:'center'}} >Foglalások</h1>
+            <h1 className={`${!props.darkMode? styles.dark:''} ${styles.reservations}`} >Foglalások</h1>
             {error && <p>{error}</p>}
             {reservationData.length > 0 ? (
-                <div>
+                <div className={styles.main}>
                     {reservationData.map(reservParser)}
                 </div>
             ) : (
