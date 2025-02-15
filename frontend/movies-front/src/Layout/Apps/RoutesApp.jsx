@@ -37,6 +37,6 @@ export const RoutesApp = ({ username, setUsername, setisStaff, isAuth, setIsAuth
     <Route path='/addvenue' element={<AddVenue />} />
     <Route path='/deleteshow' element={<DeleteShow />} ></Route>
     <Route path='/deletevenue' element={<DeleteVenue />}></Route>
-    <Route path='/contact' element={<ContactsApp />} ></Route>
+    <Route path='/contact' element={<ContactsApp darkMode={darkMode} />} ></Route>
   </Routes>
 }
