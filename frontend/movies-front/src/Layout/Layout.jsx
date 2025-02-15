@@ -7,6 +7,8 @@ import { refreshToken } from '../Auth/Functions/AuthService';
 import { jwtDecode as decode } from 'jwt-decode';
 import CookieWarning from '../Auth/Apps/CookieWarning';
 import JumpUpButton from './Apps/JumpUpButton';
+import DarkModeButton from './Apps/DarkModeButton';
+import { use } from 'react';
 const Layout = () => {
   const [isAuth, setIsAuth] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -18,6 +20,16 @@ const Layout = () => {
   const [innerHeight, setInnerHeight] = useState(0);
   const [update, setUpdate] = useState(0);
   const [hideNav, setHideNav] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    localStorage.setItem('darkmode', !darkMode);
+  }
+  useEffect(() => {
+    if (localStorage.getItem('darkmode') === 'true') {
+      setDarkMode(true);
+    }
+  }, []);
   useEffect(() => {
     const interval = setInterval(() => {
         setInnerWidth(window.innerWidth);
@@ -81,6 +93,7 @@ const Layout = () => {
         <RoutesApp username={username} setUsername={setUsername} setisStaff={setIsAdmin} isAuth={isAuth} setIsAuth={setIsAuth}/>
         <CookieWarning showWarning={showWarning} setShowWarning={setShowWarning} visible={visible} setVisible={setVisible} />
         <JumpUpButton innerWidth={innerWidth} />
+        <DarkModeButton darkMode={darkMode} toggleDarkMode={toggleDarkMode}></DarkModeButton>
       </div>
     </Router>
   );
