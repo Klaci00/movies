@@ -14,7 +14,7 @@ RATINGS={'Korhatárra való tekintet nélkül megtekinthető':
 
 class Show(models.Model):
     poster = models.ImageField(verbose_name='Poszter',
-                               upload_to='posters/')
+                               upload_to='images/posters/')
     rating = models.CharField('Korhatár',
                               choices=RATINGS,
                               max_length=50)

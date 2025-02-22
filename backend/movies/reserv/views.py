@@ -11,7 +11,7 @@ from rest_framework_simplejwt.token_blacklist.models import BlacklistedToken, Ou
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from django.http import JsonResponse
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404,render
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.db import transaction
 from rest_framework.exceptions import NotFound

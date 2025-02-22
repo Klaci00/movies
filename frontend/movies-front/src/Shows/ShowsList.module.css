@@ -59,3 +59,7 @@
     height: auto;
     border-radius: 10px;
 }
+.prevButton{
+    background-color: transparent;
+    z-index: 3;
+}

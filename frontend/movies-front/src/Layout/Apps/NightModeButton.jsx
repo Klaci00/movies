@@ -14,7 +14,7 @@ export const NightModeButton = (props) => {
 
     const buttonStyles = {
         position: 'fixed',
-        top: '20px',
+        top: '40px',
         right: '20px',
         width: props.innerWidth < 600 ? '50px' : '80px',
         height: props.innerWidth < 600 ? '50px' : '80px',

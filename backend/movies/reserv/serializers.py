@@ -2,12 +2,16 @@ from .models import Show,Venue,Reservation,CustomUser,RoomStyleDict
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from django.contrib.auth.models import User
+import os
 
 class ShowSerializer(serializers.ModelSerializer):
+    poster = serializers.SerializerMethodField()
+    def get_poster(self,obj):
+        filename = os.path.basename(obj.poster.name)
+        return f'https://localhost:7260/images/posters/{filename}'
     class Meta:
         model=Show
-        fields='__all__'
+        fields=('id','poster','rating','playtime','title','description','venues')
         depth=2
 
 User=get_user_model()

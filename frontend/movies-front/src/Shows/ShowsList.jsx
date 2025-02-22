@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FetchShowsList } from './HTTP/FetchShowsList';
-import { BASE_URL } from '../Settings';
+import { BASE_URL,STATIC_URL } from '../Settings';
 import styles from './ShowsList.module.css'; // Import the CSS module
 
 const ShowsList = ({darkMode}) => {
