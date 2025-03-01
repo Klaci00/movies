@@ -23,6 +23,8 @@ from .seathandler.seathandler import reserv_data_maker,venue_data_dict_maker,\
                                      validate
 from rest_framework_simplejwt.views import TokenObtainPairView
 import logging
+from django.core.files.storage import FileSystemStorage
+import os
 
 logger = logging.getLogger(__name__)
 
@@ -128,6 +130,17 @@ class ReservationListView(APIView):
 class ShowList(generics.ListCreateAPIView):
     queryset=Show.objects.all()
     serializer_class=ShowSerializer
+    def perform_create(self, serializer):
+        request = self.request
+        file = request.FILES['poster']
+        filename = file.name
+        file_path = f'C:\\Users\\kenyo\\source\\repos\\MoviesStaticServer\\wwwroot\\images\\posters\\{filename}'
+
+        with open(file_path, 'wb+') as destination:
+            for chunk in file.chunks():
+                destination.write(chunk)
+                
+        serializer.save(poster=filename)
     def list(self, request, *args, **kwargs):
         response = super().list(request, *args, **kwargs)
         return response
