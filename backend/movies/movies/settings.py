@@ -125,11 +125,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'https://localhost:7260/'
 
 STATICFILES_DIRS=[
     os.path.join(BASE_DIR,'static'),
-    BASE_DIR / "node_modules/jsoneditor/dist"
+    "C:\movies\MovieStaticServer\wwwroot",
 ]
 
 
