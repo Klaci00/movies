@@ -1,85 +1,74 @@
-/* Footer.module.css */
-
-.footer {
-    position:relative;
-    bottom: -90vh;
-    background-color: #333;
-    color: #fff;
-    padding: 20px 0;
-    text-align: center;
-}
-
-.footerContainer {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.footerSection {
-    flex: 1;
-    padding: 10px;
-    min-width: 200px;
-    max-width: 300px;
-}
-
-.heading {
-    margin-bottom: 10px;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.footerSection p {
-    margin: 5px 0;
-}
-
-.ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    align-items: horizontal;
-    display: inline;
-}
-
-.li {
-    margin: 5px 0;
-}
-
-.a {
-    color: #1b2e80;
-    text-decoration: none;
-}
-
-.a:hover {
-    text-decoration: underline;
-}
-
-.socialLinks {
+.footerContainer{
     display: flex;
     justify-content: center;
-    gap: 15px;
-    color: white;
-    a,p,i{
-        color: white;
+    flex-direction: column;
+    align-items: center;
+    background-color: #000;
+    color: #fff;
+    height: fit-content;
+    width: 100%;
+    position: relative;
+    bottom: -81vh;
+    left: 0;
+    z-index: 100;
+}
+.footerBottom{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    background-color: #000;
+    color: #fff;
+    height: 50px;
+    width: 100%;
+    position: relative;
+    bottom: -81vh;
+    left: 0;
+    z-index: 100;
+}
+
+h2{
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin: 10;
+    padding: 0;
+    color: aliceblue;
+}
+.quickLinks{
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    align-items: center;
+    background-color: #000;
+    color: #fff;
+    height: 50px;
+    width: 100%;
+    position: relative;
+    left: 0;
+    z-index: 100;
+}
+
+a{
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin: 0;
+    padding: 0;
+   
+    }
+
+
+.socialLinks{
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    font-size: xx-large;
+    a{
+        font-size: xx-large;
     }
 }
-
-.icon {
-    color: #fff;
-    font-size: 20px;
-    z-index: 3;
-}
-
-.footerBottom {
-    background-color: #222;
-    color: #fff;
-    padding: 10px 0;
-    margin-top: 20px;
-    font-size: 14px;
-}
-h2 {
-    color: white;
-    margin-bottom: 20px;
-}
+#insta:hover{
+    color: #E1306C;
+}   
