@@ -130,7 +130,7 @@ STATIC_URL = 'https://localhost:7260/'
 
 STATICFILES_DIRS=[
     os.path.join(BASE_DIR,'static'),
-    "C:\movies\MovieStaticServer\wwwroot",
+    "..\..\..\MovieStaticServer\wwwroot",
 ]
 
 
