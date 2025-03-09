@@ -8,8 +8,8 @@ import { jwtDecode as decode } from 'jwt-decode';
 import CookieWarning from '../Auth/Apps/CookieWarning';
 import JumpUpButton from './Apps/JumpUpButton';
 import DarkModeButton from './Apps/DarkModeButton';
-import { use } from 'react';
 import FooterApp from './Apps/FooterApp';
+import styles from './Layout.module.css';
 const Layout = () => {
   const [isAuth, setIsAuth] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -17,9 +17,6 @@ const Layout = () => {
   const [time, setTime] = useState(1);
   const [showWarning, setShowWarning] = useState(false);
   const [visible, setVisible] = useState(true);
-  const [innerWidth, setInnerWidth] = useState(0);
-  const [innerHeight, setInnerHeight] = useState(0);
-  const [update, setUpdate] = useState(0);
   const [hideNav, setHideNav] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const toggleDarkMode = () => {
@@ -31,15 +28,7 @@ const Layout = () => {
       setDarkMode(true);
     }
   }, []);
-  useEffect(() => {
-    const interval = setInterval(() => {
-        setInnerWidth(window.innerWidth);
-        setInnerHeight(window.innerHeight);
-        setUpdate(update + 1);
-    }, 1000); () => {
-        clearInterval(interval);
-    }, [update]
-});
+  
   useEffect(() => { 
     console.log(time);
     if (getCookie('refresh') === undefined) { //No refresh token? You are logged out!
@@ -89,12 +78,13 @@ const Layout = () => {
 
   return (
     <Router className='router'>
-      <div className='main_screen'>{hideNav ? <button onClick={()=>setHideNav(false)} >Menü</button> :
-        <NavApp isAuth={isAuth} setIsAuth={setIsAuth} isAdmin={isAdmin} setIsAdmin={setIsAdmin} username={username} setUserName={setUsername} setShowWarning={setShowWarning} setVisible={setVisible} setHideNav={setHideNav} innerWidth={innerWidth} innerHeight={innerHeight} />}
+      <div className='main_screen'>
+        <button className={`${styles.menuButton} ${hideNav ? '':styles.hidden}`} onClick={()=>setHideNav(false)} >Menü</button>
+        <NavApp isAuth={isAuth} setIsAuth={setIsAuth} isAdmin={isAdmin} setIsAdmin={setIsAdmin} username={username} setUserName={setUsername} setShowWarning={setShowWarning} setVisible={setVisible} setHideNav={setHideNav} hideNav={hideNav} />
         <RoutesApp username={username} setUsername={setUsername} setisStaff={setIsAdmin} isAuth={isAuth} setIsAuth={setIsAuth} darkMode={darkMode}/>
         <FooterApp />
         <CookieWarning showWarning={showWarning} setShowWarning={setShowWarning} visible={visible} setVisible={setVisible} />
-        <JumpUpButton innerWidth={innerWidth} darkMode={darkMode} />
+        <JumpUpButton darkMode={darkMode} />
         <DarkModeButton darkMode={darkMode} toggleDarkMode={toggleDarkMode}></DarkModeButton>
         <div className={`${darkMode ? 'dark ':''}background`}></div>
       </div>

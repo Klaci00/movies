@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import LogoutButton2 from "../../Auth/Apps/LogoutButton2";
 import styles from './NavApp.module.css';
-export const NavApp = ({ isAuth, setIsAuth, isAdmin, setIsAdmin, username, setUserName, setShowWarning,setVisible,setHideNav,innerWidth,innerHeight }) => {
+export const NavApp = ({ isAuth, setIsAuth, isAdmin, setIsAdmin, username, setUserName, setShowWarning,setVisible,setHideNav,hideNav}) => {
     const cookiesAccepted = localStorage.getItem('cookiesAccepted') === 'true';
     
     return (
-        <nav className={styles.nav}>
+        <nav className={`${styles.nav} ${hideNav ? styles.hidden : ''}`}>
             <Link to='/contact'><p>Kapcsolat</p></Link>
             <Link to='/'><p>Kezdőoldal</p></Link>
             {!isAuth ? (
@@ -36,7 +36,7 @@ export const NavApp = ({ isAuth, setIsAuth, isAdmin, setIsAdmin, username, setUs
                 </>
                 
             )}
-             {(innerWidth <= 600 || innerHeight <= 600) ? <button onClick={() => setHideNav(true)}>Menü elrejtése</button> : null}
+             <button className={styles.hideNavButton} onClick={() => setHideNav(true)}>Menü elrejtése</button>
         </nav>
     );
 };
